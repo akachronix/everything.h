@@ -94,6 +94,11 @@ namespace math
 	{
 		return pow(a, b);
 	}
+	
+	double pi()
+	{
+		return atan(1)*4;
+	}
 }
 
 #endif
