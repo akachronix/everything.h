@@ -2,6 +2,7 @@
 #define EVERYTHING_H
 
 #include <iostream>
+#include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
 #include <cmath>
@@ -47,6 +48,11 @@ namespace io
 		cin >> userinput;
 		cout << endl;
 		return userinput;
+	}
+	
+	void delay(double a)
+	{
+		usleep(a * 1000);
 	}
 }
 
