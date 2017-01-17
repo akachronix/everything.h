@@ -99,6 +99,20 @@ namespace math
 	{
 		return atan(1)*4;
 	}
+	
+	void listOperations()
+	{
+		cout << "Add" << endl;
+		cout << "Subtract" << endl;
+		cout << "Multiply" << endl;
+		cout << "Divide" << endl;
+		cout << "SquareRoot" << endl;
+		cout << "CubicRoot" << endl;
+		cout << "RoundUp" << endl;
+		cout << "RoundDown" << endl;
+		cout << "Power" << endl;
+		cout << "Pi" << endl;
+	}
 }
 
 #endif
