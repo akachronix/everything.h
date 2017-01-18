@@ -1,4 +1,4 @@
-/* Name:   		everything.h
+/* Name:        everything.h
    Author:      Brendan Gowen 
    Description: A header file that
    includes everything I might need
