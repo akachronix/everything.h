@@ -18,8 +18,7 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-namespace io
-{
+namespace io {
 	signed short int ssintinput(string question) {
 		signed short int userinput;
 		cout << question;
@@ -131,8 +130,7 @@ namespace io
 		cout << "\n";
 		return userinput;
 	
-	string strinput(string question)
-	{
+	string strinput(string question) {
 		string userinput;
 		cout << question;
 		cin >> userinput;
@@ -140,66 +138,53 @@ namespace io
 		return userinput;
 	}
 	
-	void delay(double a)
-	{
+	void delay(double a) {
 		usleep(a * 1000);
 	}
 }
 
-namespace math
-{
-	double add(double a, double b)
-	{
+namespace math {
+	double add(double a, double b) {
 		return a + b;
 	}
 	
-	double subtract(double a, double b)
-	{
+	double subtract(double a, double b) {
 		return a - b;
 	}
 	
-	double multiply(double a, double b)
-	{
+	double multiply(double a, double b) {
 		return a * b;
 	}
 	
-	double divide(double a, double b)
-	{
+	double divide(double a, double b) {
 		return a / b;
 	}
 	
-	double squareroot(double a)
-	{
+	double squareroot(double a) {
 		return sqrt(a);
 	}
 	
-	double cubicroot(double a)
-	{
+	double cubicroot(double a) {
 		return cbrt(a);
 	}
 	
-	double roundup(double a)
-	{
+	double roundup(double a) {
 		return ceil(a);
 	}
 	
-	double rounddown(double a)
-	{
+	double rounddown(double a) {
 		return floor(a);
 	}
 	
-	double power(double a, double b)
-	{
+	double power(double a, double b) {
 		return pow(a, b);
 	}
 	
-	double pi()
-	{
+	double pi() {
 		return atan(1)*4;
 	}
 	
-	void listOperations()
-	{
+	void listOperations() {
 		cout << "Add" << endl;
 		cout << "Subtract" << endl;
 		cout << "Multiply" << endl;
@@ -214,15 +199,12 @@ namespace math
 	}
 }
 
-namespace randnum
-{
-	void randomize()
-	{
+namespace randnum {
+	void randomize() {
 		srand((unsigned)time(NULL));
 	}
 	
-	int randint(int min, int max)
-	{
+	int randint(int min, int max) {
 		return rand() % max + min;
 	}
 }
