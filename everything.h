@@ -20,32 +20,116 @@ using std::cin;
 
 namespace io
 {
-	int intinput(string question)
-	{
+	signed short int ssintinput(string question) {
+		signed short int userinput;
+		cout << question;
+		cin >> userinput;
+		cout << "\n";
+		return userinput;
+	}
+
+	signed int sintinput(string question) {
+		signed int userinput;
+		cout << question;
+		cin >> userinput;
+		cout << "\n";
+		return userinput;
+	}
+
+	int intinput(string question) {
 		int userinput;
 		cout << question;
 		cin >> userinput;
-		cout << endl;
+		cout << "\n";
 		return userinput;
 	}
 	
-	float fltinput(string question)
-	{
+	float fltinput(string question) {
 		float userinput;
 		cout << question;
 		cin >> userinput;
-		cout << endl;
+		cout << "\n";
 		return userinput;
 	}
 	
-	double dblinput(string question)
-	{
+	double dblinput(string question) {
 		double userinput;
 		cout << question;
 		cin >> userinput;
-		cout << endl;
+		cout << "\n";
 		return userinput;
 	}
+	
+	long double ldblinput(string question) {
+		long double userinput;
+		cout << question;
+		cin >> userinput;
+		cout << "\n";
+		return userinput;
+	}
+	
+	long lnginput(string question) {
+		long userinput;
+		cout << question;
+		cin >> userinput;
+		cout << "\n";
+		return userinput;
+	}
+	
+	signed long slnginput(string question) {
+		signed long userinput;
+		cout << question;
+		cin >> userinput;
+		cout << "\n";
+		return userinput;
+	}
+	
+	long long lnglnginput(string question) {
+		long long userinput;
+		cout << question;
+		cin >> userinput;
+		cout << "\n";
+		return userinput;
+	}
+	
+	unsigned char uchrinput(string question) {
+		unsigned char userinput;
+		cout << question;
+		cin >> userinput;
+		cout << "\n";
+		return userinput;
+	}
+	
+	unsigned short int ushtintinput(string question) {
+		unsigned short int userinput;
+		cout << question;
+		cin >> userinput;
+		cout << "\n";
+		return userinput;
+	}
+	
+	unsigned int uintinput(string question) {
+		unsigned int userinput;
+		cout << question;
+		cin >> userinput;
+		cout << "\n";
+		return userinput;
+	}
+	
+	unsigned long ulnginput(string question) {
+		unsigned long userinput;
+		cout << question;
+		cin >> userinput;
+		cout << "\n";
+		return userinput;
+	}
+	
+	unsigned long long ulnglnginput(string question) {
+		unsigned long long userinput;
+		cout << question;
+		cin >> userinput;
+		cout << "\n";
+		return userinput;
 	
 	string strinput(string question)
 	{
