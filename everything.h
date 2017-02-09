@@ -129,7 +129,8 @@ namespace io {
 		cin >> userinput;
 		cout << "\n";
 		return userinput;
-	
+	}
+		
 	string strinput(string question) {
 		string userinput;
 		cout << question;
