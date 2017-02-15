@@ -200,6 +200,43 @@ namespace math {
 	}
 }
 
+namespace ptrMath {
+	void add(ldbl *ptr, ldbl a, ldbl b) {
+		ldbl ptrAnswer = a + b;
+		*ptr = ptrAnswer;
+	}
+	
+	void subtract(ldbl *ptr, ldbl a, ldbl b) {
+		ldbl ptrAnswer = a - b;
+		*ptr = ptrAnswer;
+	}
+	
+	void multiply(ldbl *ptr, ldbl a, ldbl b) {
+		ldbl ptrAnswer = a * b;
+		*ptr = ptrAnswer;
+	}
+	
+	void divide(ldbl *ptr, ldbl a, ldbl b) {
+		ldbl ptrAnswer = a / b;
+		*ptr = ptrAnswer;
+	}
+	
+	void squareroot(ldbl *ptr, ldbl a) {
+		ldbl ptrAnswer = sqrt(a);
+		*ptr = ptrAnswer;
+	}
+	
+	void cubicroot(ldbl *ptr, ldbl a) {
+		ldbl ptrAnswer = cbrt(a);
+		*ptr = ptrAnswer;
+	}
+	
+	void power(ldbl *ptr, ldbl base, ldbl exponent) {
+		ldbl ptrAnswer = pow(base, exponent);
+		*ptr = ptrAnswer;
+	}
+}
+
 namespace randnum {
 	void randomize() {
 		srand((unsigned)time(NULL));
