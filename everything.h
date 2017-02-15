@@ -18,6 +18,8 @@ using std::cout;
 using std::endl;
 using std::cin;
 
+typedef long double ldbl;
+
 namespace io {
 	signed short int ssintinput(string question) {
 		signed short int userinput;
