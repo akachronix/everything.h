@@ -237,6 +237,16 @@ namespace ptrMath {
 		ldbl ptrAnswer = pow(base, exponent);
 		*ptr = ptrAnswer;
 	}
+	
+	void roundup(ldbl *ptr, ldbl a) {
+		ldbl ptrAnswer = ceil(a);
+		*ptr = ptrAnswer;
+	}
+	
+	void rounddown(ldbl *ptr, ldbl a) {
+		ldbl ptrAnswer = floor(a);
+		*ptr = ptrAnswer;
+	}
 }
 
 namespace randnum {
