@@ -204,48 +204,39 @@ namespace math {
 
 namespace ptrMath {
 	void add(ldbl *ptr, ldbl a, ldbl b) {
-		ldbl ptrAnswer = a + b;
-		*ptr = ptrAnswer;
+		*ptr = a + b;
 	}
 	
 	void subtract(ldbl *ptr, ldbl a, ldbl b) {
-		ldbl ptrAnswer = a - b;
-		*ptr = ptrAnswer;
+		*ptr = a - b;
 	}
 	
 	void multiply(ldbl *ptr, ldbl a, ldbl b) {
-		ldbl ptrAnswer = a * b;
-		*ptr = ptrAnswer;
+		*ptr = a * b;
 	}
 	
 	void divide(ldbl *ptr, ldbl a, ldbl b) {
-		ldbl ptrAnswer = a / b;
-		*ptr = ptrAnswer;
+		*ptr = a / b;
 	}
 	
 	void squareroot(ldbl *ptr, ldbl a) {
-		ldbl ptrAnswer = sqrt(a);
-		*ptr = ptrAnswer;
+		*ptr = sqrt(a);
 	}
 	
 	void cubicroot(ldbl *ptr, ldbl a) {
-		ldbl ptrAnswer = cbrt(a);
-		*ptr = ptrAnswer;
+		*ptr = cbrt(a);
 	}
 	
 	void power(ldbl *ptr, ldbl base, ldbl exponent) {
-		ldbl ptrAnswer = pow(base, exponent);
-		*ptr = ptrAnswer;
+		*ptr = pow(base, exponent);
 	}
 	
 	void roundup(ldbl *ptr, ldbl a) {
-		ldbl ptrAnswer = ceil(a);
-		*ptr = ptrAnswer;
+		*ptr = ceil(a);
 	}
 	
 	void rounddown(ldbl *ptr, ldbl a) {
-		ldbl ptrAnswer = floor(a);
-		*ptr = ptrAnswer;
+		*ptr = floor(a);
 	}
 }
 
