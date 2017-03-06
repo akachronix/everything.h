@@ -20,8 +20,35 @@ using std::cin;
 
 typedef long double ldbl;
 
-namespace io {
-	signed short int ssintinput(string question) {
+enum Error
+{
+	ERROR_NOERROR = 0,
+	ERROR_UNEXECTEDERROR = -1,
+	ERROR_TYPEERROR = -2,
+	ERROR_ARGERROR = -3,
+	ERROR_FILEIOERROR = -4,
+	ERROR_OTHERERROR = -5,
+};
+
+enum Color
+{
+	COLOR_BLACK,
+	COLOR_WHITE,
+	COLOR_RED,
+	COLOR_BLUE,
+	COLOR_GREEN,
+	COLOR_PURPLE,
+	COLOR_PINK,
+	COLOR_MAGENTA,
+	COLOR_YELLOW,
+	COLOR_CYAN,
+	COLOR_TEAL
+};
+
+namespace IO 
+{
+	signed short int ssIntInput(string question) 
+	{
 		signed short int userinput;
 		cout << question;
 		cin >> userinput;
@@ -29,7 +56,8 @@ namespace io {
 		return userinput;
 	}
 
-	signed int sintinput(string question) {
+	signed int sIntInput(string question) 
+	{
 		signed int userinput;
 		cout << question;
 		cin >> userinput;
@@ -37,7 +65,8 @@ namespace io {
 		return userinput;
 	}
 
-	int intinput(string question) {
+	int IntInput(string question) 
+	{
 		int userinput;
 		cout << question;
 		cin >> userinput;
@@ -45,7 +74,8 @@ namespace io {
 		return userinput;
 	}
 	
-	float fltinput(string question) {
+	float FltInput(string question) 
+	{
 		float userinput;
 		cout << question;
 		cin >> userinput;
@@ -53,7 +83,8 @@ namespace io {
 		return userinput;
 	}
 	
-	double dblinput(string question) {
+	double DblInput(string question) 
+	{
 		double userinput;
 		cout << question;
 		cin >> userinput;
@@ -61,7 +92,8 @@ namespace io {
 		return userinput;
 	}
 	
-	long double ldblinput(string question) {
+	long double lDblInput(string question) 
+	{
 		long double userinput;
 		cout << question;
 		cin >> userinput;
@@ -69,7 +101,8 @@ namespace io {
 		return userinput;
 	}
 	
-	long lnginput(string question) {
+	long LngInput(string question) 
+	{
 		long userinput;
 		cout << question;
 		cin >> userinput;
@@ -77,7 +110,8 @@ namespace io {
 		return userinput;
 	}
 	
-	signed long slnginput(string question) {
+	signed long sLngInput(string question) 
+	{
 		signed long userinput;
 		cout << question;
 		cin >> userinput;
@@ -85,7 +119,8 @@ namespace io {
 		return userinput;
 	}
 	
-	long long lnglnginput(string question) {
+	long long LngLngInput(string question) 
+	{
 		long long userinput;
 		cout << question;
 		cin >> userinput;
@@ -93,7 +128,8 @@ namespace io {
 		return userinput;
 	}
 	
-	unsigned char uchrinput(string question) {
+	unsigned char uChrInput(string question) 
+	{
 		unsigned char userinput;
 		cout << question;
 		cin >> userinput;
@@ -101,7 +137,8 @@ namespace io {
 		return userinput;
 	}
 	
-	unsigned short int ushtintinput(string question) {
+	unsigned short int uShtIntInput(string question) 
+	{
 		unsigned short int userinput;
 		cout << question;
 		cin >> userinput;
@@ -109,7 +146,8 @@ namespace io {
 		return userinput;
 	}
 	
-	unsigned int uintinput(string question) {
+	unsigned int uIntInput(string question) 
+	{
 		unsigned int userinput;
 		cout << question;
 		cin >> userinput;
@@ -117,7 +155,8 @@ namespace io {
 		return userinput;
 	}
 	
-	unsigned long ulnginput(string question) {
+	unsigned long uLngInput(string question) 
+	{
 		unsigned long userinput;
 		cout << question;
 		cin >> userinput;
@@ -125,7 +164,8 @@ namespace io {
 		return userinput;
 	}
 	
-	unsigned long long ulnglnginput(string question) {
+	unsigned long long uLngLngInput(string question) 
+	{
 		unsigned long long userinput;
 		cout << question;
 		cin >> userinput;
@@ -133,7 +173,8 @@ namespace io {
 		return userinput;
 	}
 		
-	string strinput(string question) {
+	string StrInput(string question) 
+	{
 		string userinput;
 		cout << question;
 		cin >> userinput;
@@ -141,53 +182,13 @@ namespace io {
 		return userinput;
 	}
 	
-	void delay(double a) {
+	void Delay(double a) 
+	{
 		usleep(a * 1000);
 	}
-}
-
-namespace math {
-	double add(double a, double b) {
-		return a + b;
-	}
 	
-	double subtract(double a, double b) {
-		return a - b;
-	}
-	
-	double multiply(double a, double b) {
-		return a * b;
-	}
-	
-	double divide(double a, double b) {
-		return a / b;
-	}
-	
-	double squareroot(double a) {
-		return sqrt(a);
-	}
-	
-	double cubicroot(double a) {
-		return cbrt(a);
-	}
-	
-	double roundup(double a) {
-		return ceil(a);
-	}
-	
-	double rounddown(double a) {
-		return floor(a);
-	}
-	
-	double power(double a, double b) {
-		return pow(a, b);
-	}
-	
-	double pi() {
-		return atan(1)*4;
-	}
-	
-	void listOperations() {
+	void ListOperations() 
+	{
 		cout << "Add" << endl;
 		cout << "Subtract" << endl;
 		cout << "Multiply" << endl;
@@ -202,51 +203,188 @@ namespace math {
 	}
 }
 
-namespace ptrMath {
-	void add(ldbl *ptr, ldbl a, ldbl b) {
+namespace Math 
+{
+	double Add(double a, double b) 
+	{
+		return a + b;
+	}
+	
+	double Subtract(double a, double b) 
+	{
+		return a - b;
+	}
+	
+	double Multiply(double a, double b) 
+	{
+		return a * b;
+	}
+	
+	double Divide(double a, double b) 
+	{
+		return a / b;
+	}
+	
+	double SquareRoot(double a) 
+	{
+		return sqrt(a);
+	}
+	
+	double CubicRoot(double a) 
+	{
+		return cbrt(a);
+	}
+	
+	double RoundUp(double a) 
+	{
+		return ceil(a);
+	}
+	
+	double RoundDown(double a) 
+	{
+		return floor(a);
+	}
+	
+	double Power(double a, double b) 
+	{
+		return pow(a, b);
+	}
+	
+	double Pi() 
+	{
+		return atan(1)*4;
+	}
+}
+
+namespace PtrMath 
+{
+	void Add(ldbl *ptr, ldbl a, ldbl b) 
+	{
 		*ptr = a + b;
 	}
 	
-	void subtract(ldbl *ptr, ldbl a, ldbl b) {
+	void Subtract(ldbl *ptr, ldbl a, ldbl b) 
+	{
 		*ptr = a - b;
 	}
 	
-	void multiply(ldbl *ptr, ldbl a, ldbl b) {
+	void Multiply(ldbl *ptr, ldbl a, ldbl b) 
+	{
 		*ptr = a * b;
 	}
 	
-	void divide(ldbl *ptr, ldbl a, ldbl b) {
+	void Divide(ldbl *ptr, ldbl a, ldbl b) 
+	{
 		*ptr = a / b;
 	}
 	
-	void squareroot(ldbl *ptr, ldbl a) {
+	void SquareRoot(ldbl *ptr, ldbl a) 
+	{
 		*ptr = sqrt(a);
 	}
 	
-	void cubicroot(ldbl *ptr, ldbl a) {
+	void CubicRoot(ldbl *ptr, ldbl a) 
+	{
 		*ptr = cbrt(a);
 	}
 	
-	void power(ldbl *ptr, ldbl base, ldbl exponent) {
+	void Power(ldbl *ptr, ldbl base, ldbl exponent) 
+	{
 		*ptr = pow(base, exponent);
 	}
 	
-	void roundup(ldbl *ptr, ldbl a) {
+	void RoundUp(ldbl *ptr, ldbl a) 
+	{
 		*ptr = ceil(a);
 	}
 	
-	void rounddown(ldbl *ptr, ldbl a) {
+	void RoundDown(ldbl *ptr, ldbl a) 
+	{
 		*ptr = floor(a);
 	}
 }
 
-namespace randnum {
-	void randomize() {
+namespace Geometry
+{
+	namespace Square
+	{
+		ldbl Area(ldbl a, ldbl b)
+		{
+			return a * b;
+		}
+		
+		ldbl Perimeter(ldbl a, ldbl b)
+		{
+			return a + b;
+		}
+	}
+	
+	namespace Cube
+	{
+		ldbl Volume(ldbl a, ldbl b, ldbl c)
+		{
+			return a * b * c;
+		}
+	}
+}
+
+namespace PtrGeometry
+{
+	namespace Square
+	{
+		void Area(ldbl *ptr, ldbl a, ldbl b)
+		{
+			*ptr = a * b;
+		}
+		
+		void Perimeter(ldbl *ptr, ldbl a, ldbl b)
+		{
+			*ptr = a + b;
+		}
+	}
+	
+	namespace Cube
+	{
+		void Volume(ldbl *ptr, ldbl a, ldbl b)
+		{
+			*ptr = a * b * c;
+		}
+	}
+}
+
+namespace RandNum 
+{
+	void Randomize() 
+	{
 		srand((unsigned)time(NULL));
 	}
 	
-	int randint(int min, int max) {
+	int RandInt(int min, int max) 
+	{
 		return rand() % max + min;
+	}
+}
+
+namespace Exception
+{
+	Error CheckError(Error *errorPtr)
+	{
+		Error errorCode = *errorPtr;
+		
+		if(errorCode = ERROR_NOERROR)
+			return ERROR_NOERROR;
+		else if(errorCode = ERROR_UNEXECTEDERROR)
+			return ERROR_UNEXECTEDERROR;
+		else if(errorCode = ERROR_TYPEERROR)
+			return ERROR_TYPEERROR;
+		else if(errorCode = ERROR_ARGERROR)
+			return ERROR_ARGERROR;
+		else if(errorCode = ERROR_FILEIOERROR)
+			return ERROR_FILEIOERROR;
+		else if(errorCode = ERROR_OTHERERROR)
+			return ERROR_OTHERERROR;
+		
+		*errorPtr = ERROR_NOERROR;
 	}
 }
 
