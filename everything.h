@@ -378,8 +378,8 @@ namespace Exception
 		
 		if(errorCode = ERROR_NOERROR)
 			return ERROR_NOERROR;
-		else if(errorCode = ERROR_UNEXECTEDERROR)
-			return ERROR_UNEXECTEDERROR;
+		else if(errorCode = ERROR_UNEXPECTEDERROR)
+			return ERROR_UNEXPECTEDERROR;
 		else if(errorCode = ERROR_TYPEERROR)
 			return ERROR_TYPEERROR;
 		else if(errorCode = ERROR_ARGERROR)
