@@ -2,7 +2,8 @@
 
 **Open-source as in do whatever you want; modify, change, use, use commericially, blah blah blah I don't care.**
 
-Namespaces:
+
+**Namespaces:**
 * IO
 * Math
 * PtrMath
@@ -15,7 +16,8 @@ Namespaces:
 * RandNum
 * Exception
 
-Features:
+
+**Features:**
 * Written in C++ (well duh)
 * Organized into namespaces
 * Contains error handling enum and functions
