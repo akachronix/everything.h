@@ -1,96 +1,135 @@
-#include <iostream>
+/* example.cpp
+ * by Brendan Gowen
+ *
+ * Description: 
+ * This is an example program that uses my header 
+ * called everything.h with well-commented code.
+ *
+ * Goal:
+ * Teach users how to use the everything.h header
+ * and to create a calculator from it.
+ *
+ * Last Changed:
+ * 3/6/16
+ */ 
+
+// This includes the everything.h header.
+
 #include "everything.h"
 
-using namespace std;
+// This sets the error level for checking later if any errors occur.
 
-int main(void)
+Error errorCode = ERROR_NOERROR;
+
+// This is the global variable for the answer;
+
+ldbl answer;
+
+// This is the entry point.
+
+int main(int argc, char *argv[])
 {
+	// The try block lets us throw our errorCode for checking.
 	try
 	{
-		double answer = -1;
+		// Asks the user what operation they want to perform.
 		
-		math::listOperations();
+		string operation = IO::StrInput("What operation to you what to perform? ");
 		
-		string operation = io::strinput("What operation to you want to perform?");
+		// Asks the user for a number.
 		
-		if(operation == "add" | operation == "Add")
+		ldbl numA = IO::lDblInput("Please enter a number. ");
+		
+		// Does the math for adding.
+		
+		if(operation == "add")
 		{
-			double num1 = io::dblinput("Please enter a number.");
-			double num2 = io::dblinput("Please enter a number.");
-			answer = math::add(num1, num2);
+			// Asks the user for another number.
+			
+			ldbl numB = IO::lDblInput("Please enter a number. ");
+		
+			// Does the math.
+			
+			PtrMath::Add(&answer, numA, numB);
 		}
 		
-		else if(operation == "subtract" | operation == "Subtract")
+		// Does the math for subtracting.
+		
+		else if(operation == "subtract")
 		{
-			double num1 = io::dblinput("Please enter a number.");
-			double num2 = io::dblinput("Please enter a number.");
-			answer = math::sub(num1, num2);
+			// Asks the user for another number.
+			
+			ldbl numB = IO::lDblInput("Please enter a number. ");
+			
+			// Does the math.
+			
+			PtrMath::Subtract(&answer, numA, numB);
 		}
 		
-		else if(operation == "multiply" | operation == "Multiply")
+		// Does the math for multiplying.
+		
+		else if(operation == "multiply")
 		{
-			double num1 = io::dblinput("Please enter a number.");
-			double num2 = io::dblinput("Please enter a number.");
-			answer = math::mul(num1, num2);
+			// Asks the user for another number.
+			
+			ldbl numB = IO::lDblInput("Please enter a number. ");
+			
+			// Does the math.
+			
+			PtrMath::Multiply(&answer, numA, numB);
 		}
 		
-		else if(operation == "divide" | operation == "Divide")
+		// Does the math for dividing.
+		
+		else if(operation == "divide")
 		{
-			double num1 = io::dblinput("Please enter a number.");
-			double num2 = io::dblinput("Please enter a number.");
-			answer = math::div(num1, num2);
+			// Asks the user for another number.
+			
+			ldbl numB = IO::lDblInput("Please enter a number. ");
+			
+			// Does the math.
+			
+			PtrMath::Divide(&answer, numA, numB);
 		}
 		
-		else if(operation == "squareroot" | operation == "Squareroot" | operation == "squareRoot" | operation == "SquareRoot")
+		else
 		{
-			double num1 = io::dblinput("Please enter a number.");
-			answer = math::squareroot(num1);	
+			// This sets the errorCode to a TYPEERROR because what
+			// was typed in did not match the options marked above.
+			
+			errorCode = ERROR_TYPEERROR;
+			
+			// Throws the errorCode.
+			
+			throw errorCode;
 		}
 		
-		else if(operation == "cubicroot" | operation == "Cubicroot" | operation == "cubicRoot" | operation == "CubicRoot")
-		{
-			double num1 = io::dblinput("Please enter a number.");
-			answer = math::cubicroot(num1);
-		}
+		// If all goes well, print the answer.
 		
-		else if (operation == "roundup" | operation == "Roundup" | operation == "roundUp" | operation == "RoundUp")
-		{
-			double num1 = io::dblinput("Please enter a number.");
-			answer = math::roundup(num1);
-		}
+		cout << "The answer is: " << answer << ".\n";
 		
-		else if(operation == "rounddown" | operation == "Rounddown" | operation == "roundDown" | operation == "RoundDown")
-		{
-			double num1 = io::dblinput("Please enter a number.");
-			answer = math::rounddown(num1);
-		}
-	
-		else if(operation == "power" | operation == "Power")
-		{
-			double num1 = io::dblinput("Please enter a number.");
-			double num2 = io::dblinput("Please enter a number.");
-			answer = math::power(num1, num2);
-		}
+		// Throws the errorCode for checking.
 		
-		else if(operation == "pi" | operation == "Pi")
-		{
-			answer = math::pi();
-		}
-		
-		if(answer == -1)
-		{
-			cout << "Please enter an actual operation." << endl;
-			return 0;
-		}
-		
-		cout << answer << endl;
+		throw errorCode;
 	}
+	
+	// Catches the errorCode when we throw it from the try block.
+	
+	catch(Error errorCode)
+	{
+		// Convert the error into a integer and return its value.
+		
+		return static_cast<int>(errorCode);
+	}
+	
+	// Catches unexpected errors and returns t- 
+	// he equivalent of ERROR_UNEXPECTEDERROR.
 	
 	catch(...)
 	{
-		cout << "Unexpected error occurred." << endl;
-		return 0;
+		// Return unexpected error because compiler co-
+		// mplains that the Error enum is not in scope.
+		
+		return -1;
 	}
-	
-	return 0;
 }
