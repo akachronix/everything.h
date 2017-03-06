@@ -18,6 +18,24 @@ int main(int argc, char *argv[])
 	
 	catch(Error errorCode)
 	{
+		switch(static_cast<int>(errorCode))
+		{
+			case 0:
+				break;
+			case -1:
+				cout << "\n\nUnexpected error occurred.\n";
+			case -2:
+				cout << "\n\nType error occurred.\n";
+			case -3:
+				cout << "\n\nArgument error occurred.\n";
+			case -4:
+				cout << "\n\nFile I/O error occurred.\n";
+			case -5:
+				cout << "\n\nOther error occurred.\n";
+			default:
+				break;
+		}
+		
 		return static_cast<int>(errorCode);
 	}
 	
