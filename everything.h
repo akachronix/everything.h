@@ -345,7 +345,7 @@ namespace PtrGeometry
 	
 	namespace Cube
 	{
-		void Volume(ldbl *ptr, ldbl a, ldbl b)
+		void Volume(ldbl *ptr, ldbl a, ldbl b, ldbl c)
 		{
 			*ptr = a * b * c;
 		}
