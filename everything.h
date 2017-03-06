@@ -363,6 +363,11 @@ namespace RandNum
 	{
 		return rand() % max + min;
 	}
+	
+	void PtrRandInt(int *ptr, int min, int max)
+	{
+		*ptr = rand() % max + min;
+	}
 }
 
 namespace Exception
