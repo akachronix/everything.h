@@ -19,6 +19,7 @@
 
 **Features:**
 * Written in C++ (well duh)
+* Uses C++11
 * Organized into namespaces
 * Contains error handling enum and functions
 * Has a color enum (for some reason)
