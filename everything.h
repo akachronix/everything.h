@@ -1,8 +1,9 @@
 /* Name:        everything.h
-   Author:      Brendan Gowen 
-   Description: A header file that
-   includes everything I might need
-   for developing an application. */
+ * Author:      Brendan Gowen 
+ * Description: A header file that
+ * includes everything I might need
+ * for developing an application. 
+ */
 
 #ifndef EVERYTHING_H
 #define EVERYTHING_H  
