@@ -28,7 +28,7 @@
 
 # Documentation
 
-# IO Functions
+**IO Functions**
 Everything.h has many functions for dealing with I/O. Maybe too many. Anyway, instead of listing each one I will give you the prefixes.
 
 *l - long,
@@ -51,7 +51,7 @@ Everything.h has many functions for dealing with I/O. Maybe too many. Anyway, in
 
 long double example = IO::lDblInput(question);
 
-# Math and PtrMath Functions
+**Math and PtrMath Functions**
 This header file also has math functions. I will go ahead and list them.
 
 * Add
