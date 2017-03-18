@@ -395,14 +395,14 @@ namespace Exception
 		Error errorCode = *errorPtr;
 
 		if(errorCode = ERROR_NOERROR)
-        	{
+        {
 			return ERROR_NOERROR;
-        	}
+        }
 
 		else if(errorCode = ERROR_UNEXPECTEDERROR)
 		{
 			return ERROR_UNEXPECTEDERROR;
-        	}
+        }
 
 		else if(errorCode = ERROR_TYPEERROR)
 		{
@@ -411,13 +411,13 @@ namespace Exception
 
 		else if(errorCode = ERROR_ARGERROR)
 		{
-            		return ERROR_ARGERROR;
+            return ERROR_ARGERROR;
 		}
 
 		else if(errorCode = ERROR_FILEIOERROR)
 		{
 			return ERROR_FILEIOERROR;
-        	}
+        }
 
 		else if(errorCode = ERROR_OTHERERROR)
 		{
