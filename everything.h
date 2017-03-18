@@ -1,8 +1,8 @@
 /* Name:        everything.h
- * Author:      Brendan Gowen 
+ * Author:      Brendan Gowen
  * Description: A header file that
  * includes everything I might need
- * for developing an application. 
+ * for developing an application.
  *
  * License:
  * everything.h, a header file that includes everything I might need for developing an application.
@@ -23,20 +23,20 @@
  */
 
 #ifndef EVERYTHING_H
-#define EVERYTHING_H  
+#define EVERYTHING_H
 
 #include <iostream>
 #include <unistd.h>
 #include <stdlib.h>
+#include <vector>
 #include <time.h>
 #include <cmath>
 
-using std::string;
-using std::cout;
-using std::endl;
-using std::cin;
-
-typedef long double ldbl;
+typedef std::vector<std::string>    string_vect;
+typedef std::vector<double>         double_vect;
+typedef std::vector<float>          float_vect;
+typedef std::vector<char>           char_vect;
+typedef std::vector<int>            int_vect;
 
 enum Error
 {
@@ -63,260 +63,260 @@ enum Color
 	COLOR_TEAL
 };
 
-namespace IO 
+namespace IO
 {
-	signed short int ssIntInput(string question) 
+	signed short int ssIntInput(std::string question)
 	{
 		signed short int userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
 
-	signed int sIntInput(string question) 
+	signed int sIntInput(std::string question)
 	{
 		signed int userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
 
-	int IntInput(string question) 
+	int IntInput(std::string question)
 	{
 		int userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
-	
-	float FltInput(string question) 
+
+	float FltInput(std::string question)
 	{
 		float userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
-	
-	double DblInput(string question) 
+
+	double DblInput(std::string question)
 	{
 		double userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
-	
-	long double lDblInput(string question) 
+
+	long double lDblInput(std::string question)
 	{
 		long double userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
-	
-	long LngInput(string question) 
+
+	long LngInput(std::string question)
 	{
 		long userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
-	
-	signed long sLngInput(string question) 
+
+	signed long sLngInput(std::string question)
 	{
 		signed long userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
-	
-	long long LngLngInput(string question) 
+
+	long long LngLngInput(std::string question)
 	{
 		long long userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
-	
-	unsigned char uChrInput(string question) 
+
+	unsigned char uChrInput(std::string question)
 	{
 		unsigned char userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
-	
-	unsigned short int uShtIntInput(string question) 
+
+	unsigned short int uShtIntInput(std::string question)
 	{
 		unsigned short int userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
-	
-	unsigned int uIntInput(string question) 
+
+	unsigned int uIntInput(std::string question)
 	{
 		unsigned int userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
-	
-	unsigned long uLngInput(string question) 
+
+	unsigned long uLngInput(std::string question)
 	{
 		unsigned long userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
-	
-	unsigned long long uLngLngInput(string question) 
+
+	unsigned long long uLngLngInput(std::string question)
 	{
 		unsigned long long userinput;
-		cout << question;
-		cin >> userinput;
-		cout << "\n";
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
-		
-	string StrInput(string question) 
+
+	std::string StrInput(std::string question)
 	{
-		string userinput;
-		cout << question;
-		cin >> userinput;
-		cout << endl;
+		std::string userinput;
+		std::cout << question;
+		std::cin >> userinput;
+		std::cout << std::endl;
 		return userinput;
 	}
-	
-	void Delay(double a) 
+
+	void Delay(double a)
 	{
 		usleep(a * 1000);
 	}
-	
-	void ListOperations() 
+
+	void ListOperations()
 	{
-		cout << "Add" << endl;
-		cout << "Subtract" << endl;
-		cout << "Multiply" << endl;
-		cout << "Divide" << endl;
-		cout << "SquareRoot" << endl;
-		cout << "CubicRoot" << endl;
-		cout << "RoundUp" << endl;
-		cout << "RoundDown" << endl;
-		cout << "Power" << endl;
-		cout << "Pi" << endl;
-		cout << endl;
+		std::cout << "Add" << std::endl;
+		std::cout << "Subtract" << std::endl;
+		std::cout << "Multiply" << std::endl;
+		std::cout << "Divide" << std::endl;
+		std::cout << "SquareRoot" << std::endl;
+		std::cout << "CubicRoot" << std::endl;
+		std::cout << "RoundUp" << std::endl;
+		std::cout << "RoundDown" << std::endl;
+		std::cout << "Power" << std::endl;
+		std::cout << "Pi" << std::endl;
+		std::cout << std::endl;
 	}
 }
 
-namespace Math 
+namespace Math
 {
-	double Add(double a, double b) 
+	double Add(double a, double b)
 	{
 		return a + b;
 	}
-	
-	double Subtract(double a, double b) 
+
+	double Subtract(double a, double b)
 	{
 		return a - b;
 	}
-	
-	double Multiply(double a, double b) 
+
+	double Multiply(double a, double b)
 	{
 		return a * b;
 	}
-	
-	double Divide(double a, double b) 
+
+	double Divide(double a, double b)
 	{
 		return a / b;
 	}
-	
-	double SquareRoot(double a) 
+
+	double SquareRoot(double a)
 	{
 		return sqrt(a);
 	}
-	
-	double CubicRoot(double a) 
+
+	double CubicRoot(double a)
 	{
 		return cbrt(a);
 	}
-	
-	double RoundUp(double a) 
+
+	double RoundUp(double a)
 	{
 		return ceil(a);
 	}
-	
-	double RoundDown(double a) 
+
+	double RoundDown(double a)
 	{
 		return floor(a);
 	}
-	
-	double Power(double a, double b) 
+
+	double Power(double a, double b)
 	{
 		return pow(a, b);
 	}
-	
-	double Pi() 
+
+	double Pi()
 	{
 		return atan(1)*4;
 	}
 }
 
-namespace PtrMath 
+namespace PtrMath
 {
-	void Add(ldbl *ptr, ldbl a, ldbl b) 
+	void Add(long double *ptr, long double a, long double b)
 	{
 		*ptr = a + b;
 	}
-	
-	void Subtract(ldbl *ptr, ldbl a, ldbl b) 
+
+	void Subtract(long double *ptr, long double a, long double b)
 	{
 		*ptr = a - b;
 	}
-	
-	void Multiply(ldbl *ptr, ldbl a, ldbl b) 
+
+	void Multiply(long double *ptr, long double a, long double b)
 	{
 		*ptr = a * b;
 	}
-	
-	void Divide(ldbl *ptr, ldbl a, ldbl b) 
+
+	void Divide(long double *ptr, long double a, long double b)
 	{
 		*ptr = a / b;
 	}
-	
-	void SquareRoot(ldbl *ptr, ldbl a) 
+
+	void SquareRoot(long double *ptr, long double a)
 	{
 		*ptr = sqrt(a);
 	}
-	
-	void CubicRoot(ldbl *ptr, ldbl a) 
+
+	void CubicRoot(long double *ptr, long double a)
 	{
 		*ptr = cbrt(a);
 	}
-	
-	void Power(ldbl *ptr, ldbl base, ldbl exponent) 
+
+	void Power(long double *ptr, long double base, long double exponent)
 	{
 		*ptr = pow(base, exponent);
 	}
-	
-	void RoundUp(ldbl *ptr, ldbl a) 
+
+	void RoundUp(long double *ptr, long double a)
 	{
 		*ptr = ceil(a);
 	}
-	
-	void RoundDown(ldbl *ptr, ldbl a) 
+
+	void RoundDown(long double *ptr, long double a)
 	{
 		*ptr = floor(a);
 	}
@@ -326,20 +326,20 @@ namespace Geometry
 {
 	namespace Square
 	{
-		ldbl Area(ldbl a, ldbl b)
+		long double Area(long double a, long double b)
 		{
 			return a * b;
 		}
-		
-		ldbl Perimeter(ldbl a, ldbl b)
+
+		long double Perimeter(long double a, long double b)
 		{
 			return a + b;
 		}
 	}
-	
+
 	namespace Cube
 	{
-		ldbl Volume(ldbl a, ldbl b, ldbl c)
+		long double Volume(long double a, long double b, long double c)
 		{
 			return a * b * c;
 		}
@@ -350,38 +350,38 @@ namespace PtrGeometry
 {
 	namespace Square
 	{
-		void Area(ldbl *ptr, ldbl a, ldbl b)
+		void Area(long double *ptr, long double a, long double b)
 		{
 			*ptr = a * b;
 		}
-		
-		void Perimeter(ldbl *ptr, ldbl a, ldbl b)
+
+		void Perimeter(long double *ptr, long double a, long double b)
 		{
 			*ptr = a + b;
 		}
 	}
-	
+
 	namespace Cube
 	{
-		void Volume(ldbl *ptr, ldbl a, ldbl b, ldbl c)
+		void Volume(long double *ptr, long double a, long double b, long double c)
 		{
 			*ptr = a * b * c;
 		}
 	}
 }
 
-namespace RandNum 
+namespace RandNum
 {
-	void Randomize() 
+	void Randomize()
 	{
 		srand((unsigned)time(NULL));
 	}
-	
-	int RandInt(int min, int max) 
+
+	int RandInt(int min, int max)
 	{
 		return rand() % max + min;
 	}
-	
+
 	void PtrRandInt(int *ptr, int min, int max)
 	{
 		*ptr = rand() % max + min;
@@ -393,20 +393,37 @@ namespace Exception
 	Error CheckError(Error *errorPtr)
 	{
 		Error errorCode = *errorPtr;
-		
+
 		if(errorCode = ERROR_NOERROR)
+        	{
 			return ERROR_NOERROR;
+        	}
+
 		else if(errorCode = ERROR_UNEXPECTEDERROR)
+		{
 			return ERROR_UNEXPECTEDERROR;
+        	}
+
 		else if(errorCode = ERROR_TYPEERROR)
+		{
 			return ERROR_TYPEERROR;
+		}
+
 		else if(errorCode = ERROR_ARGERROR)
-			return ERROR_ARGERROR;
+		{
+            		return ERROR_ARGERROR;
+		}
+
 		else if(errorCode = ERROR_FILEIOERROR)
+		{
 			return ERROR_FILEIOERROR;
+        	}
+
 		else if(errorCode = ERROR_OTHERERROR)
+		{
 			return ERROR_OTHERERROR;
-		
+		}
+
 		*errorPtr = ERROR_NOERROR;
 	}
 }
