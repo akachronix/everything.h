@@ -25,19 +25,39 @@
 #ifndef EVERYTHING_H
 #define EVERYTHING_H
 
-#include <iostream>
-#include <unistd.h>
-#include <stdlib.h>
-#include <vector>
-#include <time.h>
-#include <cmath>
+#include <iostream> // i/o output
+#include <unistd.h> // delay function
+#include <stdlib.h> // rand thing
+#include <vector>   // vector from standard library
+#include <time.h>   // time for more random numbers
+#include <cmath>    // more math shiz
 
+// vector typedefs for easier vector use
+typedef std::vector<long double>    ldbl_vect;
 typedef std::vector<std::string>    string_vect;
+typedef std::vector<long long>      lnglng_vect;
 typedef std::vector<double>         double_vect;
 typedef std::vector<float>          float_vect;
+typedef std::vector<long>           long_vect;
 typedef std::vector<char>           char_vect;
 typedef std::vector<int>            int_vect;
 
+// for calculators! yay
+enum Operation
+{
+    OP_ADD,
+    OP_SUBTRACT,
+    OP_MULTIPLY,
+    OP_DIVIDE,
+    OP_SQUAREROOT,
+    OP_CUBICROOT,
+    OP_ROUNDUP,
+    OP_ROUNDDOWN
+    OP_POWER,
+    OP_PI
+};
+
+// for exceptions and crap
 enum Error
 {
 	ERROR_NOERROR = 0,
@@ -48,6 +68,7 @@ enum Error
 	ERROR_OTHERERROR = -5,
 };
 
+// i dont know why i made this
 enum Color
 {
 	COLOR_BLACK,
@@ -63,6 +84,8 @@ enum Color
 	COLOR_TEAL
 };
 
+// this holds all of the io functions
+// no comments cause these are all pretty obvious
 namespace IO
 {
 	signed short int ssIntInput(std::string question)
@@ -221,6 +244,9 @@ namespace IO
 	}
 }
 
+// this holds all of the functions for math
+// do some cool operator overloading or something here
+// also pretty obvious so no comments here
 namespace Math
 {
 	double Add(double a, double b)
@@ -274,6 +300,11 @@ namespace Math
 	}
 }
 
+// ok so this section puts the answer in a pointer so you would call it like this
+// only vars of long double type cause screw templates amirite
+//
+// long double answer
+// PtrMath::Add(&answer, 50, 35);
 namespace PtrMath
 {
 	void Add(long double *ptr, long double a, long double b)
@@ -322,6 +353,7 @@ namespace PtrMath
 	}
 }
 
+// geometry crap
 namespace Geometry
 {
 	namespace Square
@@ -346,6 +378,8 @@ namespace Geometry
 	}
 }
 
+// geometry crap
+// BUT WITH POINTERS!!
 namespace PtrGeometry
 {
 	namespace Square
