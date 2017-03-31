@@ -52,7 +52,7 @@ enum Operation
     OP_SQUAREROOT,
     OP_CUBICROOT,
     OP_ROUNDUP,
-    OP_ROUNDDOWN
+    OP_ROUNDDOWN,
     OP_POWER,
     OP_PI
 };
