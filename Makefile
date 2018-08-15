@@ -1,5 +1,5 @@
 CC=g++
-CXXFLAGS=-Iinclude -Llib -Wall -pedantic -g -s
+CXXFLAGS=-Iinclude -Llib -std=c++11 -Wall -pedantic -g -s
 
 all: clean everything_lib test.o liblog.o libmath.o
 	mkdir bin obj lib
