@@ -45,12 +45,7 @@ namespace libmath
 
 	rectangle_t Rectangle(double length, double width)
 	{
-		rectangle_t obj = {
-			length, width, 
-			length * width,
-			(length * 2) + (width * 2)
-		};
-
+		rectangle_t obj = {length, width, length * width};
 		return obj;
 	}
 
@@ -80,12 +75,7 @@ namespace libmath
 
 	square_t Square(double side)
 	{
-		square_t obj = {
-			side, 
-			side * side,
-			side * 4
-		};
-
+		square_t obj = {side, side * side};
 		return obj;
 	}
 
