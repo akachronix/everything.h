@@ -1,7 +1,7 @@
 CC=g++
 CXXFLAGS=-Iinclude -Llib -std=c++11 -Wall -pedantic -g
 
-all: clean libeverything.a test.o liblog.o libmath.o
+all: clean libeverything.a test.o
 	mkdir bin obj lib
 	mv *.o obj
 	mv *.a lib
