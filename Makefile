@@ -1,26 +1,26 @@
 CC=g++
-CXXFLAGS=-Iinclude -Llib -std=c++11 -Wall -pedantic -g -s
+CXXFLAGS=-Iinclude -Llib -std=c++11 -Wall -pedantic -g
 
-all: clean everything_lib test.o liblog.o libmath.o
+all: clean libeverything.a test.o liblog.o libmath.o
 	mkdir bin obj lib
 	mv *.o obj
 	mv *.a lib
 	$(CC) $(CXXFLAGS) -s obj/test.o -o bin/test -leverything -static
 
-everything_lib: liblog.o libmath.o libinput.o
-	ar rcs libeverything.a liblog.o libmath.o libinput.o
+libeverything.a: liblog.o libmath.o libinput.o
+	ar rcs $@ liblog.o libmath.o libinput.o
 
 test.o: src/test.cpp
-	$(CC) $(CXXFLAGS) -c src/test.cpp
+	$(CC) $(CXXFLAGS) -c $^
 
 liblog.o: src/liblog.cpp
-	$(CC) $(CXXFLAGS) -c src/liblog.cpp
+	$(CC) $(CXXFLAGS) -c $^
 
 libmath.o: src/libmath.cpp
-	$(CC) $(CXXFLAGS) -c src/libmath.cpp
+	$(CC) $(CXXFLAGS) -c $^
 
 libinput.o: src/libinput.cpp
-	$(CC) $(CXXFLAGS) -c src/libinput.cpp
+	$(CC) $(CXXFLAGS) -c $^
 
 clean:
 	if [ -d bin ]; then rm -rf bin; fi
