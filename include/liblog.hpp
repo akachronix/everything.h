@@ -18,9 +18,8 @@ enum loglevel_t
 class Logger
 {
 public:
-    Logger(loglevel_t loglevel, std::string logfile);
-    Logger(loglevel_t loglevel);
-
+    Logger(loglevel_t _loglevel, std::string _logfile);
+	
     Logger();
     ~Logger();
 
@@ -53,8 +52,8 @@ public:
 
 private:
     std::vector<std::string> logHistory;
+	loglevel_t m_logLevel;
     std::string m_logFile;
-    loglevel_t m_logLevel;
 };
 
 void newl(Logger& log);

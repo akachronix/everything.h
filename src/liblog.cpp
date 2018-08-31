@@ -8,22 +8,16 @@
 #include <string>
 #include <vector>
 
-Logger::Logger(loglevel_t loglevel, std::string logfile)
+Logger::Logger(loglevel_t _loglevel, std::string _logfile)
+    : m_logLevel(_loglevel), m_logFile(_logfile)
 {
-    m_logLevel = loglevel;
-    m_logFile = logfile;
-}
 
-Logger::Logger(loglevel_t loglevel)
-{
-    m_logLevel = loglevel;
 }
 
 Logger::Logger()
+    : m_logLevel(everything), m_logFile("Logger.log")
 {
-    // use defaults (which are to log everything and set filename to Logger.log)
-    m_logLevel = everything;
-    m_logFile = "Logger.log";
+
 }
 
 Logger::~Logger()
