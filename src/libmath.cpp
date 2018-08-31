@@ -1,5 +1,7 @@
 #include "libmath.hpp"
 
+#include <utility>
+#include <string>
 #include <cmath>
 
 namespace libmath
@@ -34,6 +36,13 @@ namespace libmath
 		}
 
 		return answer;
+	}
+
+	double Distance(std::pair<std::string, std::string> first_pair, std::pair<std::string, std::string> second_pair)
+	{
+		return sqrt(
+			pow((atof(second_pair.first.c_str()) - atof(first_pair.first.c_str())), 2) + 
+			pow((atof(second_pair.second.c_str()) - atof(first_pair.second.c_str())), 2));
 	}
 
 	// 2D Shapes
