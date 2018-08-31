@@ -8,37 +8,37 @@
 #include <string>
 #include <vector>
 
-logger::logger(loglevel_t loglevel, std::string logfile)
+Logger::Logger(loglevel_t loglevel, std::string logfile)
 {
-    m_loglevel = loglevel;
-    m_logfile = logfile;
+    m_logLevel = loglevel;
+    m_logFile = logfile;
 }
 
-logger::logger(loglevel_t loglevel)
+Logger::Logger(loglevel_t loglevel)
 {
-    m_loglevel = loglevel;
+    m_logLevel = loglevel;
 }
 
-logger::logger()
+Logger::Logger()
 {
-    // use defaults (which are to log everything and set filename to logger.log)
-    m_loglevel = everything;
-    m_logfile = "logger.log";
+    // use defaults (which are to log everything and set filename to Logger.log)
+    m_logLevel = everything;
+    m_logFile = "Logger.log";
 }
 
-logger::~logger()
+Logger::~Logger()
 {
-    dump_log(m_logfile);
+    dumpLog(m_logFile);
 }
 
-bool logger::log_error(std::string error_str)
+bool Logger::logError(std::string error_str)
 {
-    if (m_loglevel >= errors)
+    if (m_logLevel >= errors)
     {
         std::string message = "[ERROR] " + error_str + "\n";
 
         std::cout << message;
-        log_history.push_back(message);
+        logHistory.push_back(message);
 
         return true;
     }
@@ -46,14 +46,14 @@ bool logger::log_error(std::string error_str)
     return false;
 }
 
-bool logger::log_warning(std::string warning_str)
+bool Logger::logWarning(std::string warning_str)
 {
-    if (m_loglevel >= warnings)
+    if (m_logLevel >= warnings)
     {
         std::string message = "[WARNING] " + warning_str + "\n";
 
         std::cout << message;
-        log_history.push_back(message);
+        logHistory.push_back(message);
 
         return true;
     }
@@ -61,14 +61,15 @@ bool logger::log_warning(std::string warning_str)
     return false;
 }
 
-bool logger::log(std::string log_str)
+bool Logger::print(short value)
 {
-    if (m_loglevel >= everything)
+    if (m_logLevel >= loglevel_t::print)
     {
-        std::string message = "[LOG] " + log_str + "\n";
-
-        std::cout << message;
-        log_history.push_back(message);
+		std::ostringstream casted_value;
+		casted_value << value;
+		
+        std::cout << casted_value.str();
+        logHistory.push_back(casted_value.str());
 
         return true;
     }
@@ -76,32 +77,15 @@ bool logger::log(std::string log_str)
     return false;
 }
 
-bool logger::log_value(std::string log_str, int value)
+bool Logger::print(unsigned short value)
 {
-    if (m_loglevel >= everything)
+    if (m_logLevel >= loglevel_t::print)
     {
-        /* Credit: https://stackoverflow.com/questions/332111/how-do-i-convert-a-double-into-a-string-in-c
-         *
-         * std::ostringstream strs;
-         * strs << dbl;
-         * std::string str = strs.str(); */
-
-        std::ostringstream casted_value;
-        casted_value << value;
-
-        std::string message = BLANK_STR;
-
-        if(log_str != "")
-        {
-            message = log_str + casted_value.str() + "\n";
-        }
-
-        else
-        {
-            message = casted_value.str() + "\n";
-        }
-
-        log_history.push_back(message);
+		std::ostringstream casted_value;
+		casted_value << value;
+		
+        std::cout << casted_value.str();
+        logHistory.push_back(casted_value.str());
 
         return true;
     }
@@ -109,65 +93,15 @@ bool logger::log_value(std::string log_str, int value)
     return false;
 }
 
-bool logger::log_value(std::string log_str, float value)
+bool Logger::print(int value)
 {
-	if (m_loglevel >= everything)
-	{
-		/* Credit: https://stackoverflow.com/questions/332111/how-do-i-convert-a-double-into-a-string-in-c
-		*
-		* std::ostringstream strs;
-		* strs << dbl;
-		* std::string str = strs.str(); */
-
-		std::ostringstream casted_value;
-		casted_value << value;
-
-		std::string message = BLANK_STR;
-
-		if (log_str != "")
-		{
-			message = log_str + casted_value.str() + "\n";
-		}
-
-		else
-		{
-			message = casted_value.str() + "\n";
-		}
-
-		log_history.push_back(message);
-
-		return true;
-	}
-
-	return false;
-}
-
-bool logger::log_value(std::string log_str, double value)
-{
-    if (m_loglevel >= everything)
+    if (m_logLevel >= loglevel_t::print)
     {
-        /* Credit: https://stackoverflow.com/questions/332111/how-do-i-convert-a-double-into-a-string-in-c
-         *
-         * std::ostringstream strs;
-         * strs << dbl;
-         * std::string str = strs.str(); */
-
-        std::ostringstream casted_value;
-        casted_value << value;
-
-        std::string message = BLANK_STR;
-
-        if(log_str != "")
-        {
-            message = log_str + casted_value.str() + "\n";
-        }
-
-        else
-        {
-            message = casted_value.str() + "\n";
-        }
-
-        log_history.push_back(message);
+		std::ostringstream casted_value;
+		casted_value << value;
+		
+        std::cout << casted_value.str();
+        logHistory.push_back(casted_value.str());
 
         return true;
     }
@@ -175,81 +109,89 @@ bool logger::log_value(std::string log_str, double value)
     return false;
 }
 
-bool logger::log_value(int value)
+bool Logger::print(unsigned int value)
 {
-	if (m_loglevel >= everything)
-	{
-		/* Credit: https://stackoverflow.com/questions/332111/how-do-i-convert-a-double-into-a-string-in-c
-		*
-		* std::ostringstream strs;
-		* strs << dbl;
-		* std::string str = strs.str(); */
-
+    if (m_logLevel >= loglevel_t::print)
+    {
 		std::ostringstream casted_value;
 		casted_value << value;
+		
+        std::cout << casted_value.str();
+        logHistory.push_back(casted_value.str());
 
-		std::string message = casted_value.str() + "\n";
+        return true;
+    }
 
-		log_history.push_back(message);
+    return false;
+}
 
+bool Logger::print(float value)
+{
+    if (m_logLevel >= loglevel_t::print)
+    {
+		std::ostringstream casted_value;
+		casted_value << value;
+		
+        std::cout << casted_value.str();
+        logHistory.push_back(casted_value.str());
+
+        return true;
+    }
+
+    return false;
+}
+
+bool Logger::print(double value)
+{
+    if (m_logLevel >= loglevel_t::print)
+    {
+		std::ostringstream casted_value;
+		casted_value << value;
+		
+        std::cout << casted_value.str();
+        logHistory.push_back(casted_value.str());
+
+        return true;
+    }
+
+    return false;
+}
+
+bool Logger::print(long double value)
+{
+    if (m_logLevel >= loglevel_t::print)
+    {
+		std::ostringstream casted_value;
+		casted_value << value;
+		
+        std::cout << casted_value.str();
+        logHistory.push_back(casted_value.str());
+
+        return true;
+    }
+
+    return false;
+}
+
+bool Logger::print(const char* print_str)
+{
+	if (m_logLevel >= loglevel_t::print)
+	{
+		std::cout << print_str;
+		logHistory.push_back(print_str);
+		
 		return true;
 	}
-
+	
 	return false;
 }
 
-bool logger::log_value(float value)
+bool Logger::print(std::string print_str)
 {
-	if (m_loglevel >= everything)
-	{
-		/* Credit: https://stackoverflow.com/questions/332111/how-do-i-convert-a-double-into-a-string-in-c
-		*
-		* std::ostringstream strs;
-		* strs << dbl;
-		* std::string str = strs.str(); */
-
-		std::ostringstream casted_value;
-		casted_value << value;
-
-		std::string message = casted_value.str() + "\n";
-
-		log_history.push_back(message);
-
-		return true;
-	}
-
-	return false;
-}
-
-bool logger::log_value(double value)
-{
-	if (m_loglevel >= everything)
-	{
-		/* Credit: https://stackoverflow.com/questions/332111/how-do-i-convert-a-double-into-a-string-in-c
-		*
-		* std::ostringstream strs;
-		* strs << dbl;
-		* std::string str = strs.str(); */
-
-		std::ostringstream casted_value;
-		casted_value << value;
-
-		std::string message = casted_value.str() + "\n";
-
-		log_history.push_back(message);
-
-		return true;
-	}
-
-	return false;
-}
-
-bool logger::print(std::string print_str)
-{
-    if (m_loglevel >= loglevel_t::print)
+    if (m_logLevel >= loglevel_t::print)
     {
         std::cout << print_str;
-        log_history.push_back(print_str);
+        logHistory.push_back(print_str);
 
         return true;
     }
@@ -257,16 +199,76 @@ bool logger::print(std::string print_str)
     return false;
 }
 
-bool logger::dump_log(std::string file)
+void operator<<(Logger& log, short value)
 {
-    if(log_history.size() != 0)
+	log.print(value);
+}
+
+void operator<<(Logger& log, unsigned short value)
+{
+	log.print(value);
+}
+
+void operator<<(Logger& log, int value)
+{
+	log.print(value);
+}
+
+void operator<<(Logger& log, unsigned int value)
+{
+	log.print(value);
+}
+
+void operator<<(Logger& log, float value)
+{
+	log.print(value);
+}
+
+void operator<<(Logger& log, double value)
+{
+	log.print(value);
+}
+
+void operator<<(Logger& log, long double value)
+{
+	log.print(value);
+}
+
+void operator<<(Logger& log, const char* str)
+{
+	log.print(str);
+}
+
+void operator<<(Logger& log, std::string str)
+{
+	log.print(str);
+}
+
+void operator<<(Logger& log, void(*func)(Logger&))
+{
+	(*func)(log);
+}
+
+void newl(Logger& log)
+{
+	log.print("\n");
+}
+
+void tab(Logger& log)
+{
+	log.print("    ");
+}
+
+bool Logger::dumpLog(std::string file)
+{
+    if(logHistory.size() != 0)
     {
         std::ofstream log_file;
         log_file.open(file);
 
         if(log_file.is_open())
         {
-            for(auto x : log_history)
+            for(auto x : logHistory)
             {
                 log_file << x;
             }
@@ -276,10 +278,12 @@ bool logger::dump_log(std::string file)
             return true;
         }
     }
+	
     return false;
 }
 
-bool logger::dump_log()
+bool Logger::dumpLog()
 {
-	return dump_log(m_logfile);
+	return dumpLog(m_logFile);
 }
+
