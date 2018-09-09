@@ -6,8 +6,8 @@ all: clean libeverything.a test.o
 	mv *.a lib
 	$(CC) $(CXXFLAGS) -s obj/test.o -o bin/test -leverything -static
 
-libeverything.a: liblog.o libmath.o libinput.o
-	ar rcs $@ liblog.o libmath.o libinput.o
+libeverything.a: liblog.o libmath.o libinput.o librandom.o
+	ar rcs $@ liblog.o libmath.o libinput.o librandom.o
 
 test.o: src/test.cpp
 	$(CC) $(CXXFLAGS) -c $^
@@ -19,6 +19,9 @@ libmath.o: src/libmath.cpp
 	$(CC) $(CXXFLAGS) -c $^
 
 libinput.o: src/libinput.cpp
+	$(CC) $(CXXFLAGS) -c $^
+
+librandom.o: src/librandom.cpp
 	$(CC) $(CXXFLAGS) -c $^
 
 clean:
