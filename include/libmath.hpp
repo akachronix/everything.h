@@ -1,5 +1,8 @@
 #pragma once
 
+#include <utility>
+#include <string>
+
 const double pi = 3.141592653;
 
 // 2D shapes
@@ -24,6 +27,16 @@ namespace libmath
 	double multiply(double x, double y);
 	double divide(double x, double y);
 	double power(double base, double exponent);
+
+	double Distance(std::pair<std::string, std::string> first_pair, std::pair<std::string, std::string> second_pair);
+	
+	template<typename T>
+	inline T Distance(std::pair<T, T> first_pair, std::pair<T, T> second_pair)
+	{
+		return sqrt(
+			pow((second_pair.first - first_pair.first), 2) +
+			pow((second_pair.second - first_pair.second) ,2));
+	}
 
 	// 2D Shapes
 	trapezoid_t Trapezoid(double side1, double side2, double height);
