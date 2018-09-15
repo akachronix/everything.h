@@ -1,8 +1,6 @@
 #include "liblog.hpp"
 
 #include <iostream>
-#include <istream>
-#include <ostream>
 #include <sstream>
 #include <fstream>
 #include <string>
@@ -245,12 +243,17 @@ void operator<<(Logger& log, void(*func)(Logger&))
 
 void newl(Logger& log)
 {
-	log.print("\n");
+	log.print('\n');
 }
 
 void tab(Logger& log)
 {
 	log.print("    ");
+}
+
+void space(Logger& log)
+{
+    log.print(" ");
 }
 
 bool Logger::dumpLog(std::string file)

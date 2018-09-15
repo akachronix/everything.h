@@ -1,24 +1,25 @@
 #pragma once
 
-#include <cstdint>
-
 class Random
 {
 public:
-	Random(uint32_t _min, uint32_t _max);
+	Random(unsigned int _min, unsigned int _max);
 	Random();
 
 	~Random();
 
-	void Randomize();
+	void Randomize() const noexcept;
 
-	uint32_t RandInt(uint32_t _min, uint32_t _max) const;
-	uint32_t RandInt() const;
+	unsigned int RandInt(unsigned int _min, unsigned int _max) const noexcept;
+	unsigned int RandInt() const noexcept;
 
-	uint32_t GetMin() const;
-	uint32_t GetMax() const;
+	unsigned int GetMin() const noexcept;
+	unsigned int GetMax() const noexcept;
+
+	void SetMin(unsigned int _min) noexcept;
+	void SetMax(unsigned int _max) noexcept;
 
 private:
-	uint32_t m_min;
-	uint32_t m_max;
+	unsigned int m_min;
+	unsigned int m_max;
 };

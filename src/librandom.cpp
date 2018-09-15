@@ -1,10 +1,9 @@
 #include "librandom.hpp"
 
-#include <cstdint>
 #include <cstdlib>
 #include <ctime>
 
-Random::Random(uint32_t _min, uint32_t _max)
+Random::Random(unsigned int _min, unsigned int _max)
 	: m_min(_min), m_max(_max)
 {
 	this->Randomize();
@@ -21,27 +20,37 @@ Random::~Random()
 
 }
 
-void Random::Randomize()
+void Random::Randomize() const noexcept
 {
 	srand((unsigned)time(NULL));
 }
 
-uint32_t Random::RandInt(uint32_t _min, uint32_t _max) const
+unsigned int Random::RandInt(unsigned int _min, unsigned int _max) const noexcept
 {
 	return rand() % _max + _min;
 }
 
-uint32_t Random::RandInt() const
+unsigned int Random::RandInt() const noexcept
 {
 	return rand() % m_max + m_min;
 }
 
-uint32_t Random::GetMin() const
+unsigned int Random::GetMin() const noexcept
 {
 	return m_min;
 }
 
-uint32_t Random::GetMax() const
+unsigned int Random::GetMax() const noexcept
 {
 	return m_max;
+}
+
+void Random::SetMin(unsigned int _min) noexcept
+{
+	m_min = _min;
+}
+
+void Random::SetMax(unsigned int _max) noexcept
+{
+	m_max = _max;
 }

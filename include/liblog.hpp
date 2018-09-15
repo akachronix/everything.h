@@ -1,9 +1,5 @@
 #pragma once
 
-#include <iostream>
-#include <istream>
-#include <ostream>
-#include <fstream>
 #include <string>
 #include <vector>
 
@@ -58,5 +54,6 @@ private:
 
 void newl(Logger& log);
 void tab(Logger& log);
+void space(Logger& log);
 
 using logger_t = Logger;
