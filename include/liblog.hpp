@@ -1,7 +1,13 @@
 #pragma once
 
+#include <iostream>
+#include <istream>
+#include <ostream>
+#include <fstream>
 #include <string>
 #include <vector>
+
+#define BLANK_STR ""
 
 enum loglevel_t
 {
@@ -11,49 +17,42 @@ enum loglevel_t
     everything = 3
 };
 
-class Logger
+class logger
 {
 public:
-    Logger(loglevel_t _loglevel, std::string _logfile);
-	
-    Logger();
-    ~Logger();
+    logger(loglevel_t loglevel, std::string logfile);
+    logger(loglevel_t loglevel);
 
-    bool logError(std::string error_str);
-    bool logWarning(std::string warning_str);
+    // use defaults (which are to log everything and set filename to logger.log)
+    logger();
 
-	bool print(short value);
-	bool print(unsigned short value);
-	bool print(int value);
-	bool print(unsigned int value);
-	bool print(float value);
-	bool print(double value);
-	bool print(long double value);
-	bool print(const char* print_str);
-	bool print(std::string print_str);
-	
-	friend void operator<<(Logger& log, short value);
-	friend void operator<<(Logger& log, unsigned short value);
-	friend void operator<<(Logger& log, int value);
-	friend void operator<<(Logger& log, unsigned int value);
-	friend void operator<<(Logger& log, float value);
-	friend void operator<<(Logger& log, double value);
-	friend void operator<<(Logger& log, long double value);
-	friend void operator<<(Logger& log, const char* str);
-	friend void operator<<(Logger& log, std::string str);
-	friend void operator<<(Logger& log, void(*func)(Logger&));
+    // when object is deconstructed, all log history is flushed from the vector into a log file
+    ~logger();
 
-    bool dumpLog(std::string file);
-	bool dumpLog();
+    // logging functions
+    bool log_error(std::string error_str);
+    bool log_warning(std::string warning_str);
+    bool log(std::string log_str);
+
+    bool log_value(std::string log_str, int value);
+	bool log_value(std::string log_str, float value);
+    bool log_value(std::string log_str, double value);
+
+	bool log_value(int value);
+	bool log_value(float value);
+	bool log_value(double value);
+
+    // print function - goes into log_history to be flushed unlike std::cout
+    bool print(std::string print_str);
+
+    // called by deconstructor, but can also be called manually
+    bool dump_log(std::string file);
+	bool dump_log();
 
 private:
-    std::vector<std::string> logHistory;
-	loglevel_t m_logLevel;
-    std::string m_logFile;
+    std::vector<std::string> log_history;
+    std::string m_logfile;
+    loglevel_t m_loglevel;
 };
 
-void newl(Logger& log);
-void tab(Logger& log);
-void space(Logger& log);
-
-using logger_t = Logger;
+using logger_t = logger;
