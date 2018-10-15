@@ -1,14 +1,14 @@
 CC=g++
-CXXFLAGS=-std=c++11 -Iinclude -Llib -Wall -pedantic -g
+CXXFLAGS=-std=c++11 -Iinclude -Llib -Wall -pedantic
 CXXLDFLAGS=-leverything -static
 
 TARGET=test
 
 all: clean libeverything.a test.o
 	mkdir bin obj lib
-	mv *.o obj
 	mv *.a lib
-	$(CC) $(CXXFLAGS) -s obj/test.o -o bin/$(TARGET) $(CXXLDFLAGS)
+	$(CC) $(CXXFLAGS) -g -s test.o -o bin/$(TARGET) $(CXXLDFLAGS)
+	mv *.o obj
 
 libeverything.a: libinput.o liblog.o libmath.o librandom.o
 	ar rcs $@ $^
@@ -29,6 +29,4 @@ librandom.o: src/librandom.cpp
 	$(CC) $(CXXFLAGS) -c $^
 
 clean:
-	if [ -d bin ]; then rm -rf bin; fi
-	if [ -d obj ]; then rm -rf obj; fi
-	if [ -d lib ]; then rm -rf lib; fi
+	rm -rf bin obj lib *.log

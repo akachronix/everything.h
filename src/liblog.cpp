@@ -13,7 +13,7 @@ Logger::Logger(loglevel_t _loglevel, std::string _logfile)
 }
 
 Logger::Logger()
-    : m_logLevel(everything), m_logFile("Logger.log")
+    : m_logLevel(loglevel_t::everything), m_logFile("Logger.log")
 {
 
 }
@@ -23,9 +23,19 @@ Logger::~Logger()
     dumpLog(m_logFile);
 }
 
+void Logger::disableLogging()
+{
+    m_logLevel = loglevel_t::nothing;
+}
+
+void Logger::enableLogging(loglevel_t _loglevel)
+{
+    m_logLevel = _loglevel;
+}
+
 bool Logger::logError(std::string error_str)
 {
-    if (m_logLevel >= errors)
+    if (m_logLevel >= loglevel_t::errors)
     {
         std::string message = "[ERROR] " + error_str + "\n";
 
@@ -40,7 +50,7 @@ bool Logger::logError(std::string error_str)
 
 bool Logger::logWarning(std::string warning_str)
 {
-    if (m_logLevel >= warnings)
+    if (m_logLevel >= loglevel_t::warnings)
     {
         std::string message = "[WARNING] " + warning_str + "\n";
 
@@ -191,69 +201,81 @@ bool Logger::print(std::string print_str)
     return false;
 }
 
-void operator<<(Logger& log, short value)
+Logger& operator<<(Logger& log, short value)
 {
 	log.print(value);
+    return log;
 }
 
-void operator<<(Logger& log, unsigned short value)
+Logger& operator<<(Logger& log, unsigned short value)
 {
 	log.print(value);
+    return log;
 }
 
-void operator<<(Logger& log, int value)
+Logger& operator<<(Logger& log, int value)
 {
 	log.print(value);
+    return log;
 }
 
-void operator<<(Logger& log, unsigned int value)
+Logger& operator<<(Logger& log, unsigned int value)
 {
 	log.print(value);
+    return log;
 }
 
-void operator<<(Logger& log, float value)
+Logger& operator<<(Logger& log, float value)
 {
 	log.print(value);
+    return log;
 }
 
-void operator<<(Logger& log, double value)
+Logger& operator<<(Logger& log, double value)
 {
 	log.print(value);
+    return log;
 }
 
-void operator<<(Logger& log, long double value)
+Logger& operator<<(Logger& log, long double value)
 {
 	log.print(value);
+    return log;
 }
 
-void operator<<(Logger& log, const char* str)
+Logger& operator<<(Logger& log, const char* str)
 {
 	log.print(str);
+    return log;
 }
 
-void operator<<(Logger& log, std::string str)
+Logger& operator<<(Logger& log, std::string str)
 {
 	log.print(str);
+    return log;
 }
 
-void operator<<(Logger& log, void(*func)(Logger&))
+Logger& operator<<(Logger& log, Logger&(*func)(Logger&))
 {
-	(*func)(log);
+	return (*func)(log);
 }
 
-void newl(Logger& log)
+Logger& newl(Logger& log)
 {
-	log.print('\n');
+	log.print("\n");
+    return log;
 }
 
-void tab(Logger& log)
+Logger& tab(Logger& log)
 {
 	log.print("    ");
+    return log;
 }
 
-void space(Logger& log)
+Logger& space(Logger& log)
 {
     log.print(" ");
+    return log;
 }
 
 bool Logger::dumpLog(std::string file)
@@ -283,4 +305,3 @@ bool Logger::dumpLog()
 {
 	return dumpLog(m_logFile);
 }
-
