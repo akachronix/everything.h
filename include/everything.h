@@ -1,7 +1,6 @@
 #pragma once
 
 #ifdef __cplusplus
-    # include "librandom.hpp"
     # include "libinput.hpp"
     # include "libmath.hpp"
     # include "libpair.hpp"
