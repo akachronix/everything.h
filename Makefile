@@ -1,28 +1,16 @@
 CC=g++
-CXXFLAGS=-Iinclude -Llib -std=c++11 -Wall -pedantic -g
+CXXFLAGS=-std=c++11 -Iinclude -Llib -Wall -Werror -pedantic
+CXXLDFLAGS=-static
 
-all: clean libeverything.a test.o
-	mkdir bin obj lib
+TARGET=test
+
+all: clean test.o
+	mkdir bin obj
+	$(CC) $(CXXFLAGS) -g -s test.o -o bin/$(TARGET) $(CXXLDFLAGS)
 	mv *.o obj
-	mv *.a lib
-	$(CC) $(CXXFLAGS) -s obj/test.o -o bin/test -leverything -static
-
-libeverything.a: liblog.o libmath.o libinput.o
-	ar rcs $@ liblog.o libmath.o libinput.o
 
 test.o: src/test.cpp
 	$(CC) $(CXXFLAGS) -c $^
 
-liblog.o: src/liblog.cpp
-	$(CC) $(CXXFLAGS) -c $^
-
-libmath.o: src/libmath.cpp
-	$(CC) $(CXXFLAGS) -c $^
-
-libinput.o: src/libinput.cpp
-	$(CC) $(CXXFLAGS) -c $^
-
 clean:
-	if [ -d bin ]; then rm -rf bin; fi
-	if [ -d obj ]; then rm -rf obj; fi
-	if [ -d lib ]; then rm -rf lib; fi
+	rm -rf bin obj *.log

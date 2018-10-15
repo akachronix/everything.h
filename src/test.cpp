@@ -1,53 +1,43 @@
 #include <iostream>
-#include <utility>
-#include <cassert>
-#include <cmath>
+#include <string>
+#include <vector>
 
 #include "everything.h"
-using namespace libinput;
-using namespace libmath;
 
-double Distance(std::pair<std::string, std::string> first_pair, std::pair<std::string, std::string> second_pair)
+template <typename _T>
+static bool printVector(Logger& logger, std::vector<_T> vector, Logger&(*func)(Logger&))
 {
-	return sqrt(
-		pow((atof(second_pair.first.c_str()) - atof(first_pair.first.c_str())), 2) + 
-		pow((atof(second_pair.second.c_str()) - atof(first_pair.second.c_str())), 2));
+	for (auto& it : vector)
+	{
+		if (!logger.print(it)) return false;
+		if (!logger.print(*func)) return false;
+	}
+	
+	return true;
 }
 
-template<typename T>
-T Distance(std::pair<T, T> first_pair, std::pair<T, T> second_pair)
+template <typename _T, typename _T2>
+static bool printPair(Logger& logger, Pair<_T, _T2> pair, Logger&(*func)(Logger&))
 {
-	return sqrt(
-		pow((second_pair.first - first_pair.first), 2) +
-		pow((second_pair.second - first_pair.second) ,2));
+	if (!logger.print(pair.first())) return false;
+	if (!logger.print(*func)) return false;
+	if (!logger.print(pair.second())) return false;
+	
+	return true;
 }
 
 int main(int argc, const char* argv[])
 {
-	double distance;
-	
-	if (argc >= 5)
-	{
-		std::pair<double, double> first_pair = std::make_pair(atof(argv[1]), atof(argv[2]));
-		std::pair<double, double> second_pair = std::make_pair(atof(argv[3]), atof(argv[4]));
-		
-		distance = Distance(first_pair, second_pair);
-	}
-	
-	else
-	{
-		std::string x1 = GetString("Enter X1: ");
-		std::string y1 = GetString("Enter Y1: ");
-		std::cout << std::endl;
-		
-		std::string x2 = GetString("Enter X2: ");
-		std::string y2 = GetString("Enter Y2: ");
-		std::cout << std::endl;
-		
-		distance = Distance(std::make_pair(x1, y1), std::make_pair(x2, y2));
-	}
-	
-	std::cout << "Distance: " << distance << std::endl;
-	
+	int value1 = GetInt("Enter a first value: ");
+	int value2 = GetInt("Enter a second value: ");
+
+	std::cout << '\n';
+
+	Pair<int, int> pair_of_values(value1, value2);
+
+	logger_t console;
+	printPair(console, pair_of_values, space);
+
+	std::cin.get();
 	return 0;
 }
