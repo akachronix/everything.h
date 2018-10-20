@@ -5,6 +5,7 @@ Compiles on Linux & Mac (using Make) and Windows (using MinGW).
 First, refer to the Build section for your platform. So, now, you officially have set it up I'll assume.
 
 All the libraries are split up into their respective headers. The libraries in ```everything.h``` are:
+- libvector, a replacement for std::vector
 - libinput, a pretty crappy wrapper around std::cin
 - libpair, a pretty crappy recreation of std::pair
 - libcalc, a pretty crappy template class for calculating stuff
