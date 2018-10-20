@@ -62,7 +62,33 @@ Including ```everything.h``` will, for namesakes, include all of these. However,
   - ```bool dumpLog();```
 
 #### Functions
+- Output Operators
+  - ```Logger& operator<< (Logger& log, short value)```
+  - ```Logger& operator<< (Logger& log, unsigned short value)```
+  - ```Logger& operator<< (Logger& log, int value)```
+  - ```Logger& operator<< (Logger& log, unsigned int value)```
+  - ```Logger& operator<< (Logger& log, float value)```
+  - ```Logger& operator<< (Logger& log, double value)```
+  - ```Logger& operator<< (Logger& log, long double value)```
+  - ```Logger& operator<< (Logger& log, const char* str)```
+  - ```Logger& operator<< (Logger& log, std::string str)```
+  - ```Logger& operator<< (Logger& log, Logger&(*func)(Logger&))```
+  
+- Input Operators
+  - ```Logger& operator>> (Logger& log, short& value)```
+  - ```Logger& operator>> (Logger& log, unsigned short& value)```
+  - ```Logger& operator>> (Logger& log, int& value)```
+  - ```Logger& operator>> (Logger& log, unsigned int& value)```
+  - ```Logger& operator>> (Logger& log, float& value)```
+  - ```Logger& operator>> (Logger& log, double& value)```
+  - ```Logger& operator>> (Logger& log, long double& value)```
+  - ```Logger& operator>> (Logger& log, std::string& str)```
 
+- Stream Manipulators
+  - ```Logger& newl(Logger& log)```
+  - ```Logger& stab(Logger& log)```
+  - ```Logger& tab(Logger& log)```
+  - ```Logger& space(Logger& log)```
 
 ## Background
 ```everything.h``` is a header-only library that I've written myself for myself. However, I do believe in free software so I have open-sourced it onto here to hopefully get some suggestions. All this started for CCalc, my calculator program that I wrote for myself to use in school to make my life easier when answering math questions.
