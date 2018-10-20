@@ -457,6 +457,12 @@ Logger& newl(Logger& log)
     return log;
 }
 
+Logger& stab(Logger& log)
+{
+    log.print("  ");
+    return log;
+}
+
 Logger& tab(Logger& log)
 {
 	log.print("    ");
