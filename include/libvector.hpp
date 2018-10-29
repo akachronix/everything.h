@@ -1,8 +1,11 @@
 #pragma once
 
 #include <initializer_list>
-#include <exception>
+#include <iterator>
+#include <utility>
 #include <new>
+
+#include <exception>
 
 class OutOfRange : public std::exception
 {
@@ -187,6 +190,26 @@ public:
 		return &m_array[m_size];
 	}
 
+	std::reverse_iterator<T*> rbegin() noexcept
+	{
+		return std::reverse_iterator<T*>(&m_array[m_size]);
+	}
+
+	std::reverse_iterator<T*> rend() noexcept
+	{
+		return std::reverse_iterator<T*>(&m_array[0]);
+	}
+
+	std::reverse_iterator<const T*> crbegin() const noexcept
+	{
+		return std::reverse_iterator<const T*>(&m_array[m_size]);
+	}
+
+	std::reverse_iterator<const T*> crend() const noexcept
+	{
+		return std::reverse_iterator<const T*>(&m_array[0]);
+	}
+
 	void push_back(T new_element)
 	{
 		T* buffer = new(std::nothrow) T[m_size + 1];
@@ -197,6 +220,33 @@ public:
 		for (unsigned int i = 0; i < m_size; ++i)
 			buffer[i] = m_array[i];
 		buffer[m_size] = new_element;
+
+		delete[] m_array;
+
+		m_array = new(std::nothrow) T[m_size + 1];
+		
+		if (m_array == nullptr)
+			throw BadAlloc("Error allocating memory for new array.", m_size + 1);
+
+		for (unsigned int i = 0; i < m_size + 1; ++i)
+			m_array[i] = buffer[i];
+
+		delete[] buffer;
+
+		m_size += 1;
+	}
+
+	template<class... Args>
+	void emplace_back(Args&&... args)
+	{
+		T* buffer = new(std::nothrow) T[m_size + 1];
+
+		if (buffer == nullptr)
+			throw BadAlloc("Error allocating memory for buffer.", m_size + 1);
+		
+		for (unsigned int i = 0; i < m_size; ++i)
+			buffer[i] = m_array[i];
+		buffer[m_size] = std::move( T(std::forward<Args>(args)...) );
 
 		delete[] m_array;
 
@@ -238,31 +288,3 @@ public:
 		m_size -= 1;
 	}
 };
-
-#if 0
-template<typename T>
-struct Iterator
-{
-	Vector<T>* ptr;
-
-	Iterator() = default;
-	~Iterator() = default;
-
-	T& operator*()
-	{
-		return ptr->val;
-	}
-
-	const Iterator& operator++()
-	{
-		++ptr;
-		return *this;
-	}
-
-	const Iterator& operator--()
-	{
-		--ptr;
-		return *this;
-	}
-};
-#endif
