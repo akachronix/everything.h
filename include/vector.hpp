@@ -120,7 +120,7 @@ template<typename T>
 inline void Vector<T>::realloc()
 {
 	T* buffer = new T[m_size];
-	memcpy(buffer, m_array, m_elements * sizeof(T));
+	std::memcpy(buffer, m_array, m_elements * sizeof(T));
 	delete[] m_array;
 	
 	m_array = buffer;
@@ -161,9 +161,7 @@ Vector<T>::Vector(const Vector& v2)
 	: m_elements(v2.m_elements), m_size(v2.m_size)
 {
 	m_array = new T[m_size];
-	
-	for (unsigned long long i = 0; i < m_elements; ++i)
-		m_array[i] = v2.m_array[i];
+	std::memcpy(m_array, v2.m_array, v2.m_elements * sizeof(T));
 }
 
 template<typename T>
@@ -173,7 +171,7 @@ Vector<T>& Vector<T>::operator=(const Vector& v2)
 	m_size = v2.m_size;
 
 	m_array = new T[m_size];
-	memcpy(m_array, v2.m_array, v2.m_elements * sizeof(T));
+	std::memcpy(m_array, v2.m_array, v2.m_elements * sizeof(T));
 }
 
 template<typename T>
@@ -264,7 +262,7 @@ void Vector<T>::emplace_back(Args&&... args)
 		realloc();
 	}
 
-	m_array[m_elements] = std::move(T(std::forward<Args>(args)...));
+	m_array[m_elements] = std::move( T (std::forward<Args>(args)...) );
 	++m_elements;
 }
 
