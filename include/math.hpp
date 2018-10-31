@@ -1,10 +1,20 @@
 #pragma once
 
-#include <utility>
-#include <string>
 #include <cmath>
 
-const double pi = 3.141592653;
+inline double add(const double x, const double y) { return x + y; }
+inline double subtract(const double x, const double y) { return x - y; }
+inline double multiply(const double x, const double y) { return x * y; }
+inline double divide(const double x, const double y) { return x / y; }
+
+inline double power(const double base, const double exponent)
+{
+	double answer = base;
+	for (int i = 1; i < exponent; i++)
+		answer *= base;
+
+	return answer;
+}
 
 // 2D shapes
 typedef struct {double side1, side2, height, area;} trapezoid_t;
@@ -21,54 +31,6 @@ typedef struct {double length, width, height, area;} triangular_prism_t;
 typedef struct {double radius, height, area;} cone_t;
 typedef struct {double face, area;} cube_t;
 
-double add(double x, double y)
-{
-	return x + y;
-}
-
-double subtract(double x, double y)
-{
-	return x - y;
-}
-
-double multiply(double x, double y)
-{
-	return x * y;
-}
-
-double divide(double x, double y)
-{
-	return x / y;
-}
-
-double power(double base, double exponent)
-{
-	double answer = base;
-
-	for(int i = 1; i < exponent; i++)
-	{
-		answer *= base;
-	}
-
-	return answer;
-}
-
-template<typename T>
-inline T Distance(std::pair<T, T> first_pair, std::pair<T, T> second_pair)
-{
-	return sqrt(
-		pow((second_pair.first - first_pair.first), 2) +
-		pow((second_pair.second - first_pair.second) ,2));
-}
-
-double Distance(std::pair<std::string, std::string> first_pair, std::pair<std::string, std::string> second_pair)
-{
-	return sqrt(
-		pow((atof(second_pair.first.c_str()) - atof(first_pair.first.c_str())), 2) + 
-		pow((atof(second_pair.second.c_str()) - atof(first_pair.second.c_str())), 2));
-}
-
-// 2D Shapes
 trapezoid_t Trapezoid(double side1, double side2, double height)
 {
 	trapezoid_t obj = {side1, side2, height, (side1 + side2) / 2 * height};
@@ -111,7 +73,6 @@ square_t Square(double side)
 	return obj;
 }
 
-// 3D Shapes
 rectangular_prism_t Rectangular_Prism(double length, double width, double height)
 {
 	rectangular_prism_t obj = {length, width, height, length * width * height};
