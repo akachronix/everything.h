@@ -1,12 +1,10 @@
 #pragma once
 
-#include <cstdlib>
+#include <cstring>
 #include <stdexcept>
 #include <iterator>
 #include <utility>
 #include <initializer_list>
-
-#include <iostream>
 
 template<typename T>
 class Vector

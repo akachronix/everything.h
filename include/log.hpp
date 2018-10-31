@@ -23,11 +23,6 @@ public:
 
 	Logger(loglevel_t _loglevel, std::string _logfile);
 
-	void disableLogging();
-	void enableLogging(loglevel_t _loglevel);
-
-	std::vector<std::string> getLog();
-
 	bool logError(std::string error_str);
 	bool logWarning(std::string warning_str);
 
@@ -35,6 +30,10 @@ public:
 	bool print(unsigned short value);
 	bool print(int value);
 	bool print(unsigned int value);
+	bool print(unsigned long value);
+	bool print(long value);
+	bool print(unsigned long long value);
+	bool print(long long value);
 	bool print(float value);
 	bool print(double value);
 	bool print(long double value);
@@ -46,6 +45,10 @@ public:
 	void input(unsigned short& var);
 	void input(int& var);
 	void input(unsigned int& var);
+	void input(long& var);
+	void input(unsigned long& var);
+	void input(long long& var);
+	void input(unsigned long long& var);
 	void input(float& var);
 	void input(double& var);
 	void input(long double& var);
@@ -63,7 +66,6 @@ private:
 
 using logger_t = Logger;
 
-/* Now commences the ugly part of this file */
 Logger::Logger(loglevel_t _loglevel, std::string _logfile)
 	: m_logLevel(_loglevel), m_logFile(_logfile)
 {
@@ -79,21 +81,6 @@ Logger::Logger()
 Logger::~Logger()
 {
 	dumpLog(m_logFile);
-}
-
-void Logger::disableLogging()
-{
-	m_logLevel = loglevel_t::nothing;
-}
-
-void Logger::enableLogging(loglevel_t _loglevel)
-{
-	m_logLevel = _loglevel;
-}
-
-std::vector<std::string> Logger::getLog()
-{
-	return logHistory;
 }
 
 bool Logger::logError(std::string error_str)
@@ -181,6 +168,70 @@ bool Logger::print(unsigned int value)
 		std::ostringstream casted_value;
 		casted_value << value;
 		
+		std::cout << casted_value.str();
+		logHistory.push_back(casted_value.str());
+
+		return true;
+	}
+
+	return false;
+}
+
+bool Logger::print(long value)
+{
+	if (m_logLevel >= loglevel_t::print)
+	{
+		std::ostringstream casted_value;
+		casted_value << value;
+
+		std::cout << casted_value.str();
+		logHistory.push_back(casted_value.str());
+
+		return true;
+	}
+
+	return false;
+}
+
+bool Logger::print(unsigned long value)
+{
+	if (m_logLevel >= loglevel_t::print)
+	{
+		std::ostringstream casted_value;
+		casted_value << value;
+
+		std::cout << casted_value.str();
+		logHistory.push_back(casted_value.str());
+
+		return true;
+	}
+
+	return false;
+}
+
+bool Logger::print(long long value)
+{
+	if (m_logLevel >= loglevel_t::print)
+	{
+		std::ostringstream casted_value;
+		casted_value << value;
+
+		std::cout << casted_value.str();
+		logHistory.push_back(casted_value.str());
+
+		return true;
+	}
+
+	return false;
+}
+
+bool Logger::print(unsigned long long value)
+{
+	if (m_logLevel >= loglevel_t::print)
+	{
+		std::ostringstream casted_value;
+		casted_value << value;
+
 		std::cout << casted_value.str();
 		logHistory.push_back(casted_value.str());
 
@@ -311,6 +362,42 @@ void Logger::input(unsigned int& var)
 	logHistory.push_back(varToString.str());
 }
 
+void Logger::input(long& var)
+{
+	std::cin >> var;
+
+	std::stringstream varToString;
+	varToString << var << "\n";
+	logHistory.push_back(varToString.str());
+}
+
+void Logger::input(unsigned long& var)
+{
+	std::cin >> var;
+
+	std::stringstream varToString;
+	varToString << var << "\n";
+	logHistory.push_back(varToString.str());
+}
+
+void Logger::input(long long& var)
+{
+	std::cin >> var;
+
+	std::stringstream varToString;
+	varToString << var << "\n";
+	logHistory.push_back(varToString.str());
+}
+
+void Logger::input(unsigned long long& var)
+{
+	std::cin >> var;
+
+	std::stringstream varToString;
+	varToString << var << "\n";
+	logHistory.push_back(varToString.str());
+}
+
 void Logger::input(float& var)
 {
 	std::cin >> var;
@@ -363,6 +450,30 @@ Logger& operator<< (Logger& log, int value)
 }
 
 Logger& operator<< (Logger& log, unsigned int value)
+{
+	log.print(value);
+	return log;
+}
+
+Logger& operator<< (Logger& log, long value)
+{
+	log.print(value);
+	return log;
+}
+
+Logger& operator<< (Logger& log, unsigned long value)
+{
+	log.print(value);
+	return log;
+}
+
+Logger& operator<< (Logger& log, long long value)
+{
+	log.print(value);
+	return log;
+}
+
+Logger& operator<< (Logger& log, unsigned long long value)
 {
 	log.print(value);
 	return log;
@@ -427,6 +538,30 @@ Logger& operator>> (Logger& log, unsigned int& value)
 	return log;
 }
 
+Logger& operator>> (Logger& log, long& value)
+{
+	log.input(value);
+	return log;
+}
+
+Logger& operator>> (Logger& log, unsigned long& value)
+{
+	log.input(value);
+	return log;
+}
+
+Logger& operator>> (Logger& log, long long& value)
+{
+	log.input(value);
+	return log;
+}
+
+Logger& operator>> (Logger& log, unsigned long long& value)
+{
+	log.input(value);
+	return log;
+}
+
 Logger& operator>> (Logger& log, float& value)
 {
 	log.input(value);
@@ -485,12 +620,9 @@ bool Logger::dumpLog(std::string file)
 		if(log_file.is_open())
 		{
 			for(auto x : logHistory)
-			{
 				log_file << x;
-			}
 
 			log_file.close();
-
 			return true;
 		}
 	}
