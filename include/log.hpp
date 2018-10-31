@@ -94,8 +94,8 @@ bool Logger::print(T value)
 	{
 		std::stringstream casted_value;
 		casted_value << value;
+		std::cout << value;
 
-		std::cout << casted_value.str();
 		logHistory.push_back(casted_value.str());
 
 		return true;
@@ -125,81 +125,10 @@ void Logger::input(T& var)
 	logHistory.push_back(varToString.str());
 }
 
-Logger& operator<< (Logger& log, short value)
+template<typename T>
+Logger& operator<< (Logger& log, T value)
 {
 	log.print(value);
-	return log;
-}
-
-Logger& operator<< (Logger& log, unsigned short value)
-{
-	log.print(value);
-	return log;
-}
-
-Logger& operator<< (Logger& log, int value)
-{
-	log.print(value);
-	return log;
-}
-
-Logger& operator<< (Logger& log, unsigned int value)
-{
-	log.print(value);
-	return log;
-}
-
-Logger& operator<< (Logger& log, long value)
-{
-	log.print(value);
-	return log;
-}
-
-Logger& operator<< (Logger& log, unsigned long value)
-{
-	log.print(value);
-	return log;
-}
-
-Logger& operator<< (Logger& log, long long value)
-{
-	log.print(value);
-	return log;
-}
-
-Logger& operator<< (Logger& log, unsigned long long value)
-{
-	log.print(value);
-	return log;
-}
-
-Logger& operator<< (Logger& log, float value)
-{
-	log.print(value);
-	return log;
-}
-
-Logger& operator<< (Logger& log, double value)
-{
-	log.print(value);
-	return log;
-}
-
-Logger& operator<< (Logger& log, long double value)
-{
-	log.print(value);
-	return log;
-}
-
-Logger& operator<< (Logger& log, const char* str)
-{
-	log.print(str);
-	return log;
-}
-
-Logger& operator<< (Logger& log, std::string str)
-{
-	log.print(str);
 	return log;
 }
 
@@ -208,75 +137,10 @@ Logger& operator<< (Logger& log, Logger&(*func)(Logger&))
 	return (*func)(log);
 }
 
-Logger& operator>> (Logger& log, short& value)
+template<typename T>
+Logger& operator>> (Logger& log, T& value)
 {
 	log.input(value);
-	return log;
-}
-
-Logger& operator>> (Logger& log, unsigned short& value)
-{
-	log.input(value);
-	return log;
-}
-
-Logger& operator>> (Logger& log, int& value)
-{
-	log.input(value);
-	return log;
-}
-
-Logger& operator>> (Logger& log, unsigned int& value)
-{
-	log.input(value);
-	return log;
-}
-
-Logger& operator>> (Logger& log, long& value)
-{
-	log.input(value);
-	return log;
-}
-
-Logger& operator>> (Logger& log, unsigned long& value)
-{
-	log.input(value);
-	return log;
-}
-
-Logger& operator>> (Logger& log, long long& value)
-{
-	log.input(value);
-	return log;
-}
-
-Logger& operator>> (Logger& log, unsigned long long& value)
-{
-	log.input(value);
-	return log;
-}
-
-Logger& operator>> (Logger& log, float& value)
-{
-	log.input(value);
-	return log;
-}
-
-Logger& operator>> (Logger& log, double& value)
-{
-	log.input(value);
-	return log;
-}
-
-Logger& operator>> (Logger& log, long double& value)
-{
-	log.input(value);
-	return log;
-}
-
-Logger& operator>> (Logger& log, std::string& str)
-{
-	log.input(str);
 	return log;
 }
 
@@ -306,14 +170,12 @@ Logger& space(Logger& log)
 
 bool Logger::dumpLog(std::string file)
 {
-	if(logHistory.size() != 0)
+	if (logHistory.size() != 0)
 	{
-		std::ofstream log_file;
-		log_file.open(file);
-
-		if(log_file.is_open())
+		std::ofstream log_file(file);
+		if (log_file.is_open())
 		{
-			for(auto x : logHistory)
+			for (auto x : logHistory)
 				log_file << x;
 
 			log_file.close();
