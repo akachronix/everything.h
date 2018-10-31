@@ -26,34 +26,10 @@ public:
 	bool logError(std::string error_str);
 	bool logWarning(std::string warning_str);
 
-	bool print(short value);
-	bool print(unsigned short value);
-	bool print(int value);
-	bool print(unsigned int value);
-	bool print(unsigned long value);
-	bool print(long value);
-	bool print(unsigned long long value);
-	bool print(long long value);
-	bool print(float value);
-	bool print(double value);
-	bool print(long double value);
-	bool print(const char* print_str);
-	bool print(std::string print_str);
-	bool print(Logger&(*func)(Logger&));
+	template<typename T> bool print(T value);
+	bool print(Logger& (*func) (Logger&));
 
-	void input(short& var);
-	void input(unsigned short& var);
-	void input(int& var);
-	void input(unsigned int& var);
-	void input(long& var);
-	void input(unsigned long& var);
-	void input(long long& var);
-	void input(unsigned long long& var);
-	void input(float& var);
-	void input(double& var);
-	void input(long double& var);
-	void input(const char* var);
-	void input(std::string& var);
+	template<typename T> void input(T& var);
 
 	bool dumpLog(std::string file);
 	bool dumpLog();
@@ -63,8 +39,6 @@ private:
 	loglevel_t m_logLevel;
 	std::string m_logFile;
 };
-
-using logger_t = Logger;
 
 Logger::Logger(loglevel_t _loglevel, std::string _logfile)
 	: m_logLevel(_loglevel), m_logFile(_logfile)
@@ -113,75 +87,12 @@ bool Logger::logWarning(std::string warning_str)
 	return false;
 }
 
-bool Logger::print(short value)
+template<typename T>
+bool Logger::print(T value)
 {
 	if (m_logLevel >= loglevel_t::print)
 	{
-		std::ostringstream casted_value;
-		casted_value << value;
-		
-		std::cout << casted_value.str();
-		logHistory.push_back(casted_value.str());
-
-		return true;
-	}
-
-	return false;
-}
-
-bool Logger::print(unsigned short value)
-{
-	if (m_logLevel >= loglevel_t::print)
-	{
-		std::ostringstream casted_value;
-		casted_value << value;
-		
-		std::cout << casted_value.str();
-		logHistory.push_back(casted_value.str());
-
-		return true;
-	}
-
-	return false;
-}
-
-bool Logger::print(int value)
-{
-	if (m_logLevel >= loglevel_t::print)
-	{
-		std::ostringstream casted_value;
-		casted_value << value;
-		
-		std::cout << casted_value.str();
-		logHistory.push_back(casted_value.str());
-
-		return true;
-	}
-
-	return false;
-}
-
-bool Logger::print(unsigned int value)
-{
-	if (m_logLevel >= loglevel_t::print)
-	{
-		std::ostringstream casted_value;
-		casted_value << value;
-		
-		std::cout << casted_value.str();
-		logHistory.push_back(casted_value.str());
-
-		return true;
-	}
-
-	return false;
-}
-
-bool Logger::print(long value)
-{
-	if (m_logLevel >= loglevel_t::print)
-	{
-		std::ostringstream casted_value;
+		std::stringstream casted_value;
 		casted_value << value;
 
 		std::cout << casted_value.str();
@@ -193,129 +104,7 @@ bool Logger::print(long value)
 	return false;
 }
 
-bool Logger::print(unsigned long value)
-{
-	if (m_logLevel >= loglevel_t::print)
-	{
-		std::ostringstream casted_value;
-		casted_value << value;
-
-		std::cout << casted_value.str();
-		logHistory.push_back(casted_value.str());
-
-		return true;
-	}
-
-	return false;
-}
-
-bool Logger::print(long long value)
-{
-	if (m_logLevel >= loglevel_t::print)
-	{
-		std::ostringstream casted_value;
-		casted_value << value;
-
-		std::cout << casted_value.str();
-		logHistory.push_back(casted_value.str());
-
-		return true;
-	}
-
-	return false;
-}
-
-bool Logger::print(unsigned long long value)
-{
-	if (m_logLevel >= loglevel_t::print)
-	{
-		std::ostringstream casted_value;
-		casted_value << value;
-
-		std::cout << casted_value.str();
-		logHistory.push_back(casted_value.str());
-
-		return true;
-	}
-
-	return false;
-}
-
-bool Logger::print(float value)
-{
-	if (m_logLevel >= loglevel_t::print)
-	{
-		std::ostringstream casted_value;
-		casted_value << value;
-		
-		std::cout << casted_value.str();
-		logHistory.push_back(casted_value.str());
-
-		return true;
-	}
-
-	return false;
-}
-
-bool Logger::print(double value)
-{
-	if (m_logLevel >= loglevel_t::print)
-	{
-		std::ostringstream casted_value;
-		casted_value << value;
-		
-		std::cout << casted_value.str();
-		logHistory.push_back(casted_value.str());
-
-		return true;
-	}
-
-	return false;
-}
-
-bool Logger::print(long double value)
-{
-	if (m_logLevel >= loglevel_t::print)
-	{
-		std::ostringstream casted_value;
-		casted_value << value;
-		
-		std::cout << casted_value.str();
-		logHistory.push_back(casted_value.str());
-
-		return true;
-	}
-
-	return false;
-}
-
-bool Logger::print(const char* print_str)
-{
-	if (m_logLevel >= loglevel_t::print)
-	{
-		std::cout << print_str;
-		logHistory.push_back(print_str);
-		
-		return true;
-	}
-	
-	return false;
-}
-
-bool Logger::print(std::string print_str)
-{
-	if (m_logLevel >= loglevel_t::print)
-	{
-		std::cout << print_str;
-		logHistory.push_back(print_str);
-
-		return true;
-	}
-
-	return false;
-}
-
-bool Logger::print(Logger&(*func)(Logger&))
+bool Logger::print(Logger& (*func) (Logger&))
 {
 	if (m_logLevel >= loglevel_t::print)
 	{
@@ -326,109 +115,14 @@ bool Logger::print(Logger&(*func)(Logger&))
 	return false;
 }
 
-void Logger::input(short& var)
-{
-	std::cin >> var;
-	
-	std::stringstream varToString;
-	varToString << var << "\n";
-	logHistory.push_back(varToString.str());
-}
-
-void Logger::input(unsigned short& var)
+template<typename T>
+void Logger::input(T& var)
 {
 	std::cin >> var;
 
 	std::stringstream varToString;
 	varToString << var << "\n";
 	logHistory.push_back(varToString.str());
-}
-
-void Logger::input(int& var)
-{
-	std::cin >> var;
-
-	std::stringstream varToString;
-	varToString << var << "\n";
-	logHistory.push_back(varToString.str());
-}
-
-void Logger::input(unsigned int& var)
-{
-	std::cin >> var;
-
-	std::stringstream varToString;
-	varToString << var << "\n";
-	logHistory.push_back(varToString.str());
-}
-
-void Logger::input(long& var)
-{
-	std::cin >> var;
-
-	std::stringstream varToString;
-	varToString << var << "\n";
-	logHistory.push_back(varToString.str());
-}
-
-void Logger::input(unsigned long& var)
-{
-	std::cin >> var;
-
-	std::stringstream varToString;
-	varToString << var << "\n";
-	logHistory.push_back(varToString.str());
-}
-
-void Logger::input(long long& var)
-{
-	std::cin >> var;
-
-	std::stringstream varToString;
-	varToString << var << "\n";
-	logHistory.push_back(varToString.str());
-}
-
-void Logger::input(unsigned long long& var)
-{
-	std::cin >> var;
-
-	std::stringstream varToString;
-	varToString << var << "\n";
-	logHistory.push_back(varToString.str());
-}
-
-void Logger::input(float& var)
-{
-	std::cin >> var;
-	
-	std::stringstream varToString;
-	varToString << var << "\n";
-	logHistory.push_back(varToString.str());
-}
-
-void Logger::input(double& var)
-{
-	std::cin >> var;
-	
-	std::stringstream varToString;
-	varToString << var << "\n";
-	logHistory.push_back(varToString.str());
-}
-
-void Logger::input(long double& var)
-{
-	std::cin >> var;
-	
-	std::stringstream varToString;
-	varToString << var << "\n";
-	logHistory.push_back(varToString.str());
-}
-
-void Logger::input(std::string& var)
-{
-	std::cin >> var;
-	logHistory.push_back(var + "\n");
 }
 
 Logger& operator<< (Logger& log, short value)
@@ -634,3 +328,5 @@ bool Logger::dumpLog()
 {
 	return dumpLog(m_logFile);
 }
+
+using logger_t = Logger;
