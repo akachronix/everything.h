@@ -2,99 +2,360 @@
 
 #include <cmath>
 
+#if defined(EVERYTHING_DEBUG) || defined(MATH_DEBUG)
+	#include <iostream>
+#endif
+
 const long double pi = 3.14159265358979323846;
 
-inline long double add(const long double x, const long double y) { return x + y; }
-inline long double subtract(const long double x, const long double y) { return x - y; }
-inline long double multiply(const long double x, const long double y) { return x * y; }
-inline long double divide(const long double x, const long double y) { return x / y; }
-
-inline long double power(const long double base, const long double exponent)
+template<typename T>
+class Trapezoid
 {
-	long double answer = base;
-	for (int i = 1; i < exponent; i++)
-		answer *= base;
+public:
+	T side1, side2, height;
 
-	return answer;
+	Trapezoid() = default;
+	Trapezoid(T _side1, T _side2, T _height);
+
+	T area();
+	T operator()();
+};
+
+template<typename T = long double>
+class Rectangle
+{
+public:
+	T length, width;
+
+	Rectangle() = default;
+	Rectangle(T _length, T _width);
+
+	T area();
+	T operator()();
+};
+
+template<typename T = long double>
+class Triangle
+{
+public:
+	T base, height;
+
+	Triangle() = default;
+	Triangle(T _base, T _height);
+
+	T area();
+	T operator()();
+};
+
+template<typename T = long double>
+class Rhombus
+{
+public:
+	T side;
+
+	Rhombus() = default;
+	Rhombus(T _side);
+
+	T area();
+	T operator()();
+};
+
+template<typename T = long double>
+class Hexagon
+{
+public:
+	T side;
+
+	Hexagon() = default;
+	Hexagon(T _side);
+
+	T area();
+	T operator()();
+};
+
+template<typename T = long double>
+class Circle
+{
+public:
+	T radius;
+
+	Circle() = default;
+	Circle(T _radius);
+
+	T area();
+	T operator()();
+};
+
+template<typename T = long double>
+class Square
+{
+public:
+	T side;
+
+	Square() = default;
+	Square(T _side);
+
+	T area();
+	T operator()();
+};
+
+template<typename T = long double>
+class RectangularPrism
+{
+public:
+	T length, width, height;
+
+	RectangularPrism() = default;
+	RectangularPrism(T _length, T _width, T _height);
+
+	T area();
+	T operator()();
+};
+
+template<typename T = long double>
+class TriangularPrism
+{
+public:
+	T length, width, height;
+
+	TriangularPrism() = default;
+	TriangularPrism(T _length, T _width, T _height);
+
+	T area();
+	T operator()();
+};
+
+template<typename T = long double>
+class Cone
+{
+public:
+	T radius, height;
+
+	Cone() = default;
+	Cone(T _radius, T _height);
+
+	T area();
+	T operator()();
+};
+
+template<typename T = long double>
+class Cube
+{
+public:
+	T face;
+
+	Cube() = default;
+	Cube(T _face);
+
+	T area();
+	T operator()();
+};
+
+template<typename T>
+Trapezoid<T>::Trapezoid(T _side1, T _side2, T _height)
+	: side1(_side1), side2(_side2), height(_height)
+{
+
 }
 
-// 2D shapes
-typedef struct {long double side1, side2, height, area;} trapezoid_t;
-typedef struct {long double length, width, area;} rectangle_t;
-typedef struct {long double base, height, area;} triangle_t;
-typedef struct {long double side, area;} rhombus_t;
-typedef struct {long double side, area;} hexagon_t;
-typedef struct {long double radius, area;} circle_t;
-typedef struct {long double side, area;} square_t;
-
-// 3D shapes
-typedef struct {long double length, width, height, area;} rectangular_prism_t;
-typedef struct {long double length, width, height, area;} triangular_prism_t;
-typedef struct {long double radius, height, area;} cone_t;
-typedef struct {long double face, area;} cube_t;
-
-trapezoid_t Trapezoid(long double side1, long double side2, long double height)
+template<typename T>
+T Trapezoid<T>::area()
 {
-	trapezoid_t obj = {side1, side2, height, (side1 + side2) / 2 * height};
-	return obj;
+	return (side1 + side2) / 2 * height;
 }
 
-rectangle_t Rectangle(long double length, long double width)
+template<typename T>
+T Trapezoid<T>::operator()()
 {
-	rectangle_t obj = {length, width, length * width};
-	return obj;
+	return area();
 }
 
-triangle_t Triangle(long double base, long double height)
+template<typename T>
+Rectangle<T>::Rectangle(T _length, T _width)
+	: length(_length), width(_width)
 {
-	triangle_t obj = {base, height, (base * height) / 2};
-	return obj;
+
 }
 
-rhombus_t Rhombus(long double side)
+template<typename T>
+T Rectangle<T>::area()
 {
-	rhombus_t obj = {side, 0.5 * side};
-	return obj;
+	return length * width;
 }
 
-hexagon_t Hexagon(long double side)
+template<typename T>
+T Rectangle<T>::operator()()
 {
-	hexagon_t obj = {side, 3 * sqrt(3) / 2 * power(side, 2)};
-	return obj;
+	return area();
 }
 
-circle_t Circle(long double radius)
+template<typename T>
+Triangle<T>::Triangle(T _base, T _height)
+	: base(_base), height(_height)
 {
-	circle_t obj = {radius, (radius * radius) * pi};
-	return obj;
+
 }
 
-square_t Square(long double side)
+template<typename T>
+T Triangle<T>::area()
 {
-	square_t obj = {side, side * side};
-	return obj;
+	return (base * height) / 2;
 }
 
-rectangular_prism_t Rectangular_Prism(long double length, long double width, long double height)
+template<typename T>
+T Triangle<T>::operator()()
 {
-	rectangular_prism_t obj = {length, width, height, length * width * height};
-	return obj;
+	return area();
 }
 
-triangular_prism_t Triangular_Prism(long double length, long double width, long double height)
+template<typename T>
+Rhombus<T>::Rhombus(T _side)
+	: side(_side)
 {
-	triangular_prism_t obj = {length, width, height, 0.5 * length * width * height};
-	return obj;
+
 }
 
-cone_t Cone(long double radius, long double height)
+template<typename T>
+T Rhombus<T>::area()
 {
-	cone_t obj = {radius, height, pi * (radius * radius) * (height / 3)};
-	return obj;
+	return side / 2;
 }
 
-cube_t Cube(long double face)
+template<typename T>
+T Rhombus<T>::operator()()
 {
-	cube_t obj = {face, face * face * face};
-	return obj;
+	return area();
+}
+
+template<typename T>
+Hexagon<T>::Hexagon(T _side)
+	: side(_side)
+{
+
+}
+
+template<typename T>
+T Hexagon<T>::area()
+{
+	return 3 * sqrt(3) / 2 * (side * side);
+}
+
+template<typename T>
+T Hexagon<T>::operator()()
+{
+	return area();
+}
+
+template<typename T>
+Circle<T>::Circle(T _radius)
+	: radius(_radius)
+{
+
+}
+
+template<typename T>
+T Circle<T>::area()
+{
+	return (radius * radius) * pi;
+}
+
+template<typename T>
+T Circle<T>::operator()()
+{
+	return area();
+}
+
+template<typename T>
+Square<T>::Square(T _side)
+	: side(_side)
+{
+
+}
+
+template<typename T>
+T Square<T>::area()
+{
+	return side * side;
+}
+
+template<typename T>
+T Square<T>::operator()()
+{
+	return area();
+}
+
+template<typename T>
+RectangularPrism<T>::RectangularPrism(T _length, T _width, T _height)
+	: length(_length), width(_width), height(_height)
+{
+
+}
+
+template<typename T>
+T RectangularPrism<T>::area()
+{
+	return length * width * height;
+}
+
+template<typename T>
+T RectangularPrism<T>::operator()()
+{
+	return area();
+}
+
+template<typename T>
+TriangularPrism<T>::TriangularPrism(T _length, T _width, T _height)
+	: length(_length), width(_width), height(_height)
+{
+
+}
+
+template<typename T>
+T TriangularPrism<T>::area()
+{
+	return (length * width * height) / 2;
+}
+
+template<typename T>
+T TriangularPrism<T>::operator()()
+{
+	return area();
+}
+
+template<typename T>
+Cone<T>::Cone(T _radius, T _height)
+	: radius(_radius), height(_height)
+{
+
+}
+
+template<typename T>
+T Cone<T>::area()
+{
+	return pi * (radius * radius) * (height / 3);
+}
+
+template<typename T>
+T Cone<T>::operator()()
+{
+	return area();
+}
+
+template<typename T>
+Cube<T>::Cube(T _face)
+	: face(_face)
+{
+
+}
+
+template<typename T>
+T Cube<T>::area()
+{
+	return face * face * face;
+}
+
+template<typename T>
+T Cube<T>::operator()()
+{
+	return area();
 }
