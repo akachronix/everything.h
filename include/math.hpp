@@ -8,7 +8,7 @@
 
 const long double pi = 3.14159265358979323846;
 
-template<typename T>
+template<typename T = long double>
 class Trapezoid
 {
 public:
