@@ -13,6 +13,7 @@ namespace brisk
 
 	public:
 		array();
+		array(const std::initializer_list<T> list);
 		~array();
 
 		array(array&) = delete;
