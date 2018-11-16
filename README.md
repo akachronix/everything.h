@@ -1,6 +1,9 @@
 # brisk
 Compiles on Linux & Mac (using Make) and Windows (using MinGW).
 
+## Background
+```brisk``` is a header-only library that I've written myself for myself. However, I do believe in free software so I have open-sourced it onto here to hopefully get some suggestions. All this started for CCalc, my calculator program that I wrote for myself to use in school to make my life easier when answering math questions.
+
 ## Usage
 First, refer to the Build section for your platform. So, now, you officially have set it up I'll assume.
 
@@ -15,6 +18,37 @@ All the libraries are split up into their respective headers. The libraries in `
 Including ```brisk.h``` will, for namesakes, include all of these. However, just append ```.hpp``` to the library name to just get the library you want.
 
 ## Reference
+### algorithm
+#### Functions
+- ```template<typename T> vector<T> copy(vector<T>& v)```
+- ```template<typename T, size_t _Size> vector<T> copy(array<T, _Size>& a)```
+- ```template<typename T> void copy(vector<T>& v, vector<T>& v2)```
+- ```template<typename T, size_t _Size> void copy(array<T, _Size>& a, vector<T>& v)```
+
+### array
+#### Classes
+- array
+  - ```array()```
+  - ```array(const std::initializer_list<T> list)```
+  - ```~array()```
+  - ```array(array&) = delete```
+  - ```array(array&&) = delete```
+  - ```T& operator[](const size_t index) noexcept```
+  - ```const T& operator[](const size_t index) const noexcept```
+  - ```T& at(const size_t index)```
+  - ```const T& at(const size_t index) const```
+  - ```T* data() noexcept```
+  - ```size_t size() const noexcept```
+  - ```bool empty() const noexcept```
+  - ```T* begin() noexcept```
+  - ```T* end() noexcept```
+  - ```const T* cbegin() const noexcept```
+  - ```const T* cend() const noexcept```
+  - ```std::reverse_iterator<T*> rbegin() noexcept```
+  - ```std::reverse_iterator<T*> rend() noexcept```
+  - ```std::reverse_iterator<const T*> crbegin() const noexcept```
+  - ```std::reverse_iterator<const T*> crend() const noexcept```
+
 ### logger
 #### Enum Classes
 - ```loglevel_t```
@@ -46,9 +80,6 @@ Including ```brisk.h``` will, for namesakes, include all of these. However, just
   - ```Logger& tab(Logger& log)```
   - ```Logger& space(Logger& log)```
 
-## Background
-```brisk``` is a header-only library that I've written myself for myself. However, I do believe in free software so I have open-sourced it onto here to hopefully get some suggestions. All this started for CCalc, my calculator program that I wrote for myself to use in school to make my life easier when answering math questions.
-
 ## Requirements
 ### Linux
 - GCC 4.8.1
@@ -62,13 +93,13 @@ Including ```brisk.h``` will, for namesakes, include all of these. However, just
 
 ## Build (Linux)
 - Install the ```git``` package.
-- Clone repository using ```git clone https://github.com/akachronix/everything.h.git```
+- Clone repository using ```git clone https://github.com/akachronix/brisk.git```
 - Copy headers to whereever, and then set your path using the ```-I``` compiler argument.
 - Success.
 
 ## Build (Windows)
 - Install Git for Windows.
-- Clone repository using ```git clone https://github.com/akachronix/everything.h.git```
+- Clone repository using ```git clone https://github.com/akachronix/brisk.git```
 - Open a Command Prompt where Git for Windows cloned the repository.
 - Copy headers to whereever, and then set your path using the ```-I``` compiler argument.
 - Success.
