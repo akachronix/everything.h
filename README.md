@@ -20,10 +20,10 @@ Including ```brisk.h``` will, for namesakes, include all of these. However, just
 - ```loglevel_t```
 
 #### Classes
-- Logger (typedefed to ```logger_t```)
-  - ```Logger()```
-  - ```~Logger()```
-  - ```Logger(loglevel_t _loglevel, std::string _logfile)```
+- logger (typedefed to ```logger_t```)
+  - ```logger()```
+  - ```~logger()```
+  - ```logger(loglevel_t _loglevel, std::string _logfile)```
   - ```bool logError(std::string error_str)```
   - ```bool logWarning(std::string warning_str)```
   - ```template<typename T> bool print(T value)```
@@ -35,7 +35,7 @@ Including ```brisk.h``` will, for namesakes, include all of these. However, just
 #### Functions
 - Output Operators
   - ```template<typename T> logger& operator<<(logger& log, T value)```
-  - ```logger& operator<<(logger& log, logger& (*func)(logger&))
+  - ```logger& operator<<(logger& log, logger& (*func)(logger&))```
   
 - Input Operators
   - ```template<typename T> logger& operator>>(logger& log, T& value)```
