@@ -3,8 +3,28 @@
 #include "array.hpp"
 #include "vector.hpp"
 
+#include <type_traits>
+
 namespace brisk
 {
+	template<class Iterator, typename Function, typename... Args>
+	Function for_each(Iterator first, Iterator last, Function(*f)(std::remove_pointer<Iterator>::type(), Args...), Args... args)
+	{
+		for (; first != last; ++first)
+			f(*first, args...);
+		
+		return f;
+	}
+
+	template<class Iterator, typename Function> 
+	Function for_each(Iterator first, Iterator last, Function f)
+	{
+		for (; first != last; ++first)
+			f(*first);
+		
+		return f;
+	}
+
 	template<typename T>
 	vector<T> copy(vector<T>& v)
 	{
