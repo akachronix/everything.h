@@ -1,32 +1,21 @@
-# everything.h
+# brisk
 Compiles on Linux & Mac (using Make) and Windows (using MinGW).
 
 ## Usage
 First, refer to the Build section for your platform. So, now, you officially have set it up I'll assume.
 
-All the libraries are split up into their respective headers. The libraries in ```everything.h``` are:
-- libvector, a replacement for std::vector
-- libinput, a pretty crappy wrapper around std::cin
-- libpair, a pretty crappy recreation of std::pair
-- libcalc, a pretty crappy template class for calculating stuff
-- libmath, a pretty crappy math header
-- liblog, a pretty good wrapper around std::cin and std::cout that will dump everything output to the console to a log file automagically for you
-- libptr, a pretty crappy scoped pointer
+All the libraries are split up into their respective headers. The libraries in ```brisk``` are:
+- algorithm, a WIP library including copy functions for ```array``` and ```vector```
+- array, a replacement for std::array
+- logger, a pretty good wrapper around std::cin and std::cout that will dump everything output to the console to a log file automagically for you
+- math, containers for geometric shapes
+- pair, a replacement for std::pair
+- vector, a replacement for std::vector
 
-Including ```everything.h``` will, for namesakes, include all of these. However, just append ```.hpp``` to the library name to just get the library you want.
+Including ```brisk.h``` will, for namesakes, include all of these. However, just append ```.hpp``` to the library name to just get the library you want.
 
 ## Reference
-### libinput
-#### Functions
-- ```int GetInt(std::string prompt)```
-- ```long int GetLongInt(std::string prompt)```
-- ```long long int GetLongLongInt(std::string prompt)```
-- ```float GetFloat(std::string prompt)```
-- ```double GetDouble(std::string prompt)```
-- ```long double GetLongDouble(std::string prompt)```
-- ```std::string GetString(std::string prompt)```
-
-### liblog
+### logger
 #### Enum Classes
 - ```loglevel_t```
 
@@ -92,7 +81,7 @@ Including ```everything.h``` will, for namesakes, include all of these. However,
   - ```Logger& space(Logger& log)```
 
 ## Background
-```everything.h``` is a header-only library that I've written myself for myself. However, I do believe in free software so I have open-sourced it onto here to hopefully get some suggestions. All this started for CCalc, my calculator program that I wrote for myself to use in school to make my life easier when answering math questions.
+```brisk``` is a header-only library that I've written myself for myself. However, I do believe in free software so I have open-sourced it onto here to hopefully get some suggestions. All this started for CCalc, my calculator program that I wrote for myself to use in school to make my life easier when answering math questions.
 
 ## Requirements
 ### Linux
