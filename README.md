@@ -24,55 +24,21 @@ Including ```brisk.h``` will, for namesakes, include all of these. However, just
   - ```Logger()```
   - ```~Logger()```
   - ```Logger(loglevel_t _loglevel, std::string _logfile)```
-  - ```void disableLogging()```
-  - ```void enableLogging(loglevel_t _loglevel)```
-  - ```std::vector<std::string> getLog()```
   - ```bool logError(std::string error_str)```
   - ```bool logWarning(std::string warning_str)```
-  - ```bool print(short value);```
-  - ```bool print(unsigned short value);```
-  - ```bool print(int value);```
-  - ```bool print(unsigned int value);```
-  - ```bool print(float value);```
-  - ```bool print(double value);```
-  - ```bool print(long double value);```
-  - ```bool print(const char* print_str);```
-  - ```bool print(std::string print_str);```
-  - ```bool print(Logger&(*func)(Logger&));```
-  - ```void input(short& var);```
-  - ```void input(unsigned short& var);```
-  - ```void input(int& var);```
-  - ```void input(unsigned int& var);```
-  - ```void input(float& var);```
-  - ```void input(double& var);```
-  - ```void input(long double& var);```
-  - ```void input(const char* var);```
-  - ```void input(std::string& var);```
+  - ```template<typename T> bool print(T value)```
+  - ```template<typename T> void input(T& var)```
+  - ```bool print(logger& (*func)(Logger&))```
   - ```bool dumpLog(std::string file);```
   - ```bool dumpLog();```
 
 #### Functions
 - Output Operators
-  - ```Logger& operator<< (Logger& log, short value)```
-  - ```Logger& operator<< (Logger& log, unsigned short value)```
-  - ```Logger& operator<< (Logger& log, int value)```
-  - ```Logger& operator<< (Logger& log, unsigned int value)```
-  - ```Logger& operator<< (Logger& log, float value)```
-  - ```Logger& operator<< (Logger& log, double value)```
-  - ```Logger& operator<< (Logger& log, long double value)```
-  - ```Logger& operator<< (Logger& log, const char* str)```
-  - ```Logger& operator<< (Logger& log, std::string str)```
-  - ```Logger& operator<< (Logger& log, Logger&(*func)(Logger&))```
+  - ```template<typename T> logger& operator<<(logger& log, T value)```
+  - ```logger& operator<<(logger& log, logger& (*func)(logger&))
   
 - Input Operators
-  - ```Logger& operator>> (Logger& log, short& value)```
-  - ```Logger& operator>> (Logger& log, unsigned short& value)```
-  - ```Logger& operator>> (Logger& log, int& value)```
-  - ```Logger& operator>> (Logger& log, unsigned int& value)```
-  - ```Logger& operator>> (Logger& log, float& value)```
-  - ```Logger& operator>> (Logger& log, double& value)```
-  - ```Logger& operator>> (Logger& log, long double& value)```
-  - ```Logger& operator>> (Logger& log, std::string& str)```
+  - ```template<typename T> logger& operator>>(logger& log, T& value)```
 
 - Stream Manipulators
   - ```Logger& newl(Logger& log)```
