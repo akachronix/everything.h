@@ -3,12 +3,13 @@
 #include "array.hpp"
 #include "vector.hpp"
 
+#include <functional>
 #include <type_traits>
 
 namespace brisk
 {
 	template<class Iterator, typename Function, typename... Args>
-	Function for_each(Iterator first, Iterator last, Function(*f)(std::remove_pointer<Iterator>::type(), Args...), Args... args)
+	Function for_each(Iterator first, Iterator last, Function f, Args... args)
 	{
 		for (; first != last; ++first)
 			f(*first, args...);
