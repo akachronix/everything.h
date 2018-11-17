@@ -3,9 +3,6 @@
 #include "array.hpp"
 #include "vector.hpp"
 
-#include <functional>
-#include <type_traits>
-
 namespace brisk
 {
 	template<class Iterator, typename Function, typename... Args>
