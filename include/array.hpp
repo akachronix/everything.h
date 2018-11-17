@@ -50,6 +50,20 @@ namespace brisk
 	}
 
 	template<typename T, size_t _Size>
+	array<T, _Size>::array(const std::initializer_list<T> list)
+	{
+		unsigned int i = 0;
+		for (auto it : list)
+		{
+			if (i == _Size)
+				break;
+
+			m_array[i] = it;
+			++i;
+		}
+	}
+
+	template<typename T, size_t _Size>
 	array<T, _Size>::~array()
 	{
 		delete[] m_array;
