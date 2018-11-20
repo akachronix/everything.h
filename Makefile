@@ -1,16 +1,25 @@
 CC=g++
-CXXFLAGS=-std=c++11 -Iinclude -Llib -Wall -Werror -pedantic
-CXXLDFLAGS=-static
+CXXFLAGS=-Wall -pedantic
+CXXLDFLAGS=
+
+STD=c++17
+
+BINDIR=bin
+INCLUDEDIR=include
+LIBDIR=lib
+OBJDIR=obj
 
 TARGET=test
 
-all: clean test.o
-	mkdir bin obj
-	$(CC) $(CXXFLAGS) -g -s test.o -o bin/$(TARGET) $(CXXLDFLAGS)
-	mv *.o obj
+all: $(TARGET)
+
+$(TARGET): clean test.o
+	mkdir $(BINDIR) $(OBJDIR)
+	mv *.o $(OBJDIR)
+	$(CC) -std=$(STD) -I$(INCLUDEDIR) -L$(LIBDIR) $(CXXFLAGS) -g -s $(OBJDIR)/test.o -o $(BINDIR)/$(TARGET) $(CXXLDFLAGS)
 
 test.o: src/test.cpp
-	$(CC) $(CXXFLAGS) -c $^
+	$(CC) -std=$(STD) -I$(INCLUDEDIR) -L$(LIBDIR) $(CXXFLAGS) -c $^
 
 clean:
-	rm -rf bin obj *.log
+	rm -rf $(BINDIR) $(OBJDIR) *.log

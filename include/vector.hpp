@@ -106,6 +106,7 @@ namespace brisk
 		}
 	}
 
+	// Constructor that constructs an object with elements from an iterator
 	template<typename T>
 	vector<T>::vector(T* const begin, T* const end)
 		: m_elements(0), m_size(0)
@@ -155,13 +156,14 @@ namespace brisk
 		return m_array[index];
 	}
 
+	// Same as above, but works with const objects
 	template<typename T>
 	const T& vector<T>::operator[](const unsigned long long index) const noexcept
 	{
 		return m_array[index];
 	}
 
-	// same as operator[], but has bounds-checking
+	// Same as operator[], but has bounds-checking
 	template<typename T>
 	T& vector<T>::at(const unsigned long long index)
 	{
@@ -171,6 +173,7 @@ namespace brisk
 		return m_array[index];
 	}
 
+	// Same as above, but works with const objects
 	template<typename T>
 	const T& vector<T>::at(const unsigned long long index) const
 	{

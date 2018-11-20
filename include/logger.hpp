@@ -8,7 +8,7 @@
 
 namespace brisk
 {
-	enum class loglevel_t
+	enum class loglevel
 	{
 		nothing = -1,
 		print = 0,
@@ -21,11 +21,13 @@ namespace brisk
 	{
 	public:
 		logger();
-		logger(loglevel_t _loglevel, std::string _logfile);
+		logger(loglevel _loglevel, std::string _logfile);
 		logger(logger&) = delete;
 		logger(logger&&) = delete;
 
 		~logger();
+
+		std::string filename() const;
 
 		bool logError(std::string error_str);
 		bool logWarning(std::string warning_str);
@@ -40,17 +42,17 @@ namespace brisk
 
 	private:
 		std::vector<std::string> logHistory;
-		loglevel_t m_logLevel;
+		loglevel m_logLevel;
 		std::string m_logFile;
 	};
 
 	logger::logger()
-		: m_logLevel(loglevel_t::everything), m_logFile("logger.log")
+		: m_logLevel(loglevel::everything), m_logFile("logger.log")
 	{
 
 	}
 
-	logger::logger(loglevel_t _loglevel, std::string _logfile)
+	logger::logger(loglevel _loglevel, std::string _logfile)
 		: m_logLevel(_loglevel), m_logFile(_logfile)
 	{
 
@@ -61,9 +63,14 @@ namespace brisk
 		dumpLog(m_logFile);
 	}
 
+	std::string logger::filename() const
+	{
+		return m_logFile;
+	}
+
 	bool logger::logError(std::string error_str)
 	{
-		if (m_logLevel >= loglevel_t::errors)
+		if (m_logLevel >= loglevel::errors)
 		{
 			std::string message = "[ERROR] " + error_str + "\n";
 
@@ -78,7 +85,7 @@ namespace brisk
 
 	bool logger::logWarning(std::string warning_str)
 	{
-		if (m_logLevel >= loglevel_t::warnings)
+		if (m_logLevel >= loglevel::warnings)
 		{
 			std::string message = "[WARNING] " + warning_str + "\n";
 
@@ -94,7 +101,7 @@ namespace brisk
 	template<typename T>
 	bool logger::print(T value)
 	{
-		if (m_logLevel >= loglevel_t::print)
+		if (m_logLevel >= loglevel::print)
 		{
 			std::stringstream casted_value;
 			casted_value << value;
@@ -110,7 +117,7 @@ namespace brisk
 
 	bool logger::print(logger& (*func) (logger&))
 	{
-		if (m_logLevel >= loglevel_t::print)
+		if (m_logLevel >= loglevel::print)
 		{
 			func(*this);
 			return true;

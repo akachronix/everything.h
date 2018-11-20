@@ -120,80 +120,48 @@ namespace brisk
 	template<typename T, size_t _Size>
 	T* array<T, _Size>::begin() noexcept
 	{
-	#if defined(EVERYTHING_DEBUG) || defined(array_DEBUG)
-		std::cout << "T* array<T, _Size>::begin() noexcept\n";
-	#endif
-
 		return &m_array[0];
 	}
 
 	template<typename T, size_t _Size>
 	T* array<T, _Size>::end() noexcept
 	{
-	#if defined(EVERYTHING_DEBUG) || defined(array_DEBUG)
-		std::cout << "T* array<T, _Size>::end() noexcept\n";
-	#endif
-
 		return &m_array[_Size];
 	}
 
 	template<typename T, size_t _Size>
 	const T* array<T, _Size>::cbegin() const noexcept
 	{
-	#if defined(EVERYTHING_DEBUG) || defined(array_DEBUG)
-		std::cout << "const T* array<T, _Size>::cbegin() const noexcept\n";
-	#endif
-
 		return &m_array[0];
 	}
 
 	template<typename T, size_t _Size>
 	const T* array<T, _Size>::cend() const noexcept
 	{
-	#if defined(EVERYTHING_DEBUG) || defined(array_DEBUG)
-		std::cout << "const T* array<T, _Size>::cend() const noexcept\n";
-	#endif
-
 		return &m_array[_Size];
 	}
 
 	template<typename T, size_t _Size>
 	std::reverse_iterator<T*> array<T, _Size>::rbegin() noexcept
 	{
-	#if defined(EVERYTHING_DEBUG) || defined(array_DEBUG)
-		std::cout << "std::reverse_iterator<T*> array<T, _Size>::rbegin() noexcept\n";
-	#endif
-
 		return std::reverse_iterator<T*>(&m_array[_Size]);
 	}
 
 	template<typename T, size_t _Size>
 	std::reverse_iterator<T*> array<T, _Size>::rend() noexcept
 	{
-	#if defined(EVERYTHING_DEBUG) || defined(array_DEBUG)
-		std::cout << "std::reverse_iterator<T*> array<T, _Size>::rend() noexcept\n";
-	#endif
-
 		return std::reverse_iterator<T*>(&m_array[0]);
 	}
 
 	template<typename T, size_t _Size>
 	std::reverse_iterator<const T*> array<T, _Size>::crbegin() const noexcept
 	{
-	#if defined(EVERYTHING_DEBUG) || defined(array_DEBUG)
-		std::cout << "std::reverse_iterator<const T*> array<T, _Size>::crbegin() const noexcept\n";
-	#endif
-
 		return std::reverse_iterator<const T*>(&m_array[_Size]);
 	}
 
 	template<typename T, size_t _Size>
 	std::reverse_iterator<const T*> array<T, _Size>::crend() const noexcept
 	{
-	#if defined(EVERYTHING_DEBUG) || defined(array_DEBUG)
-		std::cout << "std::reverse_iterator<const T*> array<T, _Size>::crend() const noexcept\n";
-	#endif
-
 		return std::reverse_iterator<const T*>(&m_array[0]);
 	}
 }
