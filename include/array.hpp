@@ -5,163 +5,132 @@
 
 namespace brisk
 {
-	template<typename T, size_t _Size>
+	template<typename Type, size_t Size>
 	class array
 	{
 	private:
-		T* m_array;
-
+		Type m_array[Size];
+	
 	public:
-		array();
-		array(const std::initializer_list<T> list);
-		~array();
+		using size_type = size_t;
+		using value_type = Type;
+		using pointer = Type*;
+		using const_pointer = const Type*;
+		using reference = Type&;
+		using const_reference = const Type&;
 
-		array(array&) = delete;
+		using iterator = Type*;
+		using const_iterator = const Type*;
+		using reverse_iterator = std::reverse_iterator<iterator>;
+		using const_reverse_iterator = std::reverse_iterator<const_iterator>;
+
+		// using difference_type = ptrdiff_t;
+
+		array(array&)  = delete;
 		array(array&&) = delete;
 
-		T& operator[](const size_t index) noexcept;
-		const T& operator[](const size_t index) const noexcept;
+		array()  = default;
+		~array() = default;
 
-		T& at(const size_t index);
-		const T& at(const size_t index) const;
-
-		T* data() noexcept;
-
-		size_t size() const noexcept;
-		bool empty() const noexcept;
-
-		T* begin() noexcept;
-		T* end() noexcept;
-		
-		const T* cbegin() const noexcept;
-		const T* cend() const noexcept;
-
-		std::reverse_iterator<T*> rbegin() noexcept;
-		std::reverse_iterator<T*> rend() noexcept;
-
-		std::reverse_iterator<const T*> crbegin() const noexcept;
-		std::reverse_iterator<const T*> crend() const noexcept;
-	};
-
-	template<typename T, size_t _Size>
-	array<T, _Size>::array()
-	{
-		m_array = new T[_Size];
-	}
-
-	template<typename T, size_t _Size>
-	array<T, _Size>::array(const std::initializer_list<T> list)
-	{
-		unsigned int i = 0;
-		for (auto it : list)
+		reference operator[](const size_type index) noexcept
 		{
-			if (i == _Size)
-				break;
-
-			m_array[i] = it;
-			++i;
+			return m_array[index];
 		}
-	}
 
-	template<typename T, size_t _Size>
-	array<T, _Size>::~array()
-	{
-		delete[] m_array;
-	}
+		const_reference operator[](const size_type index) const noexcept
+		{
+			return m_array[index];
+		}
 
-	template<typename T, size_t _Size>
-	T& array<T, _Size>::operator[](const size_t index) noexcept
-	{
-		return m_array[index];
-	}
+		reference at(const size_type index)
+		{
+			if (index > (Size - 1))
+				throw std::out_of_range("index is out of range");
+			
+			return m_array[index];
+		}
 
-	template<typename T, size_t _Size>
-	const T& array<T, _Size>::operator[](const size_t index) const noexcept
-	{
-		return m_array[index];
-	}
+		const_reference at(const size_type index) const
+		{
+			if (index > (Size - 1))
+				throw std::out_of_range("index is out of range");
+			
+			return m_array[index];
+		}
 
-	template<typename T, size_t _Size>
-	T& array<T, _Size>::at(const size_t index)
-	{
-		if (index > (_Size - 1))
-			throw std::out_of_range("T& array<T, _Size>::at(const size_t index)\n");
+		reference front() noexcept
+		{
+			return m_array[0];
+		}
+
+		const_reference front() const noexcept
+		{
+			return m_array[0];
+		}
+
+		reference back() noexcept
+		{
+			return m_array[Size - 1];
+		}
+
+		const_reference back() const noexcept
+		{
+			return m_array[Size - 1];
+		}
+
+		pointer data() noexcept
+		{
+			return m_array;
+		}
+
+		constexpr size_type size() const noexcept
+		{
+			return Size;
+		}
+
+		bool empty() const noexcept
+		{
+			return (Size == 0) ? true : false;
+		}
+
+		iterator begin() noexcept
+		{
+			return &m_array[0];
+		}
+
+		iterator end() noexcept
+		{
+			return &m_array[Size];
+		}
 		
-		return m_array[index];
-	}
+		const_iterator cbegin() const noexcept
+		{
+			return &m_array[0];
+		}
 
-	template<typename T, size_t _Size>
-	const T& array<T, _Size>::at(const size_t index) const
-	{
-		if (index > (_Size - 1))
-			throw std::out_of_range("const T& array<T, _Size>::at(const size_t index) const\n");
-		
-		return m_array[index];
-	}
+		const_iterator cend() const noexcept
+		{
+			return &m_array[Size];
+		}
 
-	template<typename T, size_t _Size>
-	T* array<T, _Size>::data() noexcept
-	{
-		return m_array;
-	}
+		reverse_iterator rbegin() noexcept
+		{
+			return reverse_iterator(&m_array[Size]);
+		}
 
-	template<typename T, size_t _Size>
-	size_t array<T, _Size>::size() const noexcept
-	{
-		return _Size;
-	}
+		reverse_iterator rend() noexcept
+		{
+			return reverse_iterator(&m_array[0]);
+		}
 
-	template<typename T, size_t _Size>
-	bool array<T, _Size>::empty() const noexcept
-	{
-		return (_Size == 0) ? true : false;
-	}
+		const_reverse_iterator crbegin() const noexcept
+		{
+			return reverse_iterator(&m_array[Size]);
+		}
 
-	template<typename T, size_t _Size>
-	T* array<T, _Size>::begin() noexcept
-	{
-		return &m_array[0];
-	}
-
-	template<typename T, size_t _Size>
-	T* array<T, _Size>::end() noexcept
-	{
-		return &m_array[_Size];
-	}
-
-	template<typename T, size_t _Size>
-	const T* array<T, _Size>::cbegin() const noexcept
-	{
-		return &m_array[0];
-	}
-
-	template<typename T, size_t _Size>
-	const T* array<T, _Size>::cend() const noexcept
-	{
-		return &m_array[_Size];
-	}
-
-	template<typename T, size_t _Size>
-	std::reverse_iterator<T*> array<T, _Size>::rbegin() noexcept
-	{
-		return std::reverse_iterator<T*>(&m_array[_Size]);
-	}
-
-	template<typename T, size_t _Size>
-	std::reverse_iterator<T*> array<T, _Size>::rend() noexcept
-	{
-		return std::reverse_iterator<T*>(&m_array[0]);
-	}
-
-	template<typename T, size_t _Size>
-	std::reverse_iterator<const T*> array<T, _Size>::crbegin() const noexcept
-	{
-		return std::reverse_iterator<const T*>(&m_array[_Size]);
-	}
-
-	template<typename T, size_t _Size>
-	std::reverse_iterator<const T*> array<T, _Size>::crend() const noexcept
-	{
-		return std::reverse_iterator<const T*>(&m_array[0]);
-	}
+		const_reverse_iterator crend() const noexcept
+		{
+			return reverse_iterator(&m_array[0]);
+		}
+	};
 }
