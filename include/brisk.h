@@ -6,3 +6,4 @@
 #include "array.hpp"
 #include "pair.hpp"
 #include "algorithm.hpp"
+#include "functional.hpp"
