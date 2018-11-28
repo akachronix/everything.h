@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include <utility>
 
 namespace brisk
 {
@@ -13,7 +14,7 @@ namespace brisk
 	}
 
 	template<typename T>
-	inline T max(const T x, const T y)
+	inline T max(const T&& x, const T&& y)
 	{
 		return (x > y) ? x : y;
 	}

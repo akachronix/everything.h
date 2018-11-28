@@ -20,11 +20,10 @@ namespace brisk
 	class logger
 	{
 	public:
-		logger();
-		logger(loglevel _loglevel, std::string _logfile);
 		logger(logger&) = delete;
 		logger(logger&&) = delete;
 
+		logger(loglevel _loglevel, std::string _logfile);
 		~logger();
 
 		std::string filename() const;
@@ -45,12 +44,6 @@ namespace brisk
 		loglevel m_logLevel;
 		std::string m_logFile;
 	};
-
-	logger::logger()
-		: m_logLevel(loglevel::everything), m_logFile("logger.log")
-	{
-
-	}
 
 	logger::logger(loglevel _loglevel, std::string _logfile)
 		: m_logLevel(_loglevel), m_logFile(_logfile)
