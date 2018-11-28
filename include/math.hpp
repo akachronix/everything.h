@@ -8,13 +8,13 @@ namespace brisk
 	const long double pi = 3.14159265358979323846;
 
 	template<typename T>
-	inline T min(const T x, const T y)
+	inline T min(const T x, const T y) noexcept
 	{
 		return (x < y) ? x : y;
 	}
 
 	template<typename T>
-	inline T max(const T&& x, const T&& y)
+	inline T max(const T&& x, const T&& y) noexcept
 	{
 		return (x > y) ? x : y;
 	}
