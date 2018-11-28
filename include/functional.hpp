@@ -1,12 +1,12 @@
 #pragma once
 
-#include <utility>
+#include "utility.hpp"
 
 namespace brisk
 {
 	template <class Function, class... Args>
 	decltype(auto) invoke(Function&& f, Args&&... args) noexcept
 	{
-		return std::forward<Function>(f)(std::forward<Args>(args)...);
+		return forward<Function>(f)(forward<Args>(args)...);
 	}
 }
