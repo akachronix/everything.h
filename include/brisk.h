@@ -2,6 +2,7 @@
 
 #include "logger.hpp"
 #include "math.hpp"
+#include "string.hpp"
 #include "vector.hpp"
 #include "array.hpp"
 #include "utility.hpp"
