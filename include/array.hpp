@@ -5,7 +5,7 @@
 
 namespace brisk
 {
-	template<typename Type, size_t Size>
+	template <typename Type, size_t Size>
 	class array
 	{
 	private:
@@ -83,14 +83,25 @@ namespace brisk
 			return m_array;
 		}
 
-		constexpr size_type size() const noexcept
+		constexpr size_type size() noexcept
 		{
 			return Size;
 		}
 
-		bool empty() const noexcept
+		constexpr size_type max_size() noexcept
+		{
+			return Size;
+		}
+
+		constexpr bool empty() noexcept
 		{
 			return (Size == 0) ? true : false;
+		}
+
+		void fill(const value_type& value)
+		{
+			for (size_type i = 0; i < Size; ++i)
+				m_array[i] = value;
 		}
 
 		iterator begin() noexcept

@@ -4,19 +4,25 @@
 
 namespace brisk
 {
-	template<typename T>
+	template <class T>
 	constexpr T&& forward(typename std::remove_reference<T>::type& t) noexcept
 	{
 		return static_cast<T&&>(t);
 	}
 
-	template<typename T>
-	constexpr T&& forward(typename std::remove_reference<T>::type&& t)
+	template <class T>
+	constexpr T&& forward(typename std::remove_reference<T>::type&& t) noexcept
 	{
 		return static_cast<T&&>(t);
 	}
 
-	template<typename T, typename T2>
+	template <class T>
+	constexpr typename std::remove_reference<T>::type&& move(T&& t) noexcept
+	{
+		return static_cast<typename std::remove_reference<T>::type&&>(t);
+	}
+
+	template <class T, class T2>
 	struct pair
 	{
 		T first;
@@ -30,7 +36,7 @@ namespace brisk
 		}
 	};
 
-	template<typename T, typename T2>
+	template <class T, class T2>
 	pair<T, T2> make_pair(T&& x, T2&& y)
 	{
 		return pair<T, T2>(forward<T>(x), forward<T2>(y));

@@ -8,7 +8,7 @@
 
 namespace brisk
 {
-	template<typename Type>
+	template <class Type>
 	class vector
 	{
 	private:
@@ -145,7 +145,7 @@ namespace brisk
 			return m_array;
 		}
 
-		template<class... Args>
+		template <class... Args>
 		void emplace_back(Args&&... args)
 		{
 			if (m_elements == m_size)
