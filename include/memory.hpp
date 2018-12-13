@@ -35,17 +35,25 @@ namespace brisk
 				delete ptr;
 		}
 
+		unique_ptr& operator=(nullptr_t) noexcept
+		{
+			if (ptr != nullptr)
+			{
+				delete ptr;
+				ptr = nullptr;
+			}
+
+			return *this;
+		}
+
 		typename std::add_lvalue_reference<element_type>::type operator*() const
 		{
 			return *ptr;
 		}
 
-		pointer operator->() const noexcept
+		pointer operator->() noexcept
 		{
-			if (ptr != nullptr)
-			{
-				return *ptr;
-			}
+			return ptr;
 		}
 
 		pointer get() const noexcept
@@ -57,7 +65,6 @@ namespace brisk
 		{
 			return (ptr == nullptr) ? false : true;
 		}
-
 
 		pointer release() noexcept
 		{
