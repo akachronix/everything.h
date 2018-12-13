@@ -12,6 +12,7 @@ namespace brisk
 		using element_type = Type;
 
 		unique_ptr(const unique_ptr&) = delete;
+		unique_ptr& operator=(const unique_ptr&) = delete;
 
 		constexpr unique_ptr() noexcept
 		{
@@ -37,6 +38,14 @@ namespace brisk
 		typename std::add_lvalue_reference<element_type>::type operator*() const
 		{
 			return *ptr;
+		}
+
+		pointer operator->() const noexcept
+		{
+			if (ptr != nullptr)
+			{
+				return *ptr;
+			}
 		}
 
 		pointer get() const noexcept
@@ -70,20 +79,34 @@ namespace brisk
 		pointer ptr;
 	};
 
-	template <class Type>
 	class address_range
 	{
 	public:
-		using pointer = Type*;
-		using element_type = Type;
-
 		address_range() = default;
-		~address_range() = default;
 
-		address_range(pointer* )
+		address_range(unsigned long long begin, unsigned long long end)
+			: m_begin(begin), m_end(end)
+		{
+
+		}
+
+		void* begin() const
+		{
+			return reinterpret_cast<void*>(m_begin);
+		}
+
+		void* end() const
+		{
+			return reinterpret_cast<void*>(m_end);
+		}
+
+		unsigned long long bytes() const noexcept
+		{
+			return reinterpret_cast<unsigned long long>(m_end - m_begin);
+		}
 
 	private:
-		Type* begin;
-		Type* end;
+		unsigned long long m_begin;
+		unsigned long long m_end;
 	};
 }
