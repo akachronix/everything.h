@@ -319,4 +319,40 @@ namespace brisk
 			return reverse_iterator(&m_array[0]);
 		}
 	};
+
+	template <class Type>
+	Type* begin(brisk::vector<Type>& c) noexcept
+	{
+		return c.begin();
+	}
+
+	template <class Type>
+	Type* end(brisk::vector<Type>& c) noexcept
+	{
+		return c.end();
+	}
+
+	template <class Type>
+	const Type* begin(const brisk::vector<Type>& c) noexcept
+	{
+		return c.cbegin();
+	}
+
+	template <class Type>
+	const Type* end(const brisk::vector<Type>& c) noexcept
+	{
+		return c.cend();
+	}
+
+	template <class Type>
+	const Type* cbegin(const brisk::vector<Type>& c) noexcept
+	{
+		return c.cbegin();
+	}
+
+	template <class Type>
+	const Type* cend(const brisk::vector<Type>& c) noexcept
+	{
+		return c.cend();
+	}
 }
