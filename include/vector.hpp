@@ -279,6 +279,12 @@ namespace brisk
 			m_array = buffer;
 		}
 
+		void fill(const value_type& value)
+		{
+			for (size_type i = 0; i < m_elements; ++i)
+				m_array[i] = value;
+		}
+
 		iterator begin() noexcept
 		{
 			return &m_array[0];

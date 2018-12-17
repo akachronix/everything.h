@@ -23,10 +23,10 @@ namespace brisk
 		logger(logger&) = delete;
 		logger(logger&&) = delete;
 
-		logger(loglevel _loglevel, std::string _logfile)
+		logger(loglevel loglevel, std::string logfile)
 		{
-			m_logLevel = _loglevel;
-			m_logFile = _logfile;
+			m_logLevel = loglevel;
+			m_logFile = logfile;
 		}
 
 		~logger()
@@ -69,7 +69,8 @@ namespace brisk
 			return false;
 		}
 
-		template<class T> bool print(T value)
+		template<class T>
+		bool print(T value)
 		{
 			if (m_logLevel >= loglevel::print)
 			{
@@ -96,7 +97,8 @@ namespace brisk
 			return false;
 		}
 
-		template<class T> void input(T& var)
+		template<class T>
+		void input(T& var)
 		{
 			std::cin >> var;
 
