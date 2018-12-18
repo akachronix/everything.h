@@ -178,4 +178,7 @@ namespace brisk
 		log.print(" ");
 		return log;
 	}
+
+	static logger cout(brisk::loglevel::everything, "cout.log");
+	static logger& cin = cout;
 }

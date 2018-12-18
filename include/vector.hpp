@@ -233,9 +233,14 @@ namespace brisk
 			return m_elements;
 		}
 
-		bool empty() const noexcept
+		[[nodiscard]] bool empty() const noexcept
 		{
 			return (m_elements == 0) ? true : false;
+		}
+
+		explicit operator bool() const noexcept
+		{
+			return (m_elements == 0) ? false : true;
 		}
 
 		void resize(const size_type size)
@@ -283,6 +288,30 @@ namespace brisk
 		{
 			for (size_type i = 0; i < m_elements; ++i)
 				m_array[i] = value;
+		}
+
+		bool operator==(const vector<Type>& rhs) const
+		{
+			if (m_elements != rhs.m_elements)
+				return false;
+			
+			for (size_type i = 0; i < m_elements; ++i)
+				if (m_array[i] != rhs.m_array[i])
+					return false;
+			
+			return true;
+		}
+
+		bool operator!=(const vector<Type>& rhs) const
+		{
+			if (m_elements != rhs.m_elements)
+				return true;
+			
+			for (size_type i = 0; i < m_elements; ++i)
+				if (m_array[i] != rhs.m_array[i])
+					return true;
+			
+			return false;
 		}
 
 		iterator begin() noexcept

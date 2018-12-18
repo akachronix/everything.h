@@ -1,5 +1,6 @@
 #pragma once
 
+#include <istream>
 #include <ostream>
 #include <cstring>
 #include <iterator>
@@ -175,6 +176,7 @@ namespace brisk
         }
 
         friend std::ostream& operator<<(std::ostream& out, const brisk::string& string);
+		friend std::istream& operator>>(std::istream& in, brisk::string& string);
     };
     
     std::ostream& operator<<(std::ostream& out, const brisk::string& string)
