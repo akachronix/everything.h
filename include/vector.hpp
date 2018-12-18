@@ -368,18 +368,6 @@ namespace brisk
 	}
 
 	template <class Type>
-	const Type* begin(const brisk::vector<Type>& c) noexcept
-	{
-		return c.cbegin();
-	}
-
-	template <class Type>
-	const Type* end(const brisk::vector<Type>& c) noexcept
-	{
-		return c.cend();
-	}
-
-	template <class Type>
 	const Type* cbegin(const brisk::vector<Type>& c) noexcept
 	{
 		return c.cbegin();
@@ -389,5 +377,11 @@ namespace brisk
 	const Type* cend(const brisk::vector<Type>& c) noexcept
 	{
 		return c.cend();
+	}
+
+	template <class Type>
+	std::reverse_iterator<std::add_pointer<Type>::type> rbegin(brisk::vector<Type>& c) noexcept
+	{
+		return r.rbegin();
 	}
 }
