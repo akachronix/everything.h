@@ -358,30 +358,48 @@ namespace brisk
 	template <class Type>
 	Type* begin(brisk::vector<Type>& c) noexcept
 	{
-		return c.begin();
+		return &c.data()[0];
 	}
 
 	template <class Type>
 	Type* end(brisk::vector<Type>& c) noexcept
 	{
-		return c.end();
+		return &c.data()[c.size()];
 	}
 
 	template <class Type>
 	const Type* cbegin(const brisk::vector<Type>& c) noexcept
 	{
-		return c.cbegin();
+		return &c.data()[0];
 	}
 
 	template <class Type>
 	const Type* cend(const brisk::vector<Type>& c) noexcept
 	{
-		return c.cend();
+		return &c.data()[c.size()];
 	}
 
 	template <class Type>
-	std::reverse_iterator<std::add_pointer<Type>::type> rbegin(brisk::vector<Type>& c) noexcept
+	std::reverse_iterator<Type*> rbegin(brisk::vector<Type>& c) noexcept
 	{
-		return r.rbegin();
+		return c.rbegin();
+	}
+
+	template <class Type>
+	std::reverse_iterator<Type*> rend(brisk::vector<Type>& c) noexcept
+	{
+		return c.rend();
+	}
+
+	template <class Type>
+	std::reverse_iterator<const Type*> crbegin(brisk::vector<Type>& c) noexcept
+	{
+		return c.crbegin();
+	}
+
+	template <class Type>
+	std::reverse_iterator<const Type*> crend(brisk::vector<Type>& c) noexcept
+	{
+		return c.crend();
 	}
 }
