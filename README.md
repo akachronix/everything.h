@@ -8,63 +8,97 @@ Compiles on Linux & Mac (using Make) and Windows (using MinGW).
 First, refer to the Build section for your platform. So, now, you officially have set it up I'll assume.
 
 All the libraries are split up into their respective headers. The libraries in ```brisk``` are:
-- algorithm, a WIP library including copy functions for ```array``` and ```vector```
-- array, a replacement for std::array
-- logger, a pretty good wrapper around std::cin and std::cout that will dump everything output to the console to a log file automagically for you
-- math, containers for geometric shapes
-- pair, a replacement for std::pair
-- vector, a replacement for std::vector
+  - ```algorithm```, a WIP library including copy functions for ```array``` and ```vector```
+  - ```array```, a replacement for ```std::array```
+  - ```functional```, a replacement for the ```functional``` header
+  - ```logger```, a pretty good wrapper around ```std::cin``` and ```std::cout``` that will dump everything output to the console to a log file automagically for you
+  - ```math```, containers for geometric shapes
+  - ```memory```, smart pointer stuff
+  - ```string```, a replacement for ```std::string```
+  - ```utility```, a replacement for the ```utility``` header
+  - ```vector```, a replacement for ```std::vector```
 
 Including ```brisk.h``` will, for namesakes, include all of these. However, just append ```.hpp``` to the library name to just get the library you want.
 
 ## Reference
 ### algorithm
 #### Functions
-- ```template<typename T> vector<T> copy(vector<T>& v)```
-- ```template<typename T, size_t _Size> vector<T> copy(array<T, _Size>& a)```
-- ```template<typename T> void copy(vector<T>& v, vector<T>& v2)```
-- ```template<typename T, size_t _Size> void copy(array<T, _Size>& a, vector<T>& v)```
+  - ```template<class Iterator, class Function, class... Args> Function for_each(Iterator first, Iterator last, Function f, Args... args)```
+  - ```template<class Iterator, class Function> Function for_each(Iterator first, Iterator last, Function f)```
+  - ```template<class T> vector<T> copy(vector<T>& v)```
+  - ```template<class T, size_t _Size> vector<T> copy(array<T, _Size>& a)```
+  - ```template<class T> void copy(vector<T>& v, vector<T>& v2)```
+  - ```template<class T, size_t _Size> void copy(array<T, _Size>& a, vector<T>& v)```
 
 ### array
 #### Classes
-- array
-  - ```array()```
-  - ```array(const std::initializer_list<T> list)```
-  - ```~array()```
+- ```template<typename Type, size_t Size> array```
   - ```array(array&) = delete```
   - ```array(array&&) = delete```
-  - ```T& operator[](const size_t index) noexcept```
-  - ```const T& operator[](const size_t index) const noexcept```
-  - ```T& at(const size_t index)```
-  - ```const T& at(const size_t index) const```
-  - ```T* data() noexcept```
-  - ```size_t size() const noexcept```
+  - ```array() = default```
+  - ```~array() = default```
+  - ```array(const std::initializer_list<T> list)```
+  - ```reference operator[](const size_type index) noexcept```
+  - ```const_reference operator[](const size_type index) const noexcept```
+  - ```reference at(const size_type index)```
+  - ```const_reference at(const size_type index) const```
+  - ```reference front() noexcept```
+  - ```const_reference front() const noexcept```
+  - ```reference back() noexcept```
+  - ```const_reference back() const noexcept```
+  - ```pointer data() noexcept```
+  - ```constexpr size_type size() noexcept```
+  - ```constexpr size_type max_size() noexcept```
   - ```bool empty() const noexcept```
-  - ```T* begin() noexcept```
-  - ```T* end() noexcept```
-  - ```const T* cbegin() const noexcept```
-  - ```const T* cend() const noexcept```
-  - ```std::reverse_iterator<T*> rbegin() noexcept```
-  - ```std::reverse_iterator<T*> rend() noexcept```
-  - ```std::reverse_iterator<const T*> crbegin() const noexcept```
-  - ```std::reverse_iterator<const T*> crend() const noexcept```
+  - ```void fill(const value_type& value)```
+  - ```iterator begin() noexcept```
+  - ```iterator end() noexcept```
+  - ```const_iterator cbegin() const noexcept```
+  - ```const_iterator cend() const noexcept```
+  - ```reverse_iterator rbegin() noexcept```
+  - ```reverse_iterator rend() noexcept```
+  - ```const_reverse_iterator crbegin() const noexcept```
+  - ```const_reverse_iterator crend() const noexcept```
+
+#### Typedefs
+  - ```size_type = size_t```
+  - ```value_type = Type```
+  - ```pointer = Type*```
+  - ```const_pointer = const Type*```
+  - ```reference = Type&```
+  - ```const_reference = const Type&```
+  - ```iterator = Type*```
+  - ```const_iterator = const Type*```
+  - ```reverse_iterator = std::reverse_iterator<iterator>```
+  - ```const_reverse_iterator = std::reverse_iterator<const_iterator>```
+
+### functional
+#### Functions
+  - ```template<class Function, class... Args> decltype(auto) invoke(Function&& f, Args&&... args) noexcept```
 
 ### logger
 #### Enum Classes
 - ```loglevel_t```
+  - ```nothing = -1```
+  - ```print = 0```
+  - ```errors = 1```
+  - ```warnings = 2```
+  - ```everything = 3```
 
 #### Classes
 - logger (typedefed to ```logger_t```)
-  - ```logger()```
-  - ```~logger()```
+  - ```logger(logger&) = delete```
+  - ```logger(logger&&) = delete```
   - ```logger(loglevel_t _loglevel, std::string _logfile)```
+  - ```~logger()```
+  - ```std::string filename() const```
   - ```bool logError(std::string error_str)```
   - ```bool logWarning(std::string warning_str)```
   - ```template<typename T> bool print(T value)```
   - ```template<typename T> void input(T& var)```
   - ```bool print(logger& (*func)(Logger&))```
-  - ```bool dumpLog(std::string file);```
-  - ```bool dumpLog();```
+  - ```bool dumpLog(std::string file)```
+  - ```bool dumpLog()```
 
 #### Functions
 - Output Operators
@@ -80,29 +114,112 @@ Including ```brisk.h``` will, for namesakes, include all of these. However, just
   - ```Logger& tab(Logger& log)```
   - ```Logger& space(Logger& log)```
 
+#### Objects
+  - ```logger cout(brisk::loglevel::everything, "cout.log")```
+  - ```logger& cin = cout```
+
+### math
+#### Classes
+  - ```template<class T = long double> struct trapezoid```
+    - ```trapezoid() = default```
+	- ```trapezoid(T _side1, T _side2, T _height)```
+	- ```T area()```
+
+  - ```template<class T = long double> struct rectangle```
+    - ```rectangle() = default```
+	- ```rectangle(T _length, T _width)```
+	- ```T area()```
+
+  - ```template<class T = long double> struct triangle```
+    - ```triangle() = default```
+	- ```triangle(T _base, T _height)```
+	- ```T area()```
+
+  - ```template<class T = long double> struct rhombus```
+    - ```rhombus() = default```
+	- ```rhombus(T _side)```
+	- ```T area()```
+
+  - ```template<class T = long double> struct hexagon```
+    - ```hexagon() = default```
+	- ```hexagon(T _side)```
+	- ```T area()```
+
+  - ```template<class T = long double> struct circle```
+    - ```circle() = default```
+	- ```circle(T _radius)```
+	- ```T area()```
+
+  - ```template<class T = long double> struct square```
+    - ```square() = default```
+	- ```square(T _side)```
+	- ```T area()```
+
+  - ```template<class T = long double> struct rectangular_prism```
+    - ```rectangular_prism() = default```
+	- ```rectangular_prism(T _length, T _width, T _height)```
+	- ```T area()```
+
+  - ```template<class T = long double> struct triangular_prism```
+    - ```triangular_prism() = default```
+	- ```triangular_prism(T _length, T _width, T _height)```
+	- ```T area()```
+
+  - ```template<class T = long double> struct cone```
+    - ```cone() = default```
+	- ```cone(T _radius, T _height)```
+	- ```T area()```
+
+  - ```template<class T = long double> struct cube```
+    - ```cube() = default```
+	- ```cone(T _face)```
+	- ```T area()```
+
+### memory
+#### Classes
+  - ```template<class Type> class unique_ptr```
+    - ```unique_ptr(const unique_ptr&) = delete```
+	- ```unique_ptr& operator=(const unique_ptr&) = delete```
+
+#### Typedefs
+  - ```pointer = Type*```
+  - ```element_type = Type```
+
+### utility
+#### Functions
+  - ```template<class T> constexpr T&& forward(typename std::remove_reference<T>::type& t) noexcept```
+  - ```template<class T> constexpr T&& forward(typename std::remove_reference<T>::type&& t) noexcept```
+  - ```template<class T> constexpr typename std::remove_reference<T>::type&& move(T&& t) noexcept```
+  - ```template<class T, class T2> pair<T, T2> make_pair(T&& x, T2&& y)```
+
+#### Classes
+  - ```template<class T, class T2> struct pair```
+    - ```pair() = default```
+	- ```pair(T&& x, T2&& y)```
+
 ## Requirements
 ### Linux
-- GCC 4.8.1
-- git
-- make (only if compiling test program)
+  - GCC 4.8.1
+  - git
+  - make (only if compiling test program)
 
 ### Windows
-- Cygwin or MinGW (in PATH)
-- Git
-- GCC 4.8.1 (if using Cygwin)
+  - Cygwin or MinGW (in PATH)
+  - Git
+  - GCC 4.8.1 (if using Cygwin)
 
 ## Build (Linux)
-- Install the ```git``` package.
-- Clone repository using ```git clone https://github.com/akachronix/brisk.git```
-- Copy headers to whereever, and then set your path using the ```-I``` compiler argument.
-- Success.
+  - Install the ```git``` package.
+  - Clone repository using ```git clone https://github.com/akachronix/brisk.git```
+  - Copy headers to whereever, and then set your path using the ```-I``` compiler argument.
+  - Success.
 
 ## Build (Windows)
-- Install Git for Windows.
-- Clone repository using ```git clone https://github.com/akachronix/brisk.git```
-- Open a Command Prompt where Git for Windows cloned the repository.
-- Copy headers to whereever, and then set your path using the ```-I``` compiler argument.
-- Success.
+  - Install Git for Windows.
+  - Clone repository using ```git clone https://github.com/akachronix/brisk.git```
+  - Open a Command Prompt where Git for Windows cloned the repository.
+  - Copy headers to whereever, and then set your path using the ```-I``` compiler argument.
+  - Success.
 
 ## Help
 If you think you've found a bug, leave an issue. If you have some changes to suggest, make a pull request or put ```[REQUEST]``` before an issue.
