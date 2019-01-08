@@ -185,6 +185,38 @@ Including ```brisk.h``` will, for namesakes, include all of these. However, just
   - ```pointer = Type*```
   - ```element_type = Type```
 
+### string
+#### Classes
+  - ```class string```
+    - ```string()```
+	- ```string(const char* s)```
+	- ```~string()```
+	- ```string& operator=(const string& str)```
+	- ```string& operator=(const char* s)```
+	- ```string& operator=(char c)```
+	- ```char* begin() noexcept```
+	- ```char* end() noexcept```
+	- ```const char* cbegin() const noexcept```
+	- ```const char* cend() const noexcept```
+	- ```std::reverse_iterator<char*> rbegin() noexcept```
+	- ```std::reverse_iterator<char*> rend() noexcept```
+	- ```std::reverse_iterator<const char*> crbegin() const noexcept```
+	- ```std::reverse_iterator<const char*> crend() const noexcept```
+	- ```size_t size() const noexcept```
+	- ```size_t length() const noexcept```
+	- ```char& operator[](size_t index)```
+	- ```const char& operator[](size_t index) const```
+	- ```char& at(size_t index)```
+	- ```const char& at(size_t index) const```
+	- ```char& front()```
+	- ```char& back()```
+	- ```const char& front() const```
+	- ```const char& back() const```
+	- ```char* data() const noexcept```
+
+#### Functions
+  - ```std::ostream& operator<<(std::ostream& out, const brisk::string& string)```
+
 ### utility
 #### Functions
   - ```template<class T> constexpr T&& forward(typename std::remove_reference<T>::type& t) noexcept```
@@ -196,6 +228,72 @@ Including ```brisk.h``` will, for namesakes, include all of these. However, just
   - ```template<class T, class T2> struct pair```
     - ```pair() = default```
 	- ```pair(T&& x, T2&& y)```
+
+### vector
+#### Typedefs
+  - ```size_type = size_t```
+  - ```value_type = Type```
+  - ```pointer = Type*```
+  - ```const_pointer = const Type*```
+  - ```reference = Type&```
+  - ```const_reference = const Type&```
+  - ```iterator = Type*```
+  - ```const_iterator = const Type*```
+  - ```reverse_iterator = std::reverse_iterator<iterator>```
+  - ```const_reverse_iterator = std::reverse_iterator<const_iterator>```
+
+#### Classes
+  - ```template<class Type> class vector```
+    - ```vector()```
+	- ```explicit vector(const size_type size)```
+	- ```vector(const std::initializer_list<Type> list)```
+	- ```vector(iterator const begin, iterator const end)```
+	- ```vector(const vector& v2)```
+	- ```~vector()```
+	- ```vector<Type>& operator=(const vector& v2)```
+	- ```reference operator[](const size_type index) noexcept```
+	- ```const_reference operator[](const size_type index) const noexcept```
+	- ```reference at(const size_type index)```
+	- ```const_reference at(const size_type index) const```
+	- ```reference front() noexcept```
+	- ```const_reference front() const noexcept```
+	- ```reference back() noexcept```
+	- ```const_reference back() const noexcept```	
+	- ```pointer data() noexcept```
+	- ```const_pointer data() const noexcept```
+	- ```template<class... Args> void emplace_back(Args&&... args)```
+	- ```void push_back(const std::initalizer_list<Type>&& list)```
+	- ```void push_back(const Type& value)```
+	- ```void push_back(const Type&& value)```
+	- ```void pop_back()```
+	- ```size_type capacity() const noexcept```
+	- ```size_type size() const noexcept```
+	- ```[[nodiscard]] bool empty() const noexcept```
+	- ```explicit operator bool() const noexcept```
+	- ```void resize(const size_type size)```
+	- ```void reserve(const size_type size)```
+	- ```void shrink_to_fit()```
+	- ```void fill(const value_type& value)```
+	- ```bool operator==(const vector<Type>& rhs) const```
+	- ```bool operator!=(const vector<Type>& rhs) const```
+	- ```iterator begin() noexcept```
+	- ```iterator end() noexcept```
+	- ```const_iterator cbegin() const noexcept```
+	- ```const_iterator cend() const noexcept```
+	- ```reverse_iterator rbegin() noexcept```
+	- ```reverse_iterator rend() noexcept```
+	- ```const_reverse_iterator crbegin() const noexcept```
+	- ```const_reverse_iterator crend() const noexcept```
+
+#### Functions
+  - ```template<class Type> Type* begin(brisk::vector<Type>& c) noexcept```
+  - ```template<class Type> Type* end(brisk::vector<Type>& c) noexcept```
+  - ```template<class Type> cpnst Type* cbegin(const brisk::vector<Type>& c) noexcept```
+  - ```template<class Type> const Type* cend(const brisk::vector<Type>& c) noexcept```
+  - ```template<class Type> std::reverse_iterator<Type*> rbegin(brisk::vector<Type>& c) noexcept```
+  - ```template<class Type> std::reverse_iterator<Type*> rend(brisk::vector<Type>& c) noexcept```
+  - ```template<class Type> std::reverse_iterator<const Type*> crbegin(brisk::vector<Type>& c) noexcept```
+  - ```template<class Type> std::reverse_iterator<const Type*> crend(brisk::vector<Type>& c) noexcept```
 
 ## Requirements
 ### Linux
