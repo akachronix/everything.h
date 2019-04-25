@@ -99,6 +99,8 @@ Including ```brisk.h``` will, for namesakes, include all of these. However, just
   - ```bool print(logger& (*func)(Logger&))```
   - ```bool dumpLog(std::string file)```
   - ```bool dumpLog()```
+  - ```void disableLogging()```
+  - ```void enableLogging()```
 
 #### Functions
 - Output Operators
