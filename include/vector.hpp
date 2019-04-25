@@ -101,7 +101,7 @@ namespace brisk
 
 		reference at(const size_type index)
 		{
-			if (index > (m_size - 1))
+			if (index > (m_elements - 1) || m_elements == 0)
 				throw std::out_of_range("index out of range");
 			
 			return m_array[index];
@@ -109,7 +109,7 @@ namespace brisk
 
 		const_reference at(const size_type index) const
 		{
-			if (index > (m_size - 1))
+			if (index > (m_elements - 1) || m_elements == 0)
 				throw std::out_of_range("index out of range");
 			
 			return m_array[index];

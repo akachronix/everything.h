@@ -27,6 +27,7 @@ namespace brisk
 		{
 			m_logLevel = loglevel;
 			m_logFile = logfile;
+			m_amILogging = true;
 		}
 
 		~logger()
@@ -109,7 +110,7 @@ namespace brisk
 
 		bool dumpLog(std::string file)
 		{
-			if (logHistory.size() != 0)
+			if (logHistory.size() != 0 && m_amILogging == true)
 			{
 				std::ofstream log_file(file);
 				if (log_file.is_open())
@@ -130,10 +131,21 @@ namespace brisk
 			return dumpLog(m_logFile);
 		}
 
+		void disableLogging()
+		{
+			m_amILogging = false;
+		}
+
+		void enableLogging()
+		{
+			m_amILogging = true;
+		}
+
 	private:
 		std::vector<std::string> logHistory;
 		loglevel m_logLevel;
 		std::string m_logFile;
+		bool m_amILogging;
 	};
 
 	template <class T>
