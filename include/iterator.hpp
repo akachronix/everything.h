@@ -13,8 +13,6 @@ namespace brisk
 		using const_pointer = const Type*;
 		using difference_type = ptrdiff_t;
 
-		iterator(iterator&&) = delete;
-
 		explicit iterator(const pointer begin, const pointer end)
 			: m_it(begin), m_begin(begin), m_end(end)
 		{
@@ -23,14 +21,43 @@ namespace brisk
 
 		iterator(iterator& i)
 		{
-			i.m_it = m_it;
-			i.m_begin = m_begin;
-			i.m_end = m_end;
+			m_it = i.m_it;
+			m_begin = i.m_begin;
+			m_end = i.m_end;
+		}
+
+		iterator(iterator&& i)
+		{
+			m_it = brisk::move(i.m_it);
+			m_begin = brisk::move(i.m_begin);
+			m_end = brisk::move(i.m_end);
+
+			i.m_it = nullptr;
+			i.m_begin = nullptr;
+			i.m_end = nullptr;
 		}
 
 		~iterator()
 		{
 
+		}
+
+		iterator& operator=(const iterator& i)
+		{
+			m_it = i.m_it;
+			m_begin = i.m_begin;
+			m_end = i.m_end;
+		}
+
+		iterator& operator=(iterator&& i)
+		{
+			m_it = brisk::move(i.m_it);
+			m_begin = brisk::move(i.m_begin);
+			m_end = brisk::move(i.m_end);
+
+			i.m_it = nullptr;
+			i.m_begin = nullptr;
+			i.m_end = nullptr;
 		}
 
 		pointer it() noexcept
