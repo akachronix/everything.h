@@ -5,6 +5,7 @@
 #include <iterator>
 #include <utility>
 #include <cstring>
+#include <cstddef>
 
 namespace brisk
 {
@@ -23,11 +24,11 @@ namespace brisk
 		using const_pointer = const Type*;
 		using reference = Type&;
 		using const_reference = const Type&;
-
 		using iterator = Type*;
 		using const_iterator = const Type*;
 		using reverse_iterator = std::reverse_iterator<iterator>;
 		using const_reverse_iterator = std::reverse_iterator<const_iterator>;
+		using difference_type = ptrdiff_t;
 
 		vector()
 			: m_elements(0), m_size(4)
@@ -354,52 +355,4 @@ namespace brisk
 			return reverse_iterator(&m_array[0]);
 		}
 	};
-
-	template <class Type>
-	Type* begin(brisk::vector<Type>& c) noexcept
-	{
-		return &c.data()[0];
-	}
-
-	template <class Type>
-	Type* end(brisk::vector<Type>& c) noexcept
-	{
-		return &c.data()[c.size()];
-	}
-
-	template <class Type>
-	const Type* cbegin(const brisk::vector<Type>& c) noexcept
-	{
-		return &c.data()[0];
-	}
-
-	template <class Type>
-	const Type* cend(const brisk::vector<Type>& c) noexcept
-	{
-		return &c.data()[c.size()];
-	}
-
-	template <class Type>
-	std::reverse_iterator<Type*> rbegin(brisk::vector<Type>& c) noexcept
-	{
-		return c.rbegin();
-	}
-
-	template <class Type>
-	std::reverse_iterator<Type*> rend(brisk::vector<Type>& c) noexcept
-	{
-		return c.rend();
-	}
-
-	template <class Type>
-	std::reverse_iterator<const Type*> crbegin(brisk::vector<Type>& c) noexcept
-	{
-		return c.crbegin();
-	}
-
-	template <class Type>
-	std::reverse_iterator<const Type*> crend(brisk::vector<Type>& c) noexcept
-	{
-		return c.crend();
-	}
 }

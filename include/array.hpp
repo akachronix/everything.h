@@ -2,6 +2,7 @@
 
 #include <iterator>
 #include <stdexcept>
+#include <cstddef>
 
 namespace brisk
 {
@@ -18,13 +19,11 @@ namespace brisk
 		using const_pointer = const Type*;
 		using reference = Type&;
 		using const_reference = const Type&;
-
 		using iterator = Type*;
 		using const_iterator = const Type*;
 		using reverse_iterator = std::reverse_iterator<iterator>;
 		using const_reverse_iterator = std::reverse_iterator<const_iterator>;
-
-		// using difference_type = ptrdiff_t;
+		using difference_type = ptrdiff_t;
 
 		array(array&)  = delete;
 		array(array&&) = delete;

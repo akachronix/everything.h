@@ -4,6 +4,8 @@
 
 namespace brisk
 {
+	using nullptr_t = decltype(nullptr);
+	
 	template <class Type>
 	class unique_ptr
 	{

@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+#include "utility.hpp"
+
 namespace brisk
 {
 	enum class loglevel
@@ -20,14 +22,34 @@ namespace brisk
 	class logger
 	{
 	public:
-		logger(logger&) = delete;
-		logger(logger&&) = delete;
-
 		logger(loglevel loglevel, std::string logfile)
 		{
 			m_logLevel = loglevel;
 			m_logFile = logfile;
 			m_amILogging = true;
+			m_amIPrinting = true;
+		}
+
+		logger(const logger& other)
+		{
+			logHistory = other.logHistory;
+			m_logLevel = other.m_logLevel;
+			m_logFile = other.m_logFile;
+			m_amILogging = other.m_amILogging;
+			m_amIPrinting = other.m_amIPrinting;
+		}
+
+		logger(logger&& other)
+		{
+			logHistory = brisk::move(other.logHistory);
+			m_logLevel = brisk::move(other.m_logLevel);
+			m_logFile = brisk::move(other.m_logFile);
+			m_amILogging = brisk::move(other.m_amILogging);
+			m_amIPrinting = brisk::move(other.m_amIPrinting);
+
+			m_logLevel = brisk::loglevel::everything;
+			other.m_amILogging = true;
+			other.m_amILogging = true;
 		}
 
 		~logger()
@@ -35,52 +57,89 @@ namespace brisk
 			dumpLog(m_logFile);
 		}
 
-		std::string filename() const
+		logger& operator=(const logger& other)
+		{
+			logHistory = other.logHistory;
+			m_logLevel = other.m_logLevel;
+			m_logFile = other.m_logFile;
+			m_amILogging = other.m_amILogging;
+			m_amIPrinting = other.m_amIPrinting;
+
+			return *this;
+		}
+		
+		logger& operator=(logger&& other)
+		{
+			if (this != &other)
+			{
+				logHistory = brisk::move(other.logHistory);
+				m_logLevel = brisk::move(other.m_logLevel);
+				m_logFile = brisk::move(other.m_logFile);
+				m_amILogging = brisk::move(other.m_amILogging);
+				m_amIPrinting = brisk::move(other.m_amIPrinting);
+
+				m_logLevel = brisk::loglevel::everything;
+				other.m_amILogging = true;
+				other.m_amILogging = true;
+			}
+
+			return *this;
+		}
+
+		[[nodiscard]] std::string filename() const noexcept
 		{
 			return m_logFile;
 		}
 
-		bool logError(std::string error_str)
+		void filename(const std::string filename) noexcept
+		{
+			m_logFile = filename;
+		}
+
+		bool logError(const std::string error_str)
 		{
 			if (m_logLevel >= loglevel::errors)
 			{
 				std::string message = "[ERROR] " + error_str + "\n";
 				
-				std::cout << message;
-				logHistory.push_back(message);
+				if (m_amIPrinting)
+					std::cout << message;
 
+				logHistory.push_back(message);
 				return true;
 			}
 
 			return false;
 		}
 
-		bool logWarning(std::string warning_str)
+		bool logWarning(const std::string warning_str)
 		{
 			if (m_logLevel >= loglevel::warnings)
 			{
 				std::string message = "[WARNING] " + warning_str + "\n";
 
-				std::cout << message;
-				logHistory.push_back(message);
+				if (m_amIPrinting)
+					std::cout << message;
 
+				logHistory.push_back(message);
 				return true;
 			}
 
 			return false;
 		}
 
-		template<class T>
+		template <class T>
 		bool print(T value)
 		{
 			if (m_logLevel >= loglevel::print)
 			{
 				std::stringstream casted_value;
 				casted_value << value;
-				std::cout << value;
+
+				if (m_amIPrinting)
+					std::cout << value;
 
 				logHistory.push_back(casted_value.str());
-
 				return true;
 			}
 
@@ -108,7 +167,32 @@ namespace brisk
 			logHistory.push_back(varToString.str());
 		}
 
-		bool dumpLog(std::string file)
+		[[nodiscard]] std::vector<std::string>& buffer() noexcept
+		{
+			return logHistory;
+		}
+
+		[[nodiscard]] const size_t size() const noexcept
+		{
+			size_t sz = 0;
+			for (auto& it : logHistory)
+				sz += it.size() + sizeof(std::string);
+			
+			return sz;
+		}
+
+		void shrink_to_fit()
+		{
+			std::string s = "";
+			for (auto& it : logHistory)
+				s.append(it); 
+			
+			logHistory.erase(logHistory.begin(), logHistory.end());
+			logHistory.emplace_back(s);
+			logHistory.shrink_to_fit();
+		}
+
+		bool dumpLog(const std::string file) const
 		{
 			if (logHistory.size() != 0 && m_amILogging == true)
 			{
@@ -126,19 +210,29 @@ namespace brisk
 			return false;
 		}
 
-		bool dumpLog()
+		bool dumpLog() const
 		{
 			return dumpLog(m_logFile);
 		}
 
-		void disableLogging()
+		void disableLogging() noexcept
 		{
 			m_amILogging = false;
 		}
 
-		void enableLogging()
+		void enableLogging() noexcept
 		{
 			m_amILogging = true;
+		}
+
+		void disablePrinting() noexcept
+		{
+			m_amIPrinting = false;
+		}
+
+		void enablePrinting() noexcept
+		{
+			m_amIPrinting = true;
 		}
 
 	private:
@@ -146,6 +240,7 @@ namespace brisk
 		loglevel m_logLevel;
 		std::string m_logFile;
 		bool m_amILogging;
+		bool m_amIPrinting;
 	};
 
 	template <class T>
@@ -190,7 +285,4 @@ namespace brisk
 		log.print(" ");
 		return log;
 	}
-
-	static logger cout(brisk::loglevel::everything, "cout.log");
-	static logger& cin = cout;
 }

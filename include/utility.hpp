@@ -33,11 +33,18 @@ namespace brisk
 		pair(T&& x, T2&& y)
 			: first(forward<T>(x)), second(forward<T2>(y))
 		{
+			
 		}
 	};
 
 	template <class T, class T2>
-	pair<T, T2> make_pair(T&& x, T2&& y)
+	pair<T, T2> make_pair(T x, T2 y)
+	{
+		return pair<T, T2>(x, y);
+	}
+
+	template <class T, class T2>
+	constexpr pair<T, T2> make_pair(T&& x, T2&& y)
 	{
 		return pair<T, T2>(forward<T>(x), forward<T2>(y));
 	}
