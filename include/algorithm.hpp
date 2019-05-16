@@ -2,14 +2,15 @@
 
 #include "array.hpp"
 #include "vector.hpp"
+#include "utility.hpp"
 
 namespace brisk
 {
 	template <class Iterator, class T>
-	constexpr void fill(Iterator first, Iterator last, const T& value)
+	constexpr void fill(Iterator first, Iterator last, const T&& value)
 	{
 		for (; first != last; ++first)
-			*first = value;
+			*first = brisk::move(value);
 	}
 
 	template <class Iterator, class Function, class... Args>

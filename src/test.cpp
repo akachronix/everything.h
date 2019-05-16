@@ -2,8 +2,8 @@
 
 int main(void)
 {
-    brisk::logger console(brisk::loglevel::everything, "console.log");
-    console << "hello, world!" << brisk::newl;
+    brisk::logger cout(brisk::loglevel::everything, "cout.log");
+    cout << "Hello, world!" << brisk::newl;
 
     return 0;
 }

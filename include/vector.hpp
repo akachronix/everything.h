@@ -7,6 +7,8 @@
 #include <cstring>
 #include <cstddef>
 
+#include "utility.hpp"
+
 namespace brisk
 {
 	template <class Type>
@@ -75,6 +77,17 @@ namespace brisk
 			std::memcpy(m_array, v2.m_array, v2.m_elements * sizeof(Type));
 		}
 
+		vector(vector&& v2)
+		{
+			m_elements = brisk::move(v2.m_elements);
+			m_size = brisk::move(v2.m_size);
+			m_array = v2.m_array;
+			
+			v2.m_elements = 0;
+			v2.m_size = 0;
+			v2.m_array = nullptr;
+		}
+
 		~vector()
 		{
 			if (m_array != nullptr)
@@ -88,6 +101,17 @@ namespace brisk
 			
 			m_array = new Type[m_size];
 			std::memcpy(m_array, v2.m_array, v2.m_elements * sizeof(Type));
+		}
+
+		vector<Type>& operator=(vector&& v2)
+		{
+			m_elements = brisk::move(v2.m_elements);
+			m_size = brisk::move(v2.m_size);
+			m_array = v2.m_array;
+
+			v2.m_elements = 0;
+			v2.m_size = 0;
+			v2.m_array = nullptr;
 		}
 
 		reference operator[](const size_type index) noexcept
