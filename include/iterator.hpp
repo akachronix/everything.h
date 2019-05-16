@@ -65,12 +65,12 @@ namespace brisk
 			return m_it;
 		}
 
-		pointer begin() const noexcept
+		pointer begin() noexcept
 		{
 			return m_begin;
 		}
 		
-		pointer end() const noexcept
+		pointer end() noexcept
 		{
 			return m_end;
 		}
