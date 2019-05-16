@@ -60,7 +60,7 @@ All the libraries are split up into their respective headers. The libraries in `
 
 Including ```brisk.h``` will, for namesakes, include all of these. However, just append ```.hpp``` to the library name to just get the library you want.
 
-## Reference (last updated April 25th, 2019)
+## Reference (last updated May 16th, 2019)
 ### algorithm
 #### Functions
   - ```template<class Iterator, class T> constexpr void fill(Iterator first, Iterator last, const T&& value)```
@@ -70,14 +70,14 @@ Including ```brisk.h``` will, for namesakes, include all of these. However, just
   - ```template<class T, size_t _Size> vector<T> copy(array<T, _Size>& a)```
   - ```template<class T> void copy(vector<T>& v, vector<T>& v2)```
   - ```template<class T, size_t _Size> void copy(array<T, _Size>& a, vector<T>& v)```
-  - ```template <class Container> auto begin(Container& c) -> decltype(c.begin())```
-  - ```template <class Container> auto end(Container& c) -> decltype(c.end())```
-  - ```template <class Container> auto cbegin(Container& c) -> decltype(c.cbegin())```
-  - ```template <class Container> auto cend(Container& c) -> decltype(c.cend())```
-  - ```template <class Container> auto rbegin(Container& c) -> decltype(c.rbegin())```
-  - ```template <class Container> auto rend(Container& c) -> decltype(c.rend())```
-  - ```template <class Container> auto crbegin(Container& c) -> decltype(c.crbegin())```
-  - ```template <class Container> auto crend(Container& c) -> decltype(c.crend())```
+  - ```template<class Container> auto begin(Container& c) -> decltype(c.begin())```
+  - ```template<class Container> auto end(Container& c) -> decltype(c.end())```
+  - ```template<class Container> auto cbegin(Container& c) -> decltype(c.cbegin())```
+  - ```template<class Container> auto cend(Container& c) -> decltype(c.cend())```
+  - ```template<class Container> auto rbegin(Container& c) -> decltype(c.rbegin())```
+  - ```template<class Container> auto rend(Container& c) -> decltype(c.rend())```
+  - ```template<class Container> auto crbegin(Container& c) -> decltype(c.crbegin())```
+  - ```template<class Container> auto crend(Container& c) -> decltype(c.crend())```
 
 ### array
 #### Typedefs
@@ -294,7 +294,7 @@ Including ```brisk.h``` will, for namesakes, include all of these. However, just
 - ```template<class T> constexpr T&& forward(typename std::remove_reference<T>::type& t) noexcept```
 - ```template<class T> constexpr T&& forward(typename std::remove_reference<T>::type&& t) noexcept```
 - ```template<class T> constexpr typename std::remove_reference<T>::type&& move(T&& t) noexcept```
-- ```template <class T, class T2> pair<T, T2> make_pair(T x, T2 y)```
+- ```template<class T, class T2> pair<T, T2> make_pair(T x, T2 y)```
 - ```template<class T, class T2> constexpr pair<T, T2> make_pair(T&& x, T2&& y)```
 
 #### Classes
