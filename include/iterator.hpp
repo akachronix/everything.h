@@ -19,7 +19,7 @@ namespace brisk
 
 		}
 
-		iterator(iterator& i)
+		iterator(const iterator& i)
 		{
 			m_it = i.m_it;
 			m_begin = i.m_begin;
