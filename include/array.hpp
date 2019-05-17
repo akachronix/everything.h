@@ -23,12 +23,6 @@ namespace brisk
 		using difference_type = ptrdiff_t;
 	
 	public:
-		array(array&)  = delete;
-		array(array&&) = delete;
-
-		array()  = default;
-		~array() = default;
-
 		reference operator[](const size_type index) noexcept
 		{
 			return m_array[index];
