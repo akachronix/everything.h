@@ -12,7 +12,8 @@ namespace brisk
 		using pointer = Type*;
 		using const_pointer = const Type*;
 		using difference_type = ptrdiff_t;
-
+	
+	public:
 		explicit iterator(const pointer begin, const pointer end)
 			: m_it(begin), m_begin(begin), m_end(end)
 		{

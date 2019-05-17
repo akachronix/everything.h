@@ -12,7 +12,8 @@ namespace brisk
 	public:
 		using pointer = Type*;
 		using element_type = Type;
-
+	
+	public:
 		unique_ptr(const unique_ptr&) = delete;
 		unique_ptr& operator=(const unique_ptr&) = delete;
 
