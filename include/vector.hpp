@@ -14,11 +14,6 @@ namespace brisk
 	template <class Type>
 	class vector
 	{
-	private:
-		size_t m_elements;
-		size_t m_size;
-		Type* m_array;
-
 	public:
 		using size_type = size_t;
 		using value_type = Type;
@@ -32,6 +27,7 @@ namespace brisk
 		using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 		using difference_type = ptrdiff_t;
 
+	public:
 		vector()
 			: m_elements(0), m_size(4)
 		{
@@ -378,5 +374,10 @@ namespace brisk
 		{
 			return reverse_iterator(&m_array[0]);
 		}
+
+	private:
+		size_type m_elements;
+		size_type m_size;
+		value_type* m_array;
 	};
 }
