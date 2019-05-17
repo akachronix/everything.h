@@ -172,7 +172,7 @@ namespace brisk
 			return logHistory;
 		}
 
-		[[nodiscard]] const size_t size() const noexcept
+		[[nodiscard]] size_t size() const noexcept
 		{
 			size_t sz = 0;
 			for (auto& it : logHistory)

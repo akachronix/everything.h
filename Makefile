@@ -1,5 +1,5 @@
 CC=g++
-CXXFLAGS=-Wall -pedantic
+CXXFLAGS=-Wall -Wextra -Werror -pedantic
 CXXLDFLAGS=
 
 STD=c++17
