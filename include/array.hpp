@@ -6,12 +6,9 @@
 
 namespace brisk
 {
-	template <typename Type, size_t Size>
+	template <class Type, size_t Size>
 	class array
-	{
-	private:
-		Type m_array[Size];
-	
+	{	
 	public:
 		using size_type = size_t;
 		using value_type = Type;
@@ -24,7 +21,8 @@ namespace brisk
 		using reverse_iterator = std::reverse_iterator<iterator>;
 		using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 		using difference_type = ptrdiff_t;
-
+	
+	public:
 		array(array&)  = delete;
 		array(array&&) = delete;
 
@@ -142,5 +140,8 @@ namespace brisk
 		{
 			return reverse_iterator(&m_array[0]);
 		}
+
+	private:
+		value_type m_array[Size];
 	};
 }
