@@ -1,46 +1,6 @@
 # brisk
 Compiles on Linux & Mac (using Make) and Windows (using MinGW).
 
-## Changelog (last updated May 16th, 2019)
-### algorithm
-- Add ```brisk::fill()``` function to "algorithm.hpp"
-- Add generic iterators to ```"algorithm.hpp"``` that work on any container
-
-### array
-- Include ```<cstddef>``` in ```"array.hpp"``` since ```ptrdiff_t``` is defined there
-- Add ```brisk::array::difference_type``` into ```brisk::array``` that's defined as ```ptrdiff_t```
-
-### iterator
-- Include ```"iterator.hpp"``` in ```"brisk.h"``` since it is a new header
-- Create "iterator.hpp", a replacement for the ```<iterator>``` header
-- ```"iterator.hpp"``` contains an iterator wrapper with helpers for:
-  - Getting the position of an iterator
-  - Incrementing an iterator
-  - Decrementing an iterator
-  - The address range between the beginning and ending iterator
-  - The distance from the beginning iterator
-  - Movable & copyable!
-
-### logger
-- Overhaul ```brisk::logger``` with:
-  - Copy & move constructors with ```operator=``` overloads
-  - Add the ability to change the filename to be logged to (using ```void filename(const std::string filename) noexcept``` overload)
-  - Add [[nodiscard]] function attribute where applicable
-  - Add ```[[nodiscard]] std::vector<std::string>& buffer() noexcept``` function that returns a reference to the log buffer
-  - Add ```[[nodiscard]] const size_t size() const noexcept``` to return the size of the buffer
-  - Add ```void shrink_to_fit()``` that saves a massive amount of memory by concatenating all the strings together therefore saving 32 bytes for each string from ```std::string``` object allocation
-  - Add ```void disablePrinting() noexcept``` that disables output to console
-  - Add ```void enablePrinting() noexcept``` that reenables output to console
-
-### utility
-- Add ```template <class T, class T2> pair<T, T2> make_pair(T x, T2 y)``` that constructs a pair from non-reference values
-
-### vector
-- Remove global iterators from ```vector.hpp``` since they have been replaced
-- Include ```<cstddef>``` in ```vector.hpp``` since ```ptrdiff_t``` is used
-- Add ```brisk::vector::difference_type``` into ```brisk::vector``` that's defined as ```ptrdiff_t```
-- Add move constructor and operator
-
 ## Background
 ```brisk``` is a header-only library that I've written myself for myself. However, I do believe in free software so I have open-sourced it onto here to hopefully get some suggestions. All this started for CCalc, my calculator program that I wrote for myself to use in school to make my life easier when answering math questions.
 
