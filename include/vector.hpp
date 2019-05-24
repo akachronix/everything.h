@@ -3,7 +3,6 @@
 #include <initializer_list>
 #include <stdexcept>
 #include <iterator>
-#include <utility>
 #include <cstring>
 #include <cstddef>
 
@@ -171,16 +170,18 @@ namespace brisk
 		{
 			if (m_elements == m_size)
 			{
+				size_type old_m_size = m_size;
 				m_size <<= 2;
 
 				Type* buffer = new Type[m_size];
-				std::memcpy(buffer, m_array, m_elements * sizeof(Type));
+				for (size_type i = 0; i < old_m_size; ++i)
+					buffer[i] = brisk::move(m_array[i]);
 
 				delete[] m_array;
 				m_array = buffer;
 			}
 
-			m_array[m_elements] = std::move( Type ( std::forward<Args>(args)... ) );
+			m_array[m_elements] = brisk::move(Type(std::forward<Args>(args)...));
 			++m_elements;
 		}
 		
@@ -208,10 +209,12 @@ namespace brisk
 		{
 			if (m_elements == m_size)
 			{
+				size_type old_m_size = m_size;
 				m_size <<= 2;
 
 				Type* buffer = new Type[m_size];
-				std::memcpy(buffer, m_array, m_elements * sizeof(Type));
+				for (size_type i = 0; i < old_m_size; ++i)
+					buffer[i] = brisk::move(m_array[i]);
 
 				delete[] m_array;
 				m_array = buffer;
@@ -225,10 +228,12 @@ namespace brisk
 		{
 			if (m_elements == m_size)
 			{
+				size_type old_m_size = m_size;
 				m_size <<= 2;
 				
 				Type* buffer = new Type[m_size];
-				std::memcpy(buffer, m_array, m_elements * sizeof(Type));
+				for (size_type i = 0; i < old_m_size; ++i)
+					buffer[i] = brisk::move(m_array[i]);
 
 				delete[] m_array;
 				m_array = buffer;
@@ -268,10 +273,12 @@ namespace brisk
 		{		
 			if (size > m_size)
 			{
+				size_type old_m_size = m_size;
 				m_size = size;
 
 				Type* buffer = new Type[m_size];
-				std::memcpy(buffer, m_array, m_elements * sizeof(Type));
+				for (size_type i = 0; i < old_m_size; ++i)
+					buffer[i] = brisk::move(m_array[i]);
 
 				delete[] m_array;
 				m_array = buffer;
@@ -284,10 +291,12 @@ namespace brisk
 		{
 			if (size > m_size)
 			{
+				size_type old_m_size = m_size;
 				m_size = size;
 				
 				Type* buffer = new Type[m_size];
-				std::memcpy(buffer, m_array, m_elements * sizeof(Type));
+				for (size_type i = 0; i < old_m_size; ++i)
+					buffer[i] = brisk::move(m_array[i]);
 
 				delete[] m_array;
 				m_array = buffer;
@@ -299,7 +308,8 @@ namespace brisk
 			m_size = m_elements;
 
 			Type* buffer = new Type[m_size];
-			std::memcpy(buffer, m_array, m_elements * sizeof(Type));
+			for (size_type i = 0; i < m_size; ++i)
+				buffer[i] = brisk::move(m_array[i]);
 
 			delete[] m_array;
 			m_array = buffer;
