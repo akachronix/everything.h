@@ -13,6 +13,15 @@ namespace brisk
 			*first = brisk::move(value);
 	}
 
+	template <class Iterator, class Size, class T>
+	constexpr Iterator fill_n(Iterator first, Size count, const T&& value)
+	{
+		for (Size i = 0; i < count; i++)
+			*first++ = brisk::move(value);
+		
+		return first;
+	}
+
 	template <class Iterator, class Function, class... Args>
 	Function for_each(Iterator first, Iterator last, Function f, Args... args)
 	{

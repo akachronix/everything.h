@@ -1,6 +1,6 @@
 CC=g++
 CXXFLAGS=-Wall -Wextra -Werror -pedantic
-CXXLDFLAGS=
+CXXLDFLAGS=-pthread
 
 STD=c++17
 
