@@ -1,22 +1,25 @@
 #include "brisk.h"
 
-int main(void)
+int main(int argc, const char* argv[])
 {
 	brisk::logger cout(brisk::loglevel::everything, "cout.log");
 
 	brisk::vector<int> v(10);
-	for (unsigned int i = 0; i < v.size(); ++i) {
-		v.at(i) = i;
+	brisk::fill(v.begin(), v.end(), 10);
+	auto sum = brisk::accumulate(v.begin(), v.end(), 0);
+
+	for (size_t i = 0; i < v.size(); ++i)
+	{
 		cout << v.at(i) << ' ';
+
+		if (i != (v.size() - 1))
+			cout << "+ ";
+
+		else
+			cout << "= ";
 	}
 
-	brisk::fill_n(v.begin(), v.size() / 2, 8);
+	cout << sum << '\n';
 
-	cout << '\n';
-
-	for (unsigned int i = 0; i < v.size(); ++i) {
-		cout << v.at(i) << ' ';
-	}
-
-	cout << '\n';
+	return 0;
 }

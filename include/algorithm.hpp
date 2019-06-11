@@ -40,6 +40,15 @@ namespace brisk
 		return f;
 	}
 
+	template <class Iterator, class T>
+	T accumulate(Iterator first, Iterator last, T init)
+	{
+		for (; first != last; ++first)
+			init = brisk::move(init) + *first;
+		
+		return init;
+	}
+
 	template <class T>
 	vector<T> copy(vector<T>& v)
 	{
