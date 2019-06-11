@@ -50,49 +50,21 @@ namespace brisk
 	}
 
 	template <class T>
-	vector<T> copy(vector<T>& v)
+	constexpr void swap(T& a, T& b) noexcept
 	{
-		vector<T> v2(v.size());
-		for (size_t i = 0; i < v.size(); ++i)
-			v2[i] = v[i];
-
-		return v2;
-	}
-
-	template <class T, size_t _Size>
-	vector<T> copy(array<T, _Size>& a)
-	{
-		vector<T> v(a.size());
-		for (size_t i = 0; i < a.size(); ++i)
-			v[i] = a[i];
-		
-		return v;
+		T temp = brisk::move(a);
+		a = brisk::move(b);
+		b = brisk::move(temp);
 	}
 
 	template <class T>
-	void copy(vector<T>& v, vector<T>& v2)
-	{
-		v2.resize(v.size());
-		for (size_t i = 0; i < v.size(); ++i)
-			v2[i] = v[i];
-	}
-
-	template <class T, size_t _Size>
-	void copy(array<T, _Size>& a, vector<T>& v)
-	{
-		v.resize(a.size());
-		for (size_t i = 0; i < a.size(); ++i)
-			v[i] = a[i];
-	}
-
-	template <class T>
-	inline const T& min(const T& x, const T& y) noexcept
+	constexpr const T& min(const T& x, const T& y) noexcept
 	{
 		return (x < y) ? x : y;
 	}
 
 	template <class T>
-	inline const T& max(const T& x, const T& y) noexcept
+	constexpr const T& max(const T& x, const T& y) noexcept
 	{
 		return (x > y) ? x : y;
 	}
