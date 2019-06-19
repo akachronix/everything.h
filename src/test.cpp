@@ -1,4 +1,5 @@
 #include "brisk.h"
+#include <typeinfo>
 
 int main(int argc, const char* argv[])
 {
@@ -19,4 +20,5 @@ int main(int argc, const char* argv[])
 	}
 
 	cout << '\n';
+	cout.shrink_to_fit();
 }

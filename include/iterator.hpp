@@ -1,6 +1,8 @@
 #pragma once
 
-#include <cstddef>
+#include "briskdef.hpp"
+#include "utility.hpp"
+
 #include <type_traits>
 
 namespace brisk
@@ -11,7 +13,7 @@ namespace brisk
 	public:
 		using pointer = Type*;
 		using const_pointer = const Type*;
-		using difference_type = ptrdiff_t;
+		using difference_type = brisk::ptrdiff_t;
 	
 	public:
 		explicit iterator(const pointer begin, const pointer end)

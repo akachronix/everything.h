@@ -1,8 +1,9 @@
 #pragma once
 
+#include "briskdef.hpp"
+
 #include <iterator>
 #include <stdexcept>
-#include <cstddef>
 
 namespace brisk
 {
@@ -10,7 +11,7 @@ namespace brisk
 	class array
 	{	
 	public:
-		using size_type = size_t;
+		using size_type = brisk::size_t;
 		using value_type = Type;
 		using pointer = Type*;
 		using const_pointer = const Type*;
@@ -20,7 +21,7 @@ namespace brisk
 		using const_iterator = const Type*;
 		using reverse_iterator = std::reverse_iterator<iterator>;
 		using const_reverse_iterator = std::reverse_iterator<const_iterator>;
-		using difference_type = ptrdiff_t;
+		using difference_type = brisk::ptrdiff_t;
 	
 	public:
 		reference operator[](const size_type index) noexcept
