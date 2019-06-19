@@ -57,6 +57,15 @@ namespace brisk
 		b = brisk::move(temp);
 	}
 
+	template <class Iterator, class DestIterator>
+	Iterator copy(Iterator first, Iterator last, DestIterator d_first)
+	{
+		while (first != last)
+			*first++ = *d_first++;
+		
+		return d_first;
+	}
+
 	template <class T>
 	constexpr const T& min(const T& x, const T& y) noexcept
 	{
