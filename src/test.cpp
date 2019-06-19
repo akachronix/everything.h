@@ -1,5 +1,4 @@
 #include "brisk.h"
-#include <typeinfo>
 
 int main(int argc, const char* argv[])
 {
