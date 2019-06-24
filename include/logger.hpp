@@ -4,9 +4,9 @@
 #include <sstream>
 #include <fstream>
 #include <string>
-#include <vector>
 
 #include "utility.hpp"
+#include "vector.hpp"
 
 namespace brisk
 {
@@ -39,7 +39,7 @@ namespace brisk
 			m_amIPrinting = other.m_amIPrinting;
 		}
 
-		logger(logger&& other)
+		logger(logger&& other) noexcept
 		{
 			logHistory = brisk::move(other.logHistory);
 			m_logLevel = brisk::move(other.m_logLevel);
@@ -68,7 +68,7 @@ namespace brisk
 			return *this;
 		}
 		
-		logger& operator=(logger&& other)
+		logger& operator=(logger&& other) noexcept
 		{
 			if (this != &other)
 			{
@@ -86,7 +86,7 @@ namespace brisk
 			return *this;
 		}
 
-		[[nodiscard]] std::string filename() const noexcept
+		std::string filename() const noexcept
 		{
 			return m_logFile;
 		}
@@ -167,12 +167,12 @@ namespace brisk
 			logHistory.push_back(varToString.str());
 		}
 
-		[[nodiscard]] std::vector<std::string>& buffer() noexcept
+		brisk::vector<std::string>& buffer() noexcept
 		{
 			return logHistory;
 		}
 
-		[[nodiscard]] size_t size() const noexcept
+		size_t size() noexcept
 		{
 			size_t sz = 0;
 			for (auto& it : logHistory)
@@ -192,7 +192,7 @@ namespace brisk
 			logHistory.shrink_to_fit();
 		}
 
-		bool dumpLog(const std::string file) const
+		bool dumpLog(const std::string file)
 		{
 			if (logHistory.size() != 0 && m_amILogging == true)
 			{
@@ -210,7 +210,7 @@ namespace brisk
 			return false;
 		}
 
-		bool dumpLog() const
+		bool dumpLog()
 		{
 			return dumpLog(m_logFile);
 		}
@@ -236,7 +236,7 @@ namespace brisk
 		}
 
 	private:
-		std::vector<std::string> logHistory;
+		brisk::vector<std::string> logHistory;
 		loglevel m_logLevel;
 		std::string m_logFile;
 		bool m_amILogging;

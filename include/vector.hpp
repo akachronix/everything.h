@@ -98,7 +98,7 @@ namespace brisk
 			std::memcpy(m_array, v2.m_array, v2.m_elements * sizeof(Type));
 		}
 
-		vector<Type>& operator=(vector&& v2)
+		vector<Type>& operator=(vector&& v2) noexcept
 		{
 			m_elements = brisk::move(v2.m_elements);
 			m_size = brisk::move(v2.m_size);
@@ -343,6 +343,33 @@ namespace brisk
 					return true;
 			
 			return false;
+		}
+
+		iterator erase(const_iterator position)
+		{
+			iterator it = &m_array[position - m_array];
+			(*it).~Type();
+
+			memmove(position, position + 1, (m_size - (position - m_array) - 1) * sizeof(Type));
+			--m_size;
+
+			return it;
+		}
+
+		iterator erase(const_iterator first, const_iterator last)
+		{
+			iterator f = &m_array[first - m_array];
+			
+			if (first == last)
+				return f;
+
+			for (; first != last; ++first)
+				(*first).~Type();
+			
+			memmove(f, last, (m_size - (last - m_array)) * sizeof(Type));
+			m_size -= last - first;
+
+			return f;
 		}
 
 		iterator begin() noexcept
