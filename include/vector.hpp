@@ -96,6 +96,8 @@ namespace brisk
 			
 			m_array = new Type[m_size];
 			std::memcpy(m_array, v2.m_array, v2.m_elements * sizeof(Type));
+		
+			return *this;
 		}
 
 		vector<Type>& operator=(vector&& v2) noexcept
@@ -107,6 +109,8 @@ namespace brisk
 			v2.m_elements = 0;
 			v2.m_size = 0;
 			v2.m_array = nullptr;
+
+			return *this;
 		}
 
 		reference operator[](const size_type index) noexcept

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "array.hpp"
-#include "vector.hpp"
 #include "utility.hpp"
 
 namespace brisk
