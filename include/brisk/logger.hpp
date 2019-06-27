@@ -47,9 +47,9 @@ namespace brisk
 			m_amILogging = brisk::move(other.m_amILogging);
 			m_amIPrinting = brisk::move(other.m_amIPrinting);
 
-			m_logLevel = brisk::loglevel::everything;
+			other.m_logLevel = brisk::loglevel::everything;
 			other.m_amILogging = true;
-			other.m_amILogging = true;
+            other.m_amIPrinting = true;
 		}
 
 		~logger()
@@ -78,9 +78,9 @@ namespace brisk
 				m_amILogging = brisk::move(other.m_amILogging);
 				m_amIPrinting = brisk::move(other.m_amIPrinting);
 
-				m_logLevel = brisk::loglevel::everything;
+				other.m_logLevel = brisk::loglevel::everything;
 				other.m_amILogging = true;
-				other.m_amILogging = true;
+				other.m_amIPrinting = true;
 			}
 
 			return *this;
