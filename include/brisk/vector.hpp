@@ -44,7 +44,7 @@ namespace brisk
 		vector(const std::initializer_list<Type> list)
 		{
 			m_elements = list.size();
-            m_size = list.size() * 2;
+			m_size = list.size() * 2;
             
 			m_array = new Type[m_size];
 
