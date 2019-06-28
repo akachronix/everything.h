@@ -1,6 +1,7 @@
 CC=g++
 CXXFLAGS=-Wall -pedantic
 CXXLDFLAGS=-pthread
+CXXSTD=-std=c++14
 
 BINDIR=bin
 INCLUDEDIR=include
@@ -14,10 +15,10 @@ all: $(TARGET)
 $(TARGET): clean test.o
 	mkdir $(BINDIR) $(OBJDIR)
 	mv *.o $(OBJDIR)
-	$(CC) -std=c++14 -I$(INCLUDEDIR) -L$(LIBDIR) $(CXXFLAGS) -g -s $(OBJDIR)/$(word 2, $^) -o $(BINDIR)/$(TARGET) $(CXXLDFLAGS)
+	$(CC) $(CXXSTD) -I$(INCLUDEDIR) -L$(LIBDIR) $(CXXFLAGS) -g -s $(OBJDIR)/$(word 2, $^) -o $(BINDIR)/$(TARGET) $(CXXLDFLAGS)
 
 test.o: src/test.cpp
-	$(CC) -std=c++14 -I$(INCLUDEDIR) -L$(LIBDIR) $(CXXFLAGS) -c $^
+	$(CC) $(CXXSTD) -I$(INCLUDEDIR) -L$(LIBDIR) $(CXXFLAGS) -c $^
 
 clean:
 	rm -rf $(BINDIR) $(OBJDIR) *.log

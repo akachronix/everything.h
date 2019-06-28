@@ -4,9 +4,9 @@
 #include <sstream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 #include "utility.hpp"
-#include "vector.hpp"
 
 namespace brisk
 {
@@ -49,7 +49,7 @@ namespace brisk
 
 			other.m_logLevel = brisk::loglevel::everything;
 			other.m_amILogging = true;
-            other.m_amIPrinting = true;
+			other.m_amIPrinting = true;
 		}
 
 		~logger()
@@ -167,7 +167,7 @@ namespace brisk
 			logHistory.push_back(varToString.str());
 		}
 
-		brisk::vector<std::string>& buffer() noexcept
+		std::vector<std::string>& buffer() noexcept
 		{
 			return logHistory;
 		}
@@ -236,7 +236,7 @@ namespace brisk
 		}
 
 	private:
-		brisk::vector<std::string> logHistory;
+		std::vector<std::string> logHistory;
 		loglevel m_logLevel;
 		std::string m_logFile;
 		bool m_amILogging;
