@@ -11,15 +11,16 @@ namespace brisk
 	class iterator
 	{
 	public:
-		using pointer = Type*;
-		using const_pointer = const Type*;
-		using difference_type = brisk::ptrdiff_t;
+		typedef Type* pointer;
+		typedef const Type* const_pointer;
+		typedef brisk::ptrdiff_t difference_type;
 	
 	public:
 		explicit iterator(const pointer begin, const pointer end)
-			: m_it(begin), m_begin(begin), m_end(end)
 		{
-
+			m_it = begin;
+			m_begin = begin;
+			m_end = end;
 		}
 
 		iterator(const iterator& i)

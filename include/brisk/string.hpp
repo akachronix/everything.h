@@ -15,9 +15,8 @@ namespace brisk
     
     public:
         string()
-            : m_string(nullptr)
         {
-        
+            m_string = nullptr;
         }
 
         string(const char* s)

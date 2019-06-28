@@ -10,8 +10,8 @@ namespace brisk
 	class unique_ptr
 	{
 	public:
-		using pointer = Type*;
-		using element_type = Type;
+		typedef Type* pointer;
+		typedef Type element_type;
 	
 	public:
 		unique_ptr(const unique_ptr&) = delete;
