@@ -29,21 +29,21 @@ namespace brisk
 	public:
 		vector()
 		{
-            m_elements = 0;
-            m_size = 4;
+			m_elements = 0;
+			m_size = 4;
 			m_array = new Type[m_size];
 		}
 
 		explicit vector(const size_type size)
 		{
-            m_elements = size;
-            m_size = size << 2;
+			m_elements = size;
+			m_size = size << 2;
 			m_array = new Type[m_size];
 		}
 		
 		vector(const std::initializer_list<Type> list)
 		{
-            m_elements = list.size();
+			m_elements = list.size();
             m_size = list.size() * 2;
             
 			m_array = new Type[m_size];
@@ -58,8 +58,8 @@ namespace brisk
 		
 		vector(iterator const begin, iterator const end)
 		{
-            m_elements = 0;
-            m_size = 0;
+			m_elements = 0;
+			m_size = 0;
             
 			for (iterator it = begin; it != end; ++it)
 				++m_elements;
@@ -74,8 +74,8 @@ namespace brisk
 		vector(const vector& v2)
 			: m_elements(v2.m_elements), m_size(v2.m_size)
 		{
-            m_elements = v2.m_elements;
-            m_size = v2.m_size;
+			m_elements = v2.m_elements;
+			m_size = v2.m_size;
 			m_array = new Type[m_size];
 			std::memcpy(m_array, v2.m_array, v2.m_elements * sizeof(Type));
 		}
