@@ -9,7 +9,7 @@ LIBDIR=lib
 OBJDIR=obj
 SRCDIR=src
 
-TARGET=test
+TARGET=brisk-test
 
 .PHONY: clean meson-build
 
