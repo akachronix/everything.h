@@ -1,10 +1,12 @@
-bin
+bin/
 *.exe
 *.out
-obj
+obj/
 *.o
 *.obj
-.vscode
+.vscode/
+.vs/
 *.txt
 *.log
+build/
 
