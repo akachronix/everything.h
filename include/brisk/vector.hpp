@@ -271,7 +271,7 @@ namespace brisk
 			return m_elements;
 		}
 
-		[[nodiscard]] bool empty() const noexcept
+		bool empty() const noexcept
 		{
 			return (m_elements == 0) ? true : false;
 		}
