@@ -78,19 +78,19 @@ namespace brisk
             return *this;
         }
 
-        string &operator+(const string &rhs)
+        string& operator+(const string& rhs)
         {
             this->append(rhs);
             return *this;
         }
 
-        string &operator+(const char *rhs)
+        string& operator+(const char* rhs)
         {
             this->append(rhs);
             return *this;
         }
 
-        string &operator+(char rhs)
+        string& operator+(char rhs)
         {
             this->append(rhs);
             return *this;
@@ -247,6 +247,11 @@ namespace brisk
         }
 
         char* data() const noexcept
+        {
+            return m_string;
+        }
+
+        const char* c_str() const noexcept
         {
             return m_string;
         }
