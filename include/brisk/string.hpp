@@ -11,7 +11,7 @@ namespace brisk
     {
     private:
         char* m_string;
-        size_t m_size;
+        size_t m_size;  // this does NOT include the null termination character
     
     public:
         string()
@@ -21,10 +21,15 @@ namespace brisk
 
         string(const char* s)
         {
-            m_size = std::strlen(s);
+            m_size = strlen(s);
             m_string = new char[m_size + 1];
-
             std::memcpy(m_string, s, m_size + 1);
+        }
+
+        string(size_t sz)
+        {
+            m_size = sz;
+            m_string = new char[sz + 1];
         }
 
         ~string()
@@ -70,6 +75,78 @@ namespace brisk
             m_string[0] = c;
             m_string[1] = '\0';
 
+            return *this;
+        }
+
+        string &operator+(const string &rhs)
+        {
+            this->append(rhs);
+            return *this;
+        }
+
+        string &operator+(const char *rhs)
+        {
+            this->append(rhs);
+            return *this;
+        }
+
+        string &operator+(char rhs)
+        {
+            this->append(rhs);
+            return *this;
+        }
+
+        string& append(const string& str)
+        {
+            char* old_str = new char[m_size + 1];
+            memcpy(old_str, m_string, m_size + 1);
+
+            if (m_string != nullptr)
+                delete[] m_string;
+            
+            m_string = new char[m_size + str.size() + 1];
+            memcpy(m_string, old_str, m_size);
+            memcpy(m_string + m_size, str.data(), str.size());
+            m_string[m_size + str.size() + 1] = '\0';
+            m_size += str.size();
+
+            delete[] old_str;
+            return *this;
+        }
+
+        string& append(const char* s)
+        {
+            char* old_str = new char[m_size + 1];
+            memcpy(old_str, m_string, m_size + 1);
+
+            if (m_string != nullptr)
+                delete[] m_string;
+
+            m_string = new char[m_size + strlen(s) + 1];
+            memcpy(m_string, old_str, m_size);
+            memcpy(m_string + m_size, s, strlen(s));
+            m_string[m_size + strlen(s) + 1] = '\0';
+            m_size += strlen(s);
+
+            delete[] old_str;
+            return *this;
+        }
+
+        string& append(char c)
+        {
+            char* old_str = new char[m_size + 1];
+            memcpy(old_str, m_string, m_size + 1);
+            
+            if (m_string != nullptr)
+                delete[] m_string;
+            
+            m_string = new char[m_size + 2];
+            memcpy(m_string, old_str, m_size);
+            memcpy(m_string + m_size, &c, 1);
+            m_string[m_size + 2] = '\0';
+            m_size += 1;
+
+            delete[] old_str;
             return *this;
         }
 
@@ -175,12 +252,54 @@ namespace brisk
         }
 
         friend std::ostream& operator<<(std::ostream& out, const brisk::string& string);
-	friend std::istream& operator>>(std::istream& in, brisk::string& string);
+	    friend std::istream& operator>>(std::istream& in, brisk::string& string);
     };
     
     std::ostream& operator<<(std::ostream& out, const brisk::string& string)
     {
         out << string.m_string;
         return out;
+    }
+
+    std::istream& operator>>(std::istream &in, brisk::string &string);
+
+    string operator+(const string& lhs, const string& rhs)
+    {
+        brisk::string result(lhs.size() + rhs.size());
+        result.append(lhs);
+        result.append(rhs);
+        return result;
+    }
+
+    string operator+(const string& lhs, const char* rhs)
+    {
+        brisk::string result(lhs.size() + strlen(rhs));
+        result.append(lhs);
+        result.append(rhs);
+        return result;
+    }
+
+    string operator+(const char* lhs, const string& rhs)
+    {
+        brisk::string result(strlen(lhs) + rhs.size());
+        result.append(lhs);
+        result.append(rhs);
+        return result;
+    }
+
+    string operator+(const string& lhs, char rhs)
+    {
+        brisk::string result(lhs.size() + 1);
+        result.append(lhs);
+        result.append(rhs);
+        return result;
+    }
+
+    string operator+(char lhs, const string &rhs)
+    {
+        brisk::string result(1 + rhs.size());
+        result.append(lhs);
+        result.append(rhs);
+        return result;
     }
 }
