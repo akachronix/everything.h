@@ -174,6 +174,26 @@ namespace brisk
             return *this;
         }
 
+        string& insert(size_t index, const string& s)
+        {
+            char* old_str = new char[m_size + 1];
+            memcpy(old_str, m_string, m_size + 1);
+
+            if (m_string != nullptr)
+                delete[] m_string;
+            
+            m_string = new char[m_size + s.size() + 1];
+            memcpy(m_string, s.data(), index + 1);
+            memcpy(m_string + index, s.data(), s.size());
+            memcpy(m_string + index + s.size(), old_str + index, m_size - index);
+
+            m_size += s.size();
+            m_string[m_size + 1] = '\0';
+
+            delete[] old_str;
+            return *this;
+        }
+
         string& insert(size_t index, const char* s)
         {
             char* old_str = new char[m_size + 1];
@@ -399,8 +419,8 @@ namespace brisk
     string operator+(const string& lhs, string&& rhs)
     {
         // TODO: create insert() overload for string&
-        // rhs.insert(0, lhs);
-        // return brisk::move(rhs);
+        rhs.insert(0, lhs);
+        return brisk::move(rhs);
     }
 
     string operator+(const char* lhs, string&& rhs)
