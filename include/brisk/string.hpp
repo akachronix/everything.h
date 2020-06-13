@@ -126,70 +126,79 @@ namespace brisk
 
         string& append(const string& str)
         {
-            // copy old string into a buffer for safe-keeping
-            char* old_str = nullptr;
-            if (m_string != nullptr) {
-                old_str = new char[m_size + 1];
-                memcpy(old_str, m_string, m_size + 1);
+            if (m_size <= m_characters + str.size())
+            {
+                char* old_str = nullptr;
+                if (m_characters != 0) {
+                    old_str = new char[m_characters + 1];
+                    memcpy(old_str, m_string, m_characters + 1);
+                }
+
                 delete[] m_string;
+                m_size += str.size() << 2;
+                m_string = new char[m_size];
+                
+                if (old_str != nullptr) {
+                    memcpy(m_string, old_str, m_characters + 1);
+                }
             }
 
-            // create new string and concatenate
-            m_string = new char[m_size + str.size() + 1];
-            if (old_str != nullptr) {
-                memcpy(m_string, old_str, m_size);
-            }
-            memcpy(m_string + m_size, str.data(), str.size());
-            m_string[m_size + str.size() + 1] = '\0';
-            m_size += str.size();
+            memcpy(m_string + m_characters, str.data(), str.size());
+            memset(m_string + m_characters + str.size(), 0, m_size - (m_characters + str.size()));
+            m_characters += str.size();
 
-            delete[] old_str;
             return *this;
         }
 
         string& append(const char* s)
         {
-            // copy old string into a buffer for safe-keeping
-            char* old_str = nullptr;
-            if (m_string != nullptr) {
-                old_str = new char[m_size + 1];
-                memcpy(old_str, m_string, m_size + 1);
+            if (m_size <= m_characters + strlen(s))
+            {
+                char* old_str = nullptr;
+                if (m_characters != 0) {
+                    old_str = new char[m_characters + 1];
+                    memcpy(old_str, m_string, m_characters + 1);
+                }
+
                 delete[] m_string;
+                m_size += strlen(s) << 2;
+                m_string = new char[m_size];
+                
+                if (old_str != nullptr) {
+                    memcpy(m_string, old_str, m_characters + 1);
+                }
             }
 
-            // create new string and concatenate
-            m_string = new char[m_size + strlen(s) + 1];
-            if (old_str != nullptr) {
-                memcpy(m_string, old_str, m_size);
-            }
-            memcpy(m_string + m_size, s, strlen(s));
-            m_string[m_size + strlen(s) + 1] = '\0';
-            m_size += strlen(s);
+            memcpy(m_string + m_characters, s, strlen(s));
+            memset(m_string + m_characters + strlen(s), 0, m_size - (m_characters + strlen(s)));
+            m_characters += strlen(s);
 
-            delete[] old_str;
             return *this;
         }
 
         string& append(char c)
         {
-            // copy old string into a buffer for safe-keeping
-            char* old_str = nullptr;
-            if (m_string != nullptr) {
-                old_str = new char[m_size + 1];
-                memcpy(old_str, m_string, m_size + 1);
+            if (m_size <= m_characters + 1)
+            {
+                char* old_str = nullptr;
+                if (m_characters != 0) {
+                    old_str = new char[m_characters + 1];
+                    memcpy(old_str, m_string, m_characters + 1);
+                }
+
                 delete[] m_string;
+                m_size += 1 << 2;
+                m_string = new char[m_size];
+
+                if (old_str != nullptr) {
+                    memcpy(m_string, old_str, m_characters + 1);
+                }
             }
 
-            // create new string and concatenate
-            m_string = new char[m_size + 2];
-            if (old_str != nullptr) {
-                memcpy(m_string, old_str, m_size);
-            }
-            memcpy(m_string + m_size, &c, 1);
-            m_string[m_size + 2] = '\0';
-            m_size += 1;
+            memcpy(m_string + m_characters, &c, 1);
+            memset(m_string + m_characters + 1, 0, m_size - (m_characters + 1));
+            m_characters += 1;
 
-            delete[] old_str;
             return *this;
         }
 
