@@ -7,32 +7,48 @@
 
 #include "utility.hpp"
 
+// Time to refactor this fucking thing
+// to not create a new buffer each time
+// the string is modified.
+
 namespace brisk
 {
     class string
     {
     private:
         char* m_string;
-        size_t m_size;  // this does NOT include the null termination character
-    
+        size_t m_characters;
+        size_t m_size;
+        
     public:
         string()
         {
-            m_string = nullptr;
-            m_size = 0;
+            m_string = new char[16];
+            m_size = 16;
+            m_characters = 0;
+
+            memset(m_string, 0, m_size);
         }
 
         string(const char* s)
         {
-            m_size = strlen(s);
-            m_string = new char[m_size + 1];
-            std::memcpy(m_string, s, m_size + 1);
+            m_characters = strlen(s);
+            
+            if (m_size <= strlen(s) + 1)  // add one extra byte cause strlen doesnt include null terminator
+            {
+                delete[] m_string;
+                m_size = m_characters << 2;
+                m_string = new char[m_size];
+            }
+
+            memcpy(m_string, s, m_characters + 1);
+            memset(m_string + m_characters, 0, m_size - m_characters - 1);
         }
 
         string(size_t sz)
         {
-            m_size = sz;
-            m_string = new char[sz + 1];
+            m_size = sz * 2;
+            m_string = new char[sz];
         }
 
         string(const string& other)
@@ -67,20 +83,24 @@ namespace brisk
             m_size = str.size();
             m_string = new char[m_size + 1];
 
-            std::memcpy(m_string, str.data(), m_size + 1);
+            memcpy(m_string, str.data(), m_size + 1);
 
             return *this;
         }
 
         string& operator=(const char* s)
         {
-            if (m_string != nullptr)
-                delete[] m_string;
-            
-            m_size = strlen(s);
-            m_string = new char[m_size + 1];
+            m_characters = strlen(s);
 
-            std::memcpy(m_string, s, m_size + 1);
+            if (m_size <= strlen(s) + 1)  // add one extra byte cause strlen doesnt include null terminator
+            {
+                delete[] m_string;
+                m_size = m_characters << 2;
+                m_string = new char[m_size];
+            }
+
+            memcpy(m_string, s, m_characters + 1);
+            memset(m_string + m_characters, 0, m_size - m_characters - 1);
 
             return *this;
         }
@@ -276,10 +296,15 @@ namespace brisk
 
         size_t size() const noexcept
         {
-            return m_size;
+            return m_characters;
         }
 
         size_t length() const noexcept
+        {
+            return m_characters;
+        }
+
+        size_t capacity() const noexcept
         {
             return m_size;
         }
