@@ -1,6 +1,6 @@
 CC=g++
 CXXFLAGS=-Wall -pedantic -O2
-CXXLDFLAGS=-pthread
+CXXLDFLAGS=
 CXXSTD=-std=c++14
 
 BINDIR=bin
