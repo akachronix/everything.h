@@ -11,7 +11,7 @@ SRCDIR=src
 
 TARGET=brisk-test
 
-.PHONY: clean meson-build
+.PHONY: clean
 
 all: $(TARGET)
 
@@ -23,12 +23,6 @@ $(TARGET): clean test.o
 
 test.o: $(SRCDIR)/test.cpp
 	$(CC) $(CXXSTD) -I$(INCLUDEDIR) -L$(LIBDIR) $(CXXFLAGS) -c $^
-
-meson-build: clean $(SRCDIR)/test.cpp
-	mkdir build; \
-	meson build; \
-	cd build; \
-	ninja; \
 
 clean:
 	rm -rf $(BINDIR) $(OBJDIR) *.log build/
