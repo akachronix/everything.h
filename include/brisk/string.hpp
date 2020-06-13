@@ -7,10 +7,6 @@
 
 #include "utility.hpp"
 
-// Time to refactor this fucking thing
-// to not create a new buffer each time
-// the string is modified.
-
 namespace brisk
 {
     class string
