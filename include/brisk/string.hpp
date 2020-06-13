@@ -26,8 +26,6 @@ namespace brisk
             m_string = new char[16];
             m_size = 16;
             m_characters = 0;
-
-            memset(m_string, 0, m_size);
         }
 
         string(const char* s)
@@ -65,25 +63,27 @@ namespace brisk
         {
             m_string = other.m_string;
             m_size = brisk::move(other.m_size);
-            other.m_string = nullptr;
-            other.m_size = 0;
+            m_characters = brisk::move(other.m_characters);
+            other.m_string = new char[16];
+            other.m_size = 16;
+            other.m_characters = 0;
         }
 
         ~string()
         {
-            if (m_string != nullptr)
-                delete[] m_string;
+            delete[] m_string;
         }
 
         string& operator=(const string& str)
         {
-            if (m_string != nullptr)
-                delete[] m_string;
-            
-            m_size = str.size();
-            m_string = new char[m_size + 1];
+            m_characters = str.size();
+            m_size = str.capacity();
+            m_string = new char[m_size];
 
-            memcpy(m_string, str.data(), m_size + 1);
+            memcpy(m_string, str.data(), m_size);
+            
+            // needed until we guarantee other strings are always zero'ed out
+            memset(m_string + m_characters, 0, m_size - m_characters - 1);
 
             return *this;
         }
@@ -107,14 +107,17 @@ namespace brisk
         
         string& operator=(char c)
         {
-            if (m_string != nullptr)
+            m_characters = 1;
+
+            if (m_size <= 2)  // add one extra byte cause strlen doesnt include null terminator
+            {
                 delete[] m_string;
-            
-            m_size = sizeof(char);
-            m_string = new char[2];
+                m_size = m_characters << 2;
+                m_string = new char[m_size];
+            }
 
             m_string[0] = c;
-            m_string[1] = '\0';
+            memset(m_string + 1, 0, m_size - 1);
 
             return *this;
         }
