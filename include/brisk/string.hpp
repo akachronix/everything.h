@@ -7,8 +7,6 @@
 
 #include "utility.hpp"
 
-#include <iostream>
-
 namespace brisk
 {
     class string
