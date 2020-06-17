@@ -7,6 +7,8 @@
 
 #include "utility.hpp"
 
+#include <iostream>
+
 namespace brisk
 {
     class string
@@ -27,13 +29,8 @@ namespace brisk
         string(const char* s)
         {
             m_characters = strlen(s);
-            
-            if (m_size <= strlen(s) + 1)  // add one extra byte cause strlen doesnt include null terminator
-            {
-                delete[] m_string;
-                m_size = m_characters << 2;
-                m_string = new char[m_size];
-            }
+            m_size = (m_characters == 0) ? 16 : m_characters << 2;
+            m_string = new char[m_size];
 
             memcpy(m_string, s, m_characters + 1);
             memset(m_string + m_characters, 0, m_size - m_characters - 1);
