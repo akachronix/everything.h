@@ -42,12 +42,10 @@ namespace brisk
 
         string(const string& other)
         {
-            if (m_string != nullptr)
-                delete[] m_string;
-            
-            m_string = new char[other.m_size + 1];
             m_size = other.m_size;
-            memcpy(m_string, other.m_string, other.m_size + 1);
+            m_characters = other.m_characters;
+            m_string = new char[m_size];
+            memcpy(m_string, other.m_string, m_size);
         }
 
         string(string&& other)
@@ -91,7 +89,7 @@ namespace brisk
             }
 
             memcpy(m_string, s, m_characters + 1);
-            memset(m_string + m_characters, 0, m_size - m_characters - 1);
+            memset(m_string + m_characters, 0, m_size - m_characters);
 
             return *this;
         }
