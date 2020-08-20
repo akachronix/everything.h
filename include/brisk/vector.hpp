@@ -356,14 +356,23 @@ namespace brisk
 			
 			return false;
 		}
+        
+        void clear() noexcept
+        {
+            for (int i = 0; i < m_elements; ++i)
+                m_array[i].~Type();
+            
+            m_elements = 0;
+            m_size = 0;
+        }
 
 		iterator erase(const_iterator position)
 		{
 			iterator it = &m_array[position - m_array];
 			(*it).~Type();
 
-			memmove(position, position + 1, (m_size - (position - m_array) - 1) * sizeof(Type));
-			--m_size;
+            memmove(position, position + 1, (m_size - (position - m_array) - 1) * sizeof(Type));
+            --m_size;
 
 			return it;
 		}
