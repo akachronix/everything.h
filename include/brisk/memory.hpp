@@ -10,21 +10,18 @@ namespace brisk
 	class unique_ptr
 	{
 	public:
-		typedef Type* pointer;
-		typedef Type element_type;
-	
-	public:
-		unique_ptr(const unique_ptr&) = delete;
-		unique_ptr& operator=(const unique_ptr&) = delete;
+		typedef Type pointer;
+		typedef typename std::remove_pointer<Type>::type element_type;
 
+	public:
 		constexpr unique_ptr() noexcept
 		{
 			ptr = nullptr;
 		}
 
-		constexpr unique_ptr(nullptr_t) noexcept : unique_ptr()
+		constexpr unique_ptr(nullptr_t) noexcept
 		{
-
+			ptr = nullptr;
 		}
 
 		explicit unique_ptr(pointer p) noexcept
@@ -34,29 +31,14 @@ namespace brisk
 
 		~unique_ptr()
 		{
-			if (ptr != nullptr)
-				delete ptr;
+			delete ptr;
 		}
 
-		unique_ptr& operator=(nullptr_t) noexcept
+		pointer release() noexcept
 		{
-			if (ptr != nullptr)
-			{
-				delete ptr;
-				ptr = nullptr;
-			}
-
-			return *this;
-		}
-
-		typename std::add_lvalue_reference<element_type>::type operator*() const
-		{
-			return *ptr;
-		}
-
-		pointer operator->() noexcept
-		{
-			return ptr;
+			pointer temp = ptr;
+			ptr = nullptr;
+			return temp;
 		}
 
 		pointer get() const noexcept
@@ -64,27 +46,16 @@ namespace brisk
 			return ptr;
 		}
 
-		explicit operator bool() const noexcept
+		typename std::add_lvalue_reference<element_type>::type operator*() const
 		{
-			return (ptr == nullptr) ? false : true;
+			return *ptr;
 		}
 
-		pointer release() noexcept
+		pointer operator->() const noexcept
 		{
-			pointer temp = ptr;
-			ptr = nullptr;
-
-			return temp;
+			return ptr;
 		}
 
-		void reset(pointer p = pointer()) noexcept
-		{
-			if (ptr != nullptr)
-				delete ptr;
-			
-			ptr = p;
-		}
-	
 	private:
 		pointer ptr;
 	};
