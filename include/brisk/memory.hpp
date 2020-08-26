@@ -146,25 +146,25 @@ namespace brisk
 	template <class Type>
 	bool operator<(const unique_ptr<Type>& x, nullptr_t)
 	{
-		return std::less<unique_ptr<Type>::pointer>()(x.get(), nullptr)
+		return std::less<typename unique_ptr<Type>::pointer>()(x.get(), nullptr);
 	}
 
 	template <class Type>
 	bool operator<(nullptr_t, const unique_ptr<Type>&x) noexcept
 	{
-		return std::less<unique_ptr<Type>::pointer>()(nullptr, x.get())
+		return std::less<typename unique_ptr<Type>::pointer>()(nullptr, x.get());
 	}
 
 	template <class Type>
 	bool operator<=(const unique_ptr<Type>& x, nullptr_t)
 	{
-		return !(nullptr < x)
+		return !(nullptr < x);
 	}
 
 	template <class Type>
 	bool operator<=(nullptr_t, const unique_ptr<Type>& x)
 	{
-		return !(y < nullptr);
+		return !(x < nullptr);
 	}
 
 	template <class Type>
@@ -188,6 +188,6 @@ namespace brisk
 	template <class Type>
 	bool operator>=(nullptr_t, const unique_ptr<Type>& x)
 	{
-		return !(nullptr < x)
+		return !(nullptr < x);
 	}
 }
