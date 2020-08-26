@@ -199,7 +199,7 @@ namespace brisk
 		
 		void push_back(const std::initializer_list<Type>&& list)
 		{
-			for (auto& it = list.begin(); it != list.end(); ++it)
+			for (auto it = list.begin(); it != list.end(); ++it)
 			{
 				if (m_elements == m_size)
 				{
