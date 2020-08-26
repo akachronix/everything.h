@@ -1,6 +1,7 @@
 #pragma once
 
 #include <type_traits>
+#include "utility.hpp"
 
 namespace brisk
 {
@@ -42,6 +43,11 @@ namespace brisk
 			delete ptr;
 		}
 
+		explicit operator bool() const noexcept
+		{
+			return ptr != nullptr;
+		}
+
 		pointer release() noexcept
 		{
 			pointer temp = ptr;
@@ -81,6 +87,12 @@ namespace brisk
 	private:
 		pointer ptr;
 	};
+
+	template <class Type, class... Args>
+	unique_ptr<Type> make_unique(Args&&... args)
+	{
+		return unique_ptr<Type>(new Type(forward<Args>(args)...));
+	}
 
 	template <class Type1, class Type2>
 	bool operator==(const unique_ptr<Type1>& x, const unique_ptr<Type2>& y)
