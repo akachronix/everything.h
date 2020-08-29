@@ -15,13 +15,16 @@ TARGET=brisk-test
 
 all: $(TARGET)
 
-$(TARGET): clean test.o
+$(TARGET): clean test.o calc.o
 	mkdir $(BINDIR) $(OBJDIR)
 	mv *.o $(OBJDIR)
 	$(CC) $(CXXSTD) -I$(INCLUDEDIR) -L$(LIBDIR) $(CXXFLAGS) $(OBJDIR)/$(word 2, $^) -o $(BINDIR)/$(TARGET) $(CXXLDFLAGS)
-	strip -s $(BINDIR)/$(TARGET)
+	$(CC) $(CXXSTD) -I$(INCLUDEDIR) -L$(LIBDIR) $(CXXFLAGS) $(OBJDIR)/$(word 3, $^) -o $(BINDIR)/$(TARGET) $(CXXLDFLAGS)
 
 test.o: $(SRCDIR)/test.cpp
+	$(CC) $(CXXSTD) -I$(INCLUDEDIR) -L$(LIBDIR) $(CXXFLAGS) -c $^
+
+calc.o: $(SRCDIR)/calc.cpp
 	$(CC) $(CXXSTD) -I$(INCLUDEDIR) -L$(LIBDIR) $(CXXFLAGS) -c $^
 
 clean:
