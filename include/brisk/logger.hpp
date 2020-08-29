@@ -3,9 +3,9 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include <string>
-#include <vector>
 
+#include "vector.hpp"
+#include "string.hpp"
 #include "utility.hpp"
 
 namespace brisk
@@ -22,7 +22,7 @@ namespace brisk
 	class logger
 	{
 	public:
-		logger(loglevel loglevel, std::string logfile)
+		logger(loglevel loglevel, brisk::string logfile)
 		{
 			m_logLevel = loglevel;
 			m_logFile = logfile;
@@ -86,21 +86,21 @@ namespace brisk
 			return *this;
 		}
 
-		std::string filename() const noexcept
+		brisk::string filename() const noexcept
 		{
 			return m_logFile;
 		}
 
-		void filename(const std::string filename) noexcept
+		void filename(const brisk::string filename) noexcept
 		{
 			m_logFile = filename;
 		}
 
-		bool logError(const std::string error_str)
+		bool logError(const brisk::string error_str)
 		{
 			if (m_logLevel >= loglevel::errors)
 			{
-				std::string message = "[ERROR] " + error_str + "\n";
+				brisk::string message = "[ERROR] " + error_str + "\n";
 				
 				if (m_amIPrinting)
 					std::cout << message;
@@ -112,11 +112,11 @@ namespace brisk
 			return false;
 		}
 
-		bool logWarning(const std::string warning_str)
+		bool logWarning(const brisk::string warning_str)
 		{
 			if (m_logLevel >= loglevel::warnings)
 			{
-				std::string message = "[WARNING] " + warning_str + "\n";
+				brisk::string message = "[WARNING] " + warning_str + "\n";
 
 				if (m_amIPrinting)
 					std::cout << message;
@@ -139,7 +139,7 @@ namespace brisk
 				if (m_amIPrinting)
 					std::cout << value;
 
-				logHistory.push_back(casted_value.str());
+				logHistory.push_back(casted_value.str().c_str());
 				return true;
 			}
 
@@ -164,10 +164,10 @@ namespace brisk
 
 			std::stringstream varToString;
 			varToString << var << "\n";
-			logHistory.push_back(varToString.str());
+			logHistory.push_back(varToString.str().c_str());
 		}
 
-		std::vector<std::string>& buffer() noexcept
+		brisk::vector<brisk::string>& buffer() noexcept
 		{
 			return logHistory;
 		}
@@ -176,14 +176,14 @@ namespace brisk
 		{
 			size_t sz = 0;
 			for (auto& it : logHistory)
-				sz += it.size() + sizeof(std::string);
+				sz += it.size() + sizeof(brisk::string);
 			
 			return sz;
 		}
 
 		void shrink_to_fit()
 		{
-			std::string s = "";
+			brisk::string s = "";
 			for (auto& it : logHistory)
 				s.append(it); 
 			
@@ -192,11 +192,20 @@ namespace brisk
 			logHistory.shrink_to_fit();
 		}
 
-		bool dumpLog(const std::string file)
+		long ram_usage()
+		{
+			long size = sizeof(brisk::string) * logHistory.size();
+			for (int i = 0; i < logHistory.size(); ++i)
+				size += logHistory[i].size();
+			
+			return size;
+		}
+
+		bool dumpLog(const brisk::string file)
 		{
 			if (logHistory.size() != 0 && m_amILogging == true)
 			{
-				std::ofstream log_file(file);
+				std::ofstream log_file(file.c_str());
 				if (log_file.is_open())
 				{
 					for (auto x : logHistory)
@@ -236,9 +245,9 @@ namespace brisk
 		}
 
 	private:
-		std::vector<std::string> logHistory;
+		brisk::vector<brisk::string> logHistory;
 		loglevel m_logLevel;
-		std::string m_logFile;
+		brisk::string m_logFile;
 		bool m_amILogging;
 		bool m_amIPrinting;
 	};
