@@ -7,7 +7,7 @@ int main(void)
     brisk::logger cout(brisk::loglevel::everything, "cout.log");
     cout.disablePrinting();
 
-    brisk::unique_ptr<brisk::string*> ptr(new brisk::string);
+    brisk::unique_ptr<brisk::string> ptr(new brisk::string);
     ptr->append("hello, world");
     ptr->append("hello from brisk!");
 
